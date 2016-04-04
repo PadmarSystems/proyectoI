@@ -1,0 +1,1 @@
+<a href="view.php?com=usuarios&mod=form&ac=nuevo">nuevo usuario</a>

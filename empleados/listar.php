@@ -1,0 +1,16 @@
+<table>
+	<thead>
+		<tr>
+			<th>Empleado</th>
+			<th>Empresa</th>
+			<th>Puesto</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>

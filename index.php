@@ -11,8 +11,8 @@ require("ruta.php");
 <body>
     <form action="view.php" method="post">
         <p>Favor de ingresar sus datos</p>
-        <div><span><i class="fa fa-user"></i></span><input type="text" placeholder="Usuario" value="" autofocus id="myusername" name="myusername" /></div>
-    	<div><span><i class="fa fa-lock"></i></span><input type="password" placeholder="Contraseña" value="" id="mypassword" name="mypassword" /></div>
+        <div><span><i class="fa fa-user"></i></span><input type="text" placeholder="Usuario" value="" autofocus id="myusername" name="myusername" required/></div>
+    	<div><span><i class="fa fa-lock"></i></span><input type="password" placeholder="Contraseña" value="" id="mypassword" name="mypassword" required/></div>
         <input type="submit" value="Iniciar Sesión" />
     </form>
 </body>
