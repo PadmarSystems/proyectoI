@@ -8,6 +8,8 @@ function goto(archivo,carpeta){
 		} else {
 			window.location = 'view.php?mod='+archivo;
 		}
+	}else{
+		window.location = 'view.php';
 	}
 }
 

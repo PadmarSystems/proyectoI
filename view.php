@@ -1,5 +1,6 @@
 <?php
-if (isset($_POST)) {
+session_start();
+if (isset($_POST) && !isset($_SESSION['logged'])) {
     require('clases/usuario.class.php');
     $usuario = new usuario;
 
@@ -7,9 +8,8 @@ if (isset($_POST)) {
     $pass = htmlspecialchars($_POST['mypassword']);
 
     $row = $usuario->loginusuario($user, $pass);
-
+    ?><script type="text/javascript">console.log("aqui");</script><?php
     if (count($row) > 1) {
-        session_start();
         $horaActual = date("H:i:s");
         $_SESSION['nombre'] = $row['nombreUsuario'];
         $_SESSION['logged'] = TRUE;
@@ -47,10 +47,7 @@ if (isset($_GET['mod'])) {
 <body>
 	<nav>
 		<ul>
-		    <li><a title="Empleados" onclick="goto('listar','empleados');">Ver empleados</a></li>
-		    <li><a title="Incidencias" onclick="goto('','incidencias')">Nueva Incidencia</a></li>
-		    <li><a title="Reportes" onclick="goto('','reportes')">Generar Reporte</a></li>
-		    <li><a title="Configs" onclick="goto('index','configuracion')">Configuración</a></li>
+			<li><a title="Empleados" onclick="goto();">Inicio</a></li>
 		</ul>
 	</nav>
     <div>
