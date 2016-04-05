@@ -57,7 +57,7 @@ class usuario extends SafeMySQL {
 
     function loginusuario($usuario, $password) {
         $password = $this->encriptaPass($password);
-        $sql = "SELECT * FROM usuarios WHERE usuario LIKE '$usuario' AND contrasena LIKE '$password' LIMIT 1";
+        $sql = "SELECT * FROM usuario WHERE email LIKE '$usuario' AND contrasena LIKE '$password' LIMIT 1";
         $result = $this->con->query($sql);
         $nReg = $this->con->numRows($result);
         if ($nReg > 0) return $this->con->fetch($result);
