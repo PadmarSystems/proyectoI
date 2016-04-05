@@ -2,19 +2,60 @@
 require('../clases/empleado.class.php');
 $objemp = new empleado;
 
-if(isset($_POST['a'])){
+if(isset($_POST)){
 	$accion=$_POST['a'];
+	
+	$nombre=$_POST['nombre'].'--'.$_POST['apellidoPat'].'--'.$_POST['apellidoMat'];
+	if(empty($_POST['responsable'])){
+		$responsable = '0';
+	} else {
+		$responsable = $_POST['responsable'];
+	}
+	if(empty($_POST['ubicacion'])){
+		$ubicacion = '0';
+	} else {
+		$ubicacion = $_POST['ubicacion'];
+	}
 	switch ($accion){
 		case 'Registrar':
-			print_r($_POST);
-			
+			$dCreate = date('Y-m-d');
+			$dUpdt = $dCreate;
+			$saveArray=array(
+				$_POST['empresaEmp'],
+				$nombre,
+				$_POST['telefono'],
+				$_POST['correo'],
+				$responsable,
+				$ubicacion,
+				$_POST['puesto'],
+				$dCreate,
+				$dUpdt
+			);
+			#echo "<pre>"; print_r($saveArray); echo "</pre>";
+			// guardar saveArray
 			header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=success');
-			break;
+		break;
+		case 'Editar';
+			$dUpdt = date('Y-m-d');
+			$saveArray=array(
+				$_POST['empresaEmp'],
+				$nombre,
+				$_POST['telefono'],
+				$_POST['correo'],
+				$responsable,
+				$ubicacion,
+				$_POST['puesto'],
+				$dUpdt
+			);
+			#echo "<pre>"; print_r($saveArray); echo "</pre>";
+			// guardar saveArray sin fechaCreacion
+			header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=success');
+		break;
 		default:
 			header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=error');
-			break;
+		break;
 	}
-}else{
+} else {
 	header('Location: ../view.php?mod=notfound');
 }
 ?>
