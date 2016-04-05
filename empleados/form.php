@@ -72,7 +72,7 @@ if (isset($_GET['stt'])) {
 		</span>
 	</div>
 	<div>
-		<label>Correo electrónico*: </label>
+		<label>Correo electrónico: </label>
 		<div><input type="email" name="correo" id="correo" value="<?php echo $form['correo']; ?>" required /></div>
 	</div>
 	<div>
