@@ -10,7 +10,6 @@ class empresas extends SafeMySQL {
     function __construct() {
         $this->con = new SafeMySQL();
     }
-
 	function getEmpresas(){
 		return $this->con->getRow("SELECT * FROM `empresa` ORDER BY `aliasEmpresa` ASC");
 	}
@@ -18,11 +17,11 @@ class empresas extends SafeMySQL {
 		$result = $this->con->query("INSERT INTO `empresa` SET ?u", $datos);
 		if($result) return true;
 	}
-	/******************/
-	function actualizarEmpresa($array){
-		$result = $this->con->query("UPDATE `empresa` SET `aliasEmpresa` = ?, `fechaActualizacion` = ?  WHERE `idEmpresa` = ?");
+
+	function actualizarEmpresa($datos=array()){
+		//func con array como srg
+		$result = $this->con->query("UPDATE `empresa` SET `aliasEmpresa` = ?  WHERE `idEmpresa` = ?");
 		if($result) return true;
 	}
-
 }
 ?>
