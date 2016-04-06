@@ -4,7 +4,6 @@ require_once 'config.gral.php';
 require_once 'safemysql.php';
 
 class ubicaciones extends SafeMySQL {
-    private $keyHash = 'sad.SD$24';//clave hashing para encriptar
     var $con;
 
     function __construct() {
