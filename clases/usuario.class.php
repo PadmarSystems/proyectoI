@@ -12,7 +12,7 @@ class usuario extends SafeMySQL {
     }
 
     function insertarusuario($datos){
-        $result = $this->con->query("INSERT INTO usuarios SET ?u", $datos);
+        $result = $this->con->query("INSERT INTO usuario SET ?u", $datos);
         if($result) return true;
     }
 
@@ -49,10 +49,10 @@ class usuario extends SafeMySQL {
     }
     
     function valida_usuario($usuario) {
-        $result = $this->con->query("SELECT 1 FROM usuarios WHERE usuario LIKE ?s",$usuario);
+        $result = $this->con->query("SELECT 1 FROM usuario WHERE email LIKE ?s",$usuario);
         $nReg = $this->con->numRows($result);
-        if($nReg>0) return TRUE;
-        else return FALSE;
+        if($nReg>0) return FALSE;
+        else return TRUE;
     }
 
     function loginusuario($usuario, $password) {

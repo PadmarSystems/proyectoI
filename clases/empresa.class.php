@@ -3,8 +3,7 @@
 require_once 'config.gral.php';
 require_once 'safemysql.php';
 
-class empresas extends SafeMySQL {
-    private $keyHash = 'sad.SD$24';//clave hashing para encriptar
+class empresa extends SafeMySQL {
     var $con;
 
     function __construct() {
@@ -23,5 +22,10 @@ class empresas extends SafeMySQL {
 		$result = $this->con->query("UPDATE `empresa` SET `aliasEmpresa` = ?  WHERE `idEmpresa` = ?");
 		if($result) return true;
 	}
+
+	function mostrar_empresas($params="*", $where=""){
+        $sql = "SELECT $params from empresa $where";
+        return $this->con->getAll($sql);
+    }
 }
 ?>
