@@ -10,6 +10,7 @@ class empresas extends SafeMySQL {
     function __construct() {
         $this->con = new SafeMySQL();
     }
+	/** EMPRESA **/
 	function getEmpresas(){
 		return $this->con->getRow("SELECT * FROM `empresa` ORDER BY `aliasEmpresa` ASC");
 	}
@@ -20,7 +21,26 @@ class empresas extends SafeMySQL {
 
 	function actualizarEmpresa($datos=array()){
 		//func con array como srg
-		$result = $this->con->query("UPDATE `empresa` SET `aliasEmpresa` = ?  WHERE `idEmpresa` = ?");
+		$result = $this->con->query("UPDATE `empresa` SET `aliasEmpresa` = ?  WHERE `idEmpresa` = ?",$datos);
+		if($result) return true;
+	}
+	
+	/** PUESTOS **/
+	function getPuestos(){
+		return $this->con->getRow("SELECT * FROM `puesto` WHERE idEmpresa = ? ORDER BY `nombrePuesto` ASC");
+	}
+	function nuevoPuesto($datos){ /**/
+		$result = $this->con->query("INSERT INTO `puesto` (`idEmpresa`,`nombrePuesto`,`fechaCreacion`) VALUES (?, ?, ?)", $datos);
+		if($result) return true;
+	}
+
+	function actualizarPuesto($datos=array()){ /**/
+		//func con array como srg 
+		$result = $this->con->query("UPDATE `puesto` SET `nombrePuesto`= ? WHERE `idPuesto`=?",$datos);
+		if($result) return true;
+	}
+	function verPuestoxID($datos=array()){ /**/
+		$result = $this->con->query("SELECT * FROM `puesto` WHERE `idPuesto`=?",$datos);
 		if($result) return true;
 	}
 }
