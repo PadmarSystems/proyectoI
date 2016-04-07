@@ -1,25 +1,25 @@
 <?php
 require('clases/empleado.class.php');
-$empobj = new empleado;
+$empleado = new empleado;
 
 $msg = "";
 $stt = "";
-$responsables = array();
-$ubicaciones = array();
-$puestos = array();
+$responsables = $empleado->mostrar_responsables();
+$ubicaciones = $empleado->mostrar_ubicaciones();
+$puestos = $empleado->mostrar_puestos();
 if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
-		$form = array('nombre'=>'----','empresa'=>'','correo'=>'','telefono'=>'','responsable'=>'','ubicacion'=>'','puesto'=>'','clave'=>'','accion'=>'Registrar');
-		$name = explode('--', $form['nombre']);
+		$form = array('nombre'=>'--','idEmpresa'=>$_SESSION['idEmpresa'],'empresa'=>$_SESSION['empresa'],'correo'=>'','telefono'=>'','responsable'=>'','ubicacion'=>'','puesto'=>'','clave'=>'','accion'=>'Registrar');
+		$name = explode('-', $form['nombre']);
 		$nombre = $name[0];
 		$apePaterno = $name[1];
 		$apeMaterno = $name[2];
 	}elseif ($_GET['ac']=="editar") {
 		//obtener id
 		//arreglo prueba:
-		$form = array('nombre'=>'Nombre 1--Apellido Uno--Apellido no. Dos','empresa'=>'100','correo'=>'empleado@dominio.com','telefono'=>'8334444444','responsable'=>'22','ubicacion'=>'33','puesto'=>'101','clave'=>'','accion'=>'');
+		$form = array('nombre'=>'Nombre 1-Apellido Uno-Apellido no. Dos','idEmpresa'=>'','empresa'=>'100','correo'=>'empleado@dominio.com','telefono'=>'8334444444','responsable'=>'22','ubicacion'=>'33','puesto'=>'101','clave'=>'','accion'=>'');
 		$form['accion']="Editar";
-		$name = explode('--', $form['nombre']);
+		$name = explode('-', $form['nombre']);
 		$nombre = $name[0];
 		$apePaterno = $name[1];
 		$apeMaterno = $name[2];
@@ -41,7 +41,6 @@ if (isset($_GET['stt'])) {
 	}
 }
 ?>
-
 <h2><?php echo $form['accion'].' empleado'; ?></h2>
 <div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
 <form action="empleados/controlador.php" method="post">
@@ -61,6 +60,7 @@ if (isset($_GET['stt'])) {
 		<label>Empresa: </label>
 		<span>
 			<input type="text" id="empresaEmp" name="empresaEmp" value="<?php echo $form['empresa']; ?>" required readonly/>
+			<input type="hidden" id="idEmpresaEmp" name="idEmpresaEmp" value="<?php echo $form['idEmpresa']; ?>" required readonly/>
 		</span>
 	</div>
 	<div>

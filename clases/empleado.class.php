@@ -48,5 +48,20 @@ class empleado extends SafeMySQL {
 	function getEmpresas(){
 		return $this->con->getRow("SELECT * FROM empresa ORDER BY aliasEmpresa ASC");
 	}
+	////
+	function mostrar_responsables($params="*", $where=""){
+		$sql = "SELECT $params FROM responsable $where";
+		return $this->con->getAll($sql);
+	}
+
+	function mostrar_ubicaciones($params="*", $where=""){
+		$sql = "SELECT $params FROM ubicacion $where";
+		return $this->con->getAll($sql);
+	}
+
+	function mostrar_puestos($params="*", $where=""){
+		$sql = "SELECT $params FROM puesto $where";
+		return $this->con->getAll($sql);
+	}
 }
 ?>

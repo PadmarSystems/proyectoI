@@ -8,10 +8,12 @@ if (isset($_POST) && !isset($_SESSION['logged'])) {
     $pass = htmlspecialchars($_POST['mypassword']);
 
     $row = $usuario->loginusuario($user, $pass);
-    ?><script type="text/javascript">console.log("aqui");</script><?php
+    
     if (count($row) > 1) {
         $horaActual = date("H:i:s");
         $_SESSION['nombre'] = $row['nombreUsuario'];
+        $_SESSION['idEmpresa'] = $row['idEmpresa'];
+        $_SESSION['empresa'] = $row['aliasEmpresa'];
         $_SESSION['logged'] = TRUE;
         $_SESSION['caducidad'] = date('H:i:s', strtotime($horaActual) + 600);
     }else{

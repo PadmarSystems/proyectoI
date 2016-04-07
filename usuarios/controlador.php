@@ -6,8 +6,6 @@ if(isset($_POST['a'])){
 	$accion=$_POST['a'];
 	switch ($accion){
 		case 'Registrar':
-			print_r($_POST);
-			
 			$usuarioValido = $usuario->valida_usuario($_POST['correo']);
 			if($usuarioValido){
 				$array = array('idEmpresa'=>$_POST['empresa'],'nombreUsuario'=>$_POST['usuario'],'email'=>$_POST['correo'],'contrasena'=>$usuario->encriptaPass($_POST['pass']));
@@ -20,8 +18,7 @@ if(isset($_POST['a'])){
 			}else{
 				header('Location: ../view.php?com=usuarios&mod=form&ac=nuevo&stt=nvuser');
 			}
-			return;
-			$array = array();
+			
 			header('Location: ../view.php?com=usuarios&mod=form&ac=nuevo&stt=success');
 			break;
 		default:

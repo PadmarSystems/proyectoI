@@ -1,6 +1,6 @@
 <?php
 require('../clases/empleado.class.php');
-$objemp = new empleado;
+$empleado = new empleado;
 
 if(isset($_POST)){
 	$accion=$_POST['a'];
@@ -18,6 +18,8 @@ if(isset($_POST)){
 			} else {
 				$ubicacion = $_POST['ubicacion'];
 			}*/
+			print_r($_POST);
+			return;
 			$saveArray=array(
 				$_POST['empresaEmp'],
 				$nombre,
