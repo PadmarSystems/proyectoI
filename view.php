@@ -47,7 +47,8 @@ if (isset($_GET['mod'])) {
 <body>
 	<nav>
 		<ul>
-			<li><a title="Empleados" onclick="goto();">Inicio</a></li>
+			<li><a title="Inicio" onclick="goto();">Inicio</a></li>
+            <li><a title="Salir" href="logout.php">Salir del sistema</a></li>
 		</ul>
 	</nav>
     <div>

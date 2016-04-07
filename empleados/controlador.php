@@ -5,21 +5,19 @@ $objemp = new empleado;
 if(isset($_POST)){
 	$accion=$_POST['a'];
 	
-	$nombre=$_POST['nombre'].'--'.$_POST['apellidoPat'].'--'.$_POST['apellidoMat'];
-	if(empty($_POST['responsable'])){
-		$responsable = '0';
-	} else {
-		$responsable = $_POST['responsable'];
-	}
-	if(empty($_POST['ubicacion'])){
-		$ubicacion = '0';
-	} else {
-		$ubicacion = $_POST['ubicacion'];
-	}
 	switch ($accion){
 		case 'Registrar':
-			$dCreate = date('Y-m-d');
-			$dUpdt = $dCreate;
+			$nombre=$_POST['nombre'].'-'.$_POST['apellidoPat'].'-'.$_POST['apellidoMat'];
+			/*if(empty($_POST['responsable'])){
+				$responsable = '0';
+			} else {
+				$responsable = $_POST['responsable'];
+			}
+			if(empty($_POST['ubicacion'])){
+				$ubicacion = '0';
+			} else {
+				$ubicacion = $_POST['ubicacion'];
+			}*/
 			$saveArray=array(
 				$_POST['empresaEmp'],
 				$nombre,
