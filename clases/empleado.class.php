@@ -38,15 +38,15 @@ class empleado extends SafeMySQL {
 		return $this->con->insertId();
 	}
 
-	function valida_empleado($empleado) {
-		$result = $this->con->query("SELECT 1 FROM empleado WHERE empleado LIKE ?s",$empleado);
-		$nReg = $this->con->numRows($result);
-		if($nReg>0) return TRUE;
-		else return FALSE;
+	function verEmpleados($dato) {
+		return $this->con->getAll("SELECT * FROM empleado WHERE idEmpresa=?i",$dato);
+	}
+	function verEmpleadoxID($dato) {
+		return $this->con->getRow("SELECT * FROM empleado WHERE idEmpleado=?i",$dato);
 	}
 	////////////
-	function getEmpresas(){
-		return $this->con->getRow("SELECT * FROM empresa ORDER BY aliasEmpresa ASC");
+	function verUsuarioxNombre($name){
+		return $this->con->getRow("SELECT * FROM usuario WHERE nombreUsuario LIKE '".$name."'");
 	}
 }
 ?>
