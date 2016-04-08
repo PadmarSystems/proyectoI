@@ -1,13 +1,14 @@
 <?php
-require('clases/empleado.class.php');
-$empobj = new empleado;
+require('clases/empresa.class.php');
+$objEmp = new empresa;
 $msg = "";
 $stt = "";
 
 if (isset($_GET['ac'])) {
 	if ($_GET['ac']=="editar") {
-		# obtener id de emp
-		$form = array('id'=>'100','alias'=>'Ejemplo Empresa','clave'=>'','accion'=>'Editar');
+		$nombre=$objEmp->verEmpresaxID($_SESSION['idEmpresa']);
+		$nombre=$nombre['aliasEmpresa'];
+		$form = array('id'=>$_SESSION['idEmpresa'],'alias'=>$nombre,'clave'=>'','accion'=>'Editar');
 	}else{
 		header('Location: view.php?com=empresa&mod=form&ac=editar&stt=error');
 	}
@@ -28,7 +29,6 @@ if (isset($_GET['stt'])) {
 	}
 }
 ?>
-
 <h2>Cambiar nombre de mi empresa</h2>
 <div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
 <form action="empresa/controlador.php" method="post">
