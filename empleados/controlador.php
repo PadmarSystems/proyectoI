@@ -73,7 +73,7 @@ if(isset($_POST)){
 		switch ($accion){
 			case 'Registrar':
 				//$dCreate = date('Y-m-d');
-				$saveArray=array(
+				/*$saveArray=array(
 					$idEmp,
 					$nombre,
 					$_POST['telefono'],
@@ -85,10 +85,10 @@ if(isset($_POST)){
 					$nombreAa,
 					$telefonoAa,
 					$rutaFoto
-				);
-				echo "<pre>"; print_r($saveArray); echo "</pre>";
+				);*/
+				echo "<pre>"; print_r($_POST); echo "</pre>";
 				// guardar saveArray
-				header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=success');
+				//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=success');
 			break;
 			case 'Editar';
 				$saveArray=array(
