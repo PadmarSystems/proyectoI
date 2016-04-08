@@ -1,12 +1,15 @@
 <?php
 require('clases/empleado.class.php');
-$empobj = new empleado;
+$empleado = new empleado;
+
 $msg = "";
 $stt = "";
-
+$responsables = $empleado->mostrar_responsables();
+$ubicaciones = $empleado->mostrar_ubicaciones();
+$puestos = $empleado->mostrar_puestos();
 if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
-		$form = array('nombre'=>'----','correo'=>'','telefono'=>'','nomina'=>'','responsable'=>'','ubicacion'=>'','puesto'=>'','nombreAa'=>'','telAa'=>'','fotoEmp'=>'','accion'=>'Registrar');
+		$form = array('nombre'=>'----','idEmpresa'=>$_SESSION['idEmpresa'],'empresa'=>$_SESSION['empresa'],'correo'=>'','telefono'=>'','responsable'=>'','ubicacion'=>'','puesto'=>'','clave'=>'','nombreAa'=>'','telAa'=>'','fotoEmp'=>'','accion'=>'Registrar');
 		$name = explode('--', $form['nombre']);
 		$nombre = $name[0];
 		$apePaterno = $name[1];
@@ -14,7 +17,7 @@ if (isset($_GET['ac'])) {
 	}elseif ($_GET['ac']=="editar") {
 		//obtener id
 		//arreglo prueba:
-		$form = array('nombre'=>'Empleado--de Prueba--no. 1','correo'=>'empleado@prueba.com','telefono'=>'8331001122','nomina'=>'2','responsable'=>'11','ubicacion'=>'10','puesto'=>'1','nombreAa'=>'Aa Nombre Comp','telAa'=>'8332998877','fotoEmp'=>'empleados/files/tstFile.jpg','accion'=>'');
+		$form = array('nombre'=>'Nombre 1--Apellido Uno--Apellido no. Dos','idEmpresa'=>'','empresa'=>'100','correo'=>'empleado@dominio.com','telefono'=>'8334444444','responsable'=>'22','ubicacion'=>'33','puesto'=>'101','clave'=>'','nombreAa'=>'Aa Nombre Comp','telAa'=>'8332998877','fotoEmp'=>'empleados/files/tstFile.jpg','accion'=>'');
 		$form['accion']="Editar";
 		$name = explode('--', $form['nombre']);
 		$nombre = $name[0];
@@ -44,15 +47,27 @@ if (isset($_GET['stt'])) {
 	}
 }
 ?>
-
 <h2><?php echo $form['accion'].' empleado'; ?></h2>
 <div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
 <form action="empleados/controlador.php" enctype="multipart/form-data" method="post">
 	<p>Los campos marcados con un asterisco (<b>*</b>) son obligatorios.</p>
 	<div>
+		<label>Nombre: </label>
+		<div><input type="text" id="nombre" name="nombre" value="<?php echo $nombre ?>" required /></div>
+	</div>
+	<div>
+		<label>Apellido Paterno: </label>
+		<div><input type="text" id="apellidoPat" name="apellidoPat" value="<?php echo $apePaterno; ?>" required /></div>
+	</div>
+	<div>
+		<label>Apellido Materno: </label>
+		<div><input type="text" id="apellidoMat" name="apellidoMat" value="<?php echo $apeMaterno; ?>" required /></div>
+	</div>
+	<div>
 		<label>Fotografía de empleado: </label>
 		<div>
 			<input type="file" id="foto" name="foto"/>
+			<input type="hidden" id="idEmpresaEmp" name="idEmpresaEmp" value="<?php echo $form['idEmpresa']; ?>" required readonly/>
 		</div>
 		<?php #if ($form['fotoEmp'] != ''){
 			echo '
@@ -64,23 +79,11 @@ if (isset($_GET['stt'])) {
 		?>
 	</div>
 	<div>
-		<label><b>*</b> Nombre: </label>
-		<div><input type="text" id="nombre" name="nombre" value="<?php echo $nombre ?>" required /></div>
-	</div>
-	<div>
-		<label><b>*</b> Apellido Paterno: </label>
-		<div><input type="text" id="apellidoPat" name="apellidoPat" value="<?php echo $apePaterno; ?>" required /></div>
-	</div>
-	<div>
-		<label><b>*</b> Apellido Materno: </label>
-		<div><input type="text" id="apellidoMat" name="apellidoMat" value="<?php echo $apeMaterno; ?>" required /></div>
-	</div>
-	<div>
-		<label><b>*</b> Correo electrónico: </label>
+		<label>Correo electrónico: </label>
 		<div><input type="email" name="correo" id="correo" value="<?php echo $form['correo']; ?>" required /></div>
 	</div>
 	<div>
-		<label><b>*</b> Teléfono: </label>
+		<label>Teléfono: </label>
 		<div><input type="text" name="telefono" id="telefono" pattern="\d{10}" value="<?php echo $form['telefono']; ?>" required /></div>
 	</div>
 	<div>
@@ -96,56 +99,52 @@ if (isset($_GET['stt'])) {
 	</div>
 	<div>
 		<label>Responsable: </label>
-		<div>
-			<!--- <select id="responsable" name="responsable">
-				<?php
-				foreach ($responsable as $val){
-					echo '<option value="'.$val['idResponsable'].'"';
-						if ($form['responsable'] == $val['idResponsable']){ // $form
-							echo ' selected="selected" ';
-						}
-					echo '>'.$val['nombreResponsable'].'</option>';
-				}
+		<span>
+			<select id="responsable" name="responsable">
+				<option value="0">Seleccione</option>
+				<?php 	foreach ($responsables as $responsable) {
+					$selected = "";
+					if($form['responsable'] == $responsable['nombreResponsable']){
+						$selected = "selected";
+					}
 				?>
-			</select>--->
-			<input type="text" id="responsable" name="responsable" value="<?php echo $form['responsable']; ?>"/>
-		</div>
+		            <option value="<?php echo $responsable['idResponsable']; ?>" <?php echo $selected; ?>><?php echo $responsable['nombreResponsable']; ?></option>
+		    	<?php 	}	?>
+			</select>
+		</span>
 	</div>
 	<div>
 		<label>Ubicación: </label>
-		<div>
-			<!---<select id="ubicacion" name="ubicacion" >
-				<?php
-				foreach ($ubicacion as $val){
-					echo '<option value="'.$val['idUbicacion'].'"';
-						if ($form['ubicacion'] == $val['idUbicacion']){
-							echo ' selected="selected" ';
-						}
-					echo '>'.$val['nombreUbicacion'].'</option>';
-				}
+		<span>
+			<select id="ubicacion" name="ubicacion" >
+				<option value="0">Seleccione</option>
+				<?php 	foreach ($ubicaciones as $ubicacion) {
+					$selected = "";
+					if($form['ubicacion'] == $ubicacion['nombreUbicacion']){
+						$selected = "selected";
+					}
 				?>
-			</select>--->
-			<input type="text" id="ubicacion" name="ubicacion" value="<?php echo $form['ubicacion']; ?>"/>
-		</div>
+		            <option value="<?php echo $ubicacion['idUbicacion']; ?>" <?php echo $selected; ?>><?php echo $ubicacion['nombreUbicacion']; ?></option>
+		    	<?php 	}	?>
+			</select>
+		</span>
 	</div>
 	<div>
-		<label><b>*</b> Puesto: </label>
-		<div>
-			<!---
-				<select id="puesto" name="puesto" required>
-				<?php
-				foreach ($puesto as $val){
-					echo '<option value="'.$val['idPuesto'].'"';
-						if ($form['puesto'] == $val['idPuesto']){
-							echo ' selected="selected" ';
-						}
-					echo '>'.$val['nombrePuesto'].'</option>';
-				}
+		<label>Puesto: </label>
+		<span>
+			<select id="puesto" name="puesto">
+				<option value="0">Seleccione</option>
+				<?php 	foreach ($puestos as $puesto) {
+					$selected = "";
+					if($form['ubicacion'] == $puesto['idPuesto']){
+						$selected = "selected";
+					}
 				?>
+		            <option value="<?php echo $puesto['idPuesto']; ?>" <?php echo $selected; ?>><?php echo $puesto['nombrePuesto']; ?></option>
+		    	<?php 	}	?>
 			</select>
-				</select>--->
-			<input type="text" id="puesto" name="puesto" required value="<?php echo $form['puesto']; ?>"/>
-		</div>
+				</select>
+		</span>
 	</div>
 	<p>¿A quén deberíamos contactar en caso de accidente?</p>
 	<div>

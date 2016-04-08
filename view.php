@@ -13,6 +13,9 @@ if (isset($_POST) && !isset($_SESSION['logged'])) {
         $horaActual = date("H:i:s");
         $_SESSION['nombre'] = $row['nombreUsuario'];
         $_SESSION['idEmpresa'] = $row['idEmpresa'];
+
+        $_SESSION['empresa'] = $row['aliasEmpresa'];
+
         $_SESSION['logged'] = TRUE;
         $_SESSION['caducidad'] = date('H:i:s', strtotime($horaActual) + 600);
     }else{
@@ -60,4 +63,6 @@ if (isset($_GET['mod'])) {
 <?php }else{
     header('Location: index.php');
     exit;
+
 } ?>
+

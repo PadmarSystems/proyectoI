@@ -24,6 +24,16 @@ class empresa extends SafeMySQL {
 		if($result) return true;
 	}
 
+	function actualizarPuesto($datos=array()){ /**/
+		//func con array como srg 
+		$result = $this->con->query("UPDATE `puesto` SET `nombrePuesto`= ? WHERE `idPuesto`=?",$datos);
+		if($result) return true;
+	}
+	function verPuestoxID($datos=array()){ /**/
+		$result = $this->con->query("SELECT * FROM `puesto` WHERE `idPuesto`=?",$datos);
+		if($result) return true;
+	}
+
 	function mostrar_empresas($params="*", $where=""){
         $sql = "SELECT $params from empresa $where";
         return $this->con->getAll($sql);

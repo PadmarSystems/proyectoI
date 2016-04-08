@@ -13,3 +13,4 @@ require("ruta.php");
     <p>Modo offline...</p>
 </body>
 </html>
+
