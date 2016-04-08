@@ -15,10 +15,13 @@ class ubicaciones extends SafeMySQL {
 		if($result) return true;
 	}
 	function getEmpleadosxUbic($id){
-		return $this->con->getAll("SELECT COUNT(*) FROM empleado WHERE idUbicacion=?i",$id);
+		return $this->con->getAll("SELECT COUNT(*) FROM `empleado` WHERE `idUbicacion`=?i",$id);
 	}
 	function getUbicacionesxEmp($datos){
-		return $this->con->getAll("SELECT * FROM `ubicacion` WHERE idEmpresa= ?i ORDER BY `nombreUbicacion` ASC",$datos);
+		return $this->con->getAll("SELECT * FROM `ubicacion` WHERE `idEmpresa`= ?i ORDER BY `nombreUbicacion` ASC",$datos);
+	}
+	function getUbicacionxID($id){
+		return $this->con->getRow("SELECT * FROM `ubicacion` WHERE `idUbicacion`= ?i",$id);
 	}
 	function insertarUbicacion($datos){
 		$result = $this->con->query("INSERT INTO `ubicacion` SET ?u", $datos);
