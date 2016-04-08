@@ -2,7 +2,7 @@
 require('../clases/empleado.class.php');
 $objemp = new empleado;
 $idEmp = '1'; // =$_SESSION['empresa'];
-
+$stt = "default";
 if(isset($_POST)){
 	$accion=$_POST['a'];
 	$nombre=$_POST['nombre'].'--'.$_POST['apellidoPat'].'--'.$_POST['apellidoMat'];
@@ -87,6 +87,22 @@ if(isset($_POST)){
 					$rutaFoto
 				);*/
 				echo "<pre>"; print_r($_POST); echo "</pre>";
+				$empleadoValido = $objemp->valida_empleado($nombre);
+				if($usuarioValido){
+					$array = array('idEmpresa'=>$_POST['idEmpresaEmp'],'nombreEmp'=>$nombre,'telEmp'=>$_POST['telefono'],'emailEmp'=>$_POST['correo'],'tipoNomina'=>$_POST['tipoNomina'],'idResponsable'=>$_POST['responsable'],'idUbicacion'=>$_POST['ubicacion'],'idPuesto'=>$_POST['puesto'],'contactoAccidente'=>$_POST['nombreAa'],'numeroAccidente'=>$_POST['telefonoAa'],'fotoEmp'=>$rutaFoto);
+					$inserta = $objemp->insertarempleado($array);
+					if($inserta){
+						$stt = "csuccess";
+						//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=csuccess');
+					}else{
+						$stt = "cfailded";
+						//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=cfailed');
+					}	
+				}else{
+					$stt = "nvuser";
+					//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=nvuser');
+				}
+				header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt='.$stt);
 				// guardar saveArray
 				//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=success');
 			break;
