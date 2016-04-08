@@ -29,7 +29,6 @@ if (isset($_GET['stt'])) {
 		$msg="No se detectaron cambios en el nombre de la ubicación.";
 	}
 }
-$getEmp = $objEmp->verUsuarioxNombre($_SESSION['nombre']);
 ?>
 <h2><?php echo $form['accion']; ?> ubicación</h2>
 <div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
@@ -74,7 +73,7 @@ switch ($form['accion']) {
 	<div>
 		<label></label>
 		<div style="padding-top:15px;">
-			<input type="hidden" name="idEmp" value="<?php echo $getEmp['idEmpresa']; ?>"/>
+			<input type="hidden" name="idEmp" value="<?php echo $_SESSION['idEmpresa']; ?>"/>
 			<input type="button" name="back" onclick="history.back();" value="Regresar">
 			<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
 		</div>
