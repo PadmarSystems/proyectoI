@@ -1,14 +1,13 @@
 <?php
-require('../clases/empresa.class.php');
-$objPuesto = new empresas;
-# $idEmp = $_SESSION['empresa']; // 
-$idEmp = '1';
+require('../clases/puesto.class.php');
+$objPuesto = new puestos;
+$idEmp = $_POST['idEmp'];
 
 if(isset($_POST)){
 	$accion=$_POST['a'];
 	switch ($accion){
 		case 'Registrar':
-			#$dCreate = date('Y-m-d');
+			$dCreate = date('Y-m-d H:i:s');
 			if ( !empty($_POST['puesto2'] )){
 				$puestos=array($_POST['puesto1'],$_POST['puesto2']);
 			} else {
@@ -16,27 +15,33 @@ if(isset($_POST)){
 			}
 			foreach($puestos as $pues){
 				$saveArray=array(
-					$idEmp, /***/
-					$pues
+					'idEmpresa'=>$idEmp,
+					'nombrePuesto'=>$pues
 				);
 				echo "<pre>"; print_r($saveArray); echo "</pre>";
-				// guardar saveArray // $objPuesto->nuevoPuesto($saveArray)
+				if ($objPuesto->nuevoPuesto($saveArray)){
+					echo "guardó info";
+					header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt=success');
+				} else {
+					echo "no guardó";
+					header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt=error');
+				}
 			}
-			header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt=success');
 		break;
 		case 'Editar';
-			$nomPuesto = 'Programador Web'; // $nomPuesto = $objPuesto->verPuestoxID(...); $nomPuesto=$nomPuesto[0]['nombrePuesto'];
+			$nomPuesto = $objPuesto->verPuestoxID($_POST['idP']);
+			$nomPuesto=$nomPuesto['nombrePuesto'];
 			if($_POST['nombreNuevo'] == $nomPuesto){
 				echo "igual";
 				header('Location: ../view.php?com=puestos&mod=form&ac=editar&stt=nochng');
 			} else {
-				$saveArray=array(
-					$_POST['nombreNuevo'],
-					$_POST['idP']
-				);
-				echo "<pre>"; print_r($saveArray); echo "</pre>";
-				# guardar saveArray (alias, fechaActualizacion) // $objPuesto->$nomPuesto($saveArray);
-				header('Location: ../view.php?com=puestos&mod=form&ac=editar&stt=success');
+				if ($objPuesto->actualizarPuesto($_POST['nombreNuevo'],$_POST['idP'])){
+					echo "guardó info";
+					header('Location: ../view.php?com=puestos&mod=form&ac=editar&stt=success');
+				} else {
+					echo "no guardó";
+					header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt=error');
+				}
 			}
 		break;
 		default:

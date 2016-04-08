@@ -1,15 +1,14 @@
 <?php
-require('clases/empresa.class.php');
-$objPuesto = new empresas;
+require('clases/empleado.class.php');
+$objEmp = new empleado;
 $msg = "";
 $stt = "";
 if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
 		$form = array('puesto'=>'','idP'=>'','empresa'=>'','accion'=>'Registrar');
 	}elseif ($_GET['ac']=="editar") {
-		# obtener id
-		# arreglo ejemplo:
-		$form = array('puesto'=>'Programador Web','idP'=>'1','empresa'=>'1','accion'=>'Editar');
+		# FALTA OBTENER ID
+		$form = array('puesto'=>'Programador Web','idP'=>'3','empresa'=>'1','accion'=>'Editar');
 	}else{
 		header('Location: view.php?com=puestos&mod=form&ac=nuevo&stt=error');
 	}
@@ -53,7 +52,7 @@ switch ($form['accion']) {
 		?>
 		<div>
 			<label>Nombre del puesto: </label>
-			<div><label id="puesto"><?php echo $form['puesto']; ?></label></div>
+			<div><label id="puesto" name="puesto"><?php echo $form['puesto']; ?></label></div>
 		</div>
 		<div>
 			<label>Nuevo nombre del puesto: </label>
@@ -69,6 +68,7 @@ switch ($form['accion']) {
 	<div>
 		<label></label>
 		<div style="padding-top:15px;">
+			<input type="hidden" name="idEmp" value="<?php echo $_SESSION['idEmpresa']; ?>"/>
 			<input type="button" name="back" onclick="history.back();" value="Regresar">
 			<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
 		</div>
