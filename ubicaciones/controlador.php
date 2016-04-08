@@ -1,13 +1,14 @@
 <?php
 require('../clases/ubicacion.class.php');
 $objUbic = new ubicaciones;
-# $idEmp = $_SESSION['empresa']; // 
 
 if(isset($_POST)){
+	print_r($_POST);
+	$idEmp = $_POST['idEmp'];
 	$accion=$_POST['a'];
 	switch ($accion){
 		case 'Registrar':
-			#$dCreate = date('Y-m-d');
+			$dCreate =  date('Y-m-d H:i:s');
 			if ( !empty($_POST['ubicacion2']) && !empty($_POST['ubicacion3']) ){
 				$ubicaciones=array($_POST['ubicacion1'],$_POST['ubicacion2'],$_POST['ubicacion3']);
 			} elseif ( !empty($_POST['ubicacion2']) && empty($_POST['ubicacion3']) ){
@@ -19,28 +20,34 @@ if(isset($_POST)){
 			}
 			foreach($ubicaciones as $ubc){
 				$saveArray=array(
-					$idEmp, /***/
-					$ubc
-					//$dCreate
+					'idEmpresa'=>$idEmp,
+					'nombreUbicacion'=>$ubc,
+					'fechaCreacion'=>$dCreate
 				);
 				echo "<pre>"; print_r($saveArray); echo "</pre>";
-				// guardar saveArray // $objUbic->nuevaUbicacion(...)
+				if ($objUbic->insertarUbicacion($saveArray)){
+					echo "ya";
+					header('Location: ../view.php?com=ubicaciones&mod=form&ac=nuevo&stt=success');
+				} else {
+					echo "no guardó";
+					header('Location: ../view.php?com=ubicaciones&mod=form&ac=nuevo&stt=error');
+				}
 			}
-			header('Location: ../view.php?com=ubicaciones&mod=form&ac=nuevo&stt=success');
+			
 		break;
 		case 'Editar';
-			$nomUbicacion = 'PS Col. Aurora';
+			$nomUbicacion = 'PS Col. Aurora'; // por ID
 			if($_POST['nombreNuevo'] == $nomUbicacion){
 				echo "igual";
 				header('Location: ../view.php?com=ubicaciones&mod=form&ac=editar&stt=nochng');
 			} else {
-				$saveArray=array(
-					$_POST['nombreNuevo'],
-					$_POST['idU']
-				);
-				echo "<pre>"; print_r($saveArray); echo "</pre>";
-				# guardar saveArray (alias, fechaActualizacion) // $objUbic->actualizarUbicacion($saveArray);
-				header('Location: ../view.php?com=ubicaciones&mod=form&ac=editar&stt=success');
+				if ($objUbic->actualizarUbicacion( $_POST['nombreNuevo'], $_POST['idU'] )){
+					echo "ya";
+					header('Location: ../view.php?com=ubicaciones&mod=form&ac=editar&stt=success');
+				} else {
+					echo "no guardó";
+					header('Location: ../view.php?com=ubicaciones&mod=form&ac=editar&stt=error');
+				}
 			}
 		break;
 		default:
