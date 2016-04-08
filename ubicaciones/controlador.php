@@ -36,7 +36,8 @@ if(isset($_POST)){
 			
 		break;
 		case 'Editar';
-			$nomUbicacion = 'PS Col. Aurora'; // por ID
+			$nomUbicacion = $objUbic->getUbicacionxID($_POST['idU']);
+			$nomUbicacion=$nomUbicacion['nombreUbicacion'];
 			if($_POST['nombreNuevo'] == $nomUbicacion){
 				echo "igual";
 				header('Location: ../view.php?com=ubicaciones&mod=form&ac=editar&stt=nochng');
