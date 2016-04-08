@@ -101,6 +101,7 @@ if (isset($_GET['stt'])) {
 		<label>Responsable: </label>
 		<span>
 			<select id="responsable" name="responsable">
+				<option value="0">Seleccione</option>
 				<?php 	foreach ($responsables as $responsable) {
 					$selected = "";
 					if($form['responsable'] == $responsable['nombreResponsable']){
@@ -116,6 +117,7 @@ if (isset($_GET['stt'])) {
 		<label>Ubicación: </label>
 		<span>
 			<select id="ubicacion" name="ubicacion" >
+				<option value="0">Seleccione</option>
 				<?php 	foreach ($ubicaciones as $ubicacion) {
 					$selected = "";
 					if($form['ubicacion'] == $ubicacion['nombreUbicacion']){
@@ -130,7 +132,8 @@ if (isset($_GET['stt'])) {
 	<div>
 		<label>Puesto: </label>
 		<span>
-			<select id="puesto" name="puesto" required>
+			<select id="puesto" name="puesto">
+				<option value="0">Seleccione</option>
 				<?php 	foreach ($puestos as $puesto) {
 					$selected = "";
 					if($form['ubicacion'] == $puesto['idPuesto']){
