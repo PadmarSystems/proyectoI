@@ -1,4 +1,4 @@
 <div>
-<h1>No se encontro la informacion deseada</h1>
+<h1>No se encontró la información deseada</h1>
 <a href="index.php">Volver al inicio</a>
 </div>
