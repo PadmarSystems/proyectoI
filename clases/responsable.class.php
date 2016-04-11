@@ -11,25 +11,25 @@ class responsable extends SafeMySQL {
 	}
 
 	function actualizarResponsable($name,$id){
-		$result = $this->con->query("UPDATE responsable SET nombreResponsable = ?s  WHERE idResponsable = ?i", $name,$id);
+		$result = $this->con->query("UPDATE responsables SET nombreResponsable = ?s  WHERE idResponsable = ?i", $name,$id);
 		if($result) return true;
 	}
 	function eliminarempleado($id){
-		$result = $this->con->query("DELETE FROM empleado WHERE idEmpleado= ?i",$id);
+		$result = $this->con->query("DELETE FROM empleados WHERE idEmpleado= ?i",$id);
 		if($result) return true;
 	}
 	function insertarResponsable($datos){
-		$result = $this->con->query("INSERT INTO responsable SET ?u", $datos);
+		$result = $this->con->query("INSERT INTO responsables SET ?u", $datos);
 		if($result) return true;
 	}
 	function ultimoidinsertado(){
 		return $this->con->insertId();
 	}
 	function verResponsablexID($id){
-		return $this->con->getRow("SELECT * FROM responsable WHERE idResponsable = ?i",$id);
+		return $this->con->getRow("SELECT * FROM responsables WHERE idResponsable = ?i",$id);
 	}
 	function verUsuario($id){
-		return $this->con->getRow("SELECT * FROM usuario WHERE idUsuario=?i",$id);
+		return $this->con->getRow("SELECT * FROM usuarios WHERE idUsuario=?i",$id);
 	}
 }
 ?>

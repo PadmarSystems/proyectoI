@@ -46,6 +46,58 @@ if($actualiza == 1){
 	if($result) echo 'Query ejecutado correctamente';
 }
 
+if ($actualiza == 2) {
+	$sql = "RENAME TABLE empleado TO empleados";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "RENAME TABLE empresa TO empresas";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "RENAME TABLE puesto TO puestos";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "RENAME TABLE responsable TO responsables";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "RENAME TABLE ubicacion TO ubicaciones";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "RENAME TABLE usuario TO usuarios";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+}
+
+if ($actualiza == 3) {
+	$sql = "ALTER TABLE `puestos` CHANGE `fechaCreacion` `fechaCreacion` TIMESTAMP NOT NULL";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "ALTER TABLE `puestos` CHANGE `fechaActualizacion` `fechaActualizacion` TIMESTAMP NOT NULL";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "ALTER TABLE `responsables` CHANGE `fechaCreacion` `fechaCreacion` TIMESTAMP NOT NULL";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "ALTER TABLE `responsables` CHANGE `fechaActualizacion` `fechaActualizacion` TIMESTAMP NOT NULL";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "ALTER TABLE `ubicaciones` CHANGE `fechaCreacion` `fechaCreacion` TIMESTAMP NULL DEFAULT NULL";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+
+	$sql = "ALTER TABLE `ubicaciones` CHANGE `fechaActualizacion` `fechaActualizacion` TIMESTAMP NOT NULL";
+	$result = $conexSM->query($sql);
+	if($result) echo 'Query ejecutado correctamente';
+}
+
 $tiempoFinal = microtime(true);
 echo '<h2>Tiempo de ejecucion = ' . round(($tiempoFinal - $tiempoInicio), 4) . ' seg.</h2> Fecha: ' . date('Y-m-d H:i:s');
 ?>

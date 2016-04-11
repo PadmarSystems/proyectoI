@@ -11,26 +11,26 @@ class empleado extends SafeMySQL {
 	}
 
 	function insertarempleado($datos){
-		$result = $this->con->query("INSERT INTO empleado SET ?u", $datos);
+		$result = $this->con->query("INSERT INTO empleados SET ?u", $datos);
 		if($result) return true;
 	}
 
 	function actualizarempleado($datos,$id){
-		$result = $this->con->query("UPDATE empleado SET ?u  WHERE idEmpleado = ?i", $datos,$id);
+		$result = $this->con->query("UPDATE empleados SET ?u  WHERE idEmpleado = ?i", $datos,$id);
 		if($result) return true;
 	}
 
 	function mostrar_empleado($id){
-		return $this->con->getRow("SELECT * from empleado WHERE idEmpleado=?i",$id);
+		return $this->con->getRow("SELECT * from empleados WHERE idEmpleado=?i",$id);
 	}
 
 	function mostrar_empleados($params="*", $where=""){
-		$sql = "SELECT $params FROM empleado $where";
+		$sql = "SELECT $params FROM empleados $where";
 		return $this->con->getAll($sql);
 	}
 
 	function eliminarempleado($id){
-		$result = $this->con->query("DELETE FROM empleado WHERE idEmpleado= ?i",$id);
+		$result = $this->con->query("DELETE FROM empleados WHERE idEmpleado= ?i",$id);
 		if($result) return true;
 	}
 
@@ -39,29 +39,36 @@ class empleado extends SafeMySQL {
 	}
 
 	function verEmpleados($dato) {
-		return $this->con->getAll("SELECT * FROM empleado WHERE idEmpresa=?i",$dato);
+		return $this->con->getAll("SELECT * FROM empleados WHERE idEmpresa=?i",$dato);
 	}
 	function verEmpleadoxID($dato) {
-		return $this->con->getRow("SELECT * FROM empleado WHERE idEmpleado=?i",$dato);
+		return $this->con->getRow("SELECT * FROM empleados WHERE idEmpleado=?i",$dato);
 	}
 	////////////
 	function verUsuarioxNombre($name){
-		return $this->con->getRow("SELECT * FROM usuario WHERE nombreUsuario LIKE '".$name."'");
+		return $this->con->getRow("SELECT * FROM usuarios WHERE nombreUsuario LIKE '".$name."'");
 	}
 	////
 	function mostrar_responsables($params="*", $where=""){
-		$sql = "SELECT $params FROM responsable $where";
+		$sql = "SELECT $params FROM responsables $where";
 		return $this->con->getAll($sql);
 	}
 
 	function mostrar_ubicaciones($params="*", $where=""){
-		$sql = "SELECT $params FROM ubicacion $where";
+		$sql = "SELECT $params FROM ubicaciones $where";
 		return $this->con->getAll($sql);
 	}
 
 	function mostrar_puestos($params="*", $where=""){
-		$sql = "SELECT $params FROM puesto $where";
+		$sql = "SELECT $params FROM puestos $where";
 		return $this->con->getAll($sql);
 	}
+
+	function valida_empleado($usuario) {
+        $result = $this->con->query("SELECT 1 FROM empleados WHERE nombreEmp LIKE ?s",$usuario);
+        $nReg = $this->con->numRows($result);
+        if($nReg>0) return FALSE;
+        else return TRUE;
+    }
 }
 ?>
