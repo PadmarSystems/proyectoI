@@ -25,7 +25,12 @@ class empleado extends SafeMySQL {
 	}
 
 	function mostrar_empleados($params="*", $where=""){
-		$sql = "SELECT $params FROM empleados $where";
+		$sql = "SELECT empleados.*, nombrePuesto,nombreUbicacion,nombreResponsable
+				FROM `empleados`
+				LEFT JOIN puestos ON empleados.idPuesto=puestos.idPuesto
+				LEFT JOIN ubicaciones ON empleados.idUbicacion = ubicaciones.idUbicacion
+				LEFT JOIN responsables ON empleados.idResponsable=responsables.idResponsable 
+				ORDER by empleados.nombreEmp";
 		return $this->con->getAll($sql);
 	}
 
