@@ -7,7 +7,7 @@ $empleados = $empleado->mostrar_empleados();
 
 
 <h1>Incidencias</h1>
-
+<button class="ex" onclick="goto('form&ac=nuevo','incidencias')">Registrar incidencia</button>
 <table >
 	<tbody id="">
 	   <?php
@@ -22,14 +22,13 @@ $empleados = $empleado->mostrar_empleados();
                <?php echo $row['nombreResponsable']; ?>
            </td>
            <td>
-               <button onclick="alert('formulario');">Registrar<br> Incidencia</button>
+               <button class="nin" onclick="goto('form&ac=nuevo&id=<?php echo $row["idEmpleado"]; ?>','incidencias')">Registrar<br> Incidencia</button>
            </td>
            <td>
-               <button onclick="alert('Perfil')">Ver perfil</button><br>
-               <button onclick="alert('Alert')">Ver más</button>
+               <button class="ex">Ver perfil</button><br>
+               <button class="ex">Ver más</button>
            </td>
        </tr>
        <?php } } ?>
 	</tbody>
 </table>
-

@@ -24,6 +24,10 @@ class empleado extends SafeMySQL {
 		return $this->con->getRow("SELECT * from empleados WHERE idEmpleado=?i",$id);
 	}
 
+	function mostrar_empleado_nombre($clave){
+		return $this->con->getRow("SELECT * from empleados WHERE nombreEmp=?s",$clave);
+	}
+
 	function mostrar_empleados($params="*", $where=""){
 		$sql = "SELECT empleados.*, nombrePuesto,nombreUbicacion,nombreResponsable
 				FROM `empleados`
@@ -31,6 +35,11 @@ class empleado extends SafeMySQL {
 				LEFT JOIN ubicaciones ON empleados.idUbicacion = ubicaciones.idUbicacion
 				LEFT JOIN responsables ON empleados.idResponsable=responsables.idResponsable 
 				ORDER by empleados.nombreEmp";
+		return $this->con->getAll($sql);
+	}
+
+	function autocompletar_nombreEmpleados($clave,$params="nombreEmp", $where=""){
+		$sql = "SELECT $params FROM empleados WHERE nombreEmp LIKE '%$clave%' $where";
 		return $this->con->getAll($sql);
 	}
 

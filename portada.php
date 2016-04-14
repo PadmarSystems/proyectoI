@@ -6,3 +6,4 @@
     <li><a title="Configs" onclick="goto('configurar','configuracion')">Configuración</a></li>
   </ul>
 </nav>
+

@@ -1,8 +1,8 @@
 <?php
 $msg = "Favor de ingresar sus datos";
 $stt = "";
-
-if(isset($_SESSION)){
+session_start();
+if(isset($_SESSION['logged'])){
 	header('Location: view.php?');
 	exit;
 }
@@ -24,10 +24,16 @@ require("ruta.php");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Login</title>
+<title>SRin</title>
+<link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/style.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/font-awesome.css" />
+<script type="text/javascript" src="<?php echo $ruta; ?>js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $ruta; ?>js/jquery-ui.min.js"></script>
 </head>
 <body>
-    <form action="view.php" method="post">
+    <form action="view.php" method="post" class="login">
+    	<img src="images/logo.png" />
         <p><?php echo $msg; ?></p>
         <div><span><i class="fa fa-user"></i></span><input type="text" placeholder="Usuario" value="" autofocus id="myusername" name="myusername" required/></div>
     	<div><span><i class="fa fa-lock"></i></span><input type="password" placeholder="Contraseña" value="" id="mypassword" name="mypassword" required/></div>
