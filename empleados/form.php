@@ -143,7 +143,6 @@ if (isset($_GET['stt'])) {
 		            <option value="<?php echo $puesto['idPuesto']; ?>" <?php echo $selected; ?>><?php echo $puesto['nombrePuesto']; ?></option>
 		    	<?php 	}	?>
 			</select>
-				</select>
 		</span>
 	</div>
 	<p>¿A quén deberíamos contactar en caso de accidente?</p>

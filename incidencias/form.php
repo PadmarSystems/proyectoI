@@ -1,19 +1,44 @@
 <?php
+require('clases/empleado.class.php');
+$empleado = new empleado;
+
+require('clases/incidencia.class.php');
+$incidencia = new incidencia;
+
 $msg = "Todos los campos son obligatorios.";
 $stt = "aviso";
 
 if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
-		$form = array('folio'=>'','empleado'=>'','idEmpleado'=>'','tipoIncidencia'=>'','motivo'=>'');
+		$form = array('folio'=>'','empleado'=>'','tipoIncidencia'=>'','motivo'=>'');
 	}
 }
 
+$empleados = $empleado->mostrar_empleados();
+$tiposincidencias = $incidencia->mostrar_tipo_incidencias();
+
 ?>
 <script type="text/javascript" src="<?php echo $ruta; ?>incidencias/incidencias.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<style>
+  .custom-combobox {
+    position: relative;
+    display: inline-block;
+  }
+  .custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+  }
+  .custom-combobox-input {
+    margin: 0;
+    padding: 5px 10px;
+  }
+</style>
 <script>
   $(function() {
-    $( "#empleado" ).autocomplete({
+    /*$( "#empleado" ).autocomplete({
     	source: function(request,response){
     		$.ajax({
     			url : 'incidencias/controlador_incidencias.php',
@@ -34,7 +59,8 @@ if (isset($_GET['ac'])) {
     	},
     	autoFocus: true,
     	minLength: 0
-    });
+    });*/
+    $( "#empleado" ).combobox();
   });
   </script>
 <h2>Registrar Incidencia</h2>
@@ -45,18 +71,28 @@ if (isset($_GET['ac'])) {
 		<div><input type="text" id="folio" name="folio" value="<?php echo $form['folio'] ?>" required /></div>
 	</div>
 	<div>
-		<label>Empleado: </label>
 		<div>
-			<input type="text" id="empleado" name="empleado" value="<?php echo $form['empleado'] ?>" required />
+			<label>Empleado: </label>
+			<div class="ui-widget">
+		    <select id="empleado" name="empleado" >
+		        <option value="">Select one...</option>
+		        <?php   foreach ($empleados as $empleado) {
+		        ?>
+		            <option value="<?php echo $empleado['idEmpleado']; ?>"><?php echo str_replace('--',' ',$empleado['nombreEmp']); ?></option>
+		        <?php   }   ?>
+		    </select>
+		</div>
 		</div>
 	</div>
 	<div>
 		<label>Tipo de incidencia: </label>
 		<div>
 			<select id="tipoIncidencia" name="tipoIncidencia" required>
-				<option value="0">Seleccione</option>
-				<option value="1">Tipo 1</option>
-				
+				<option value="" selected disabled>Seleccione...</option>
+		        <?php   foreach ($tiposincidencias as $tipo) {
+		        ?>
+		            <option value="<?php echo $tipo['idTipo']; ?>"><?php echo str_replace('--',' ',$tipo['tipoIncidencia']); ?></option>
+		        <?php   }   ?>	
 			</select>
 		</div>
 	</div>

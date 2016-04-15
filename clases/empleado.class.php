@@ -25,7 +25,8 @@ class empleado extends SafeMySQL {
 	}
 
 	function mostrar_empleado_nombre($clave){
-		return $this->con->getRow("SELECT * from empleados WHERE nombreEmp=?s",$clave);
+		$this->con->query("SET NAMES utf8");
+		return $this->con->getRow("SELECT * from empleados WHERE nombreEmp like ?s COLLATE utf8_bin",$clave);
 	}
 
 	function mostrar_empleados($params="*", $where=""){

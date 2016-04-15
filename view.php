@@ -37,15 +37,61 @@ require("ruta.php");
 <link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/style.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="<?php echo $ruta; ?>js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="<?php echo $ruta; ?>js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?php echo $ruta; ?>js/funciones.js"></script>
+<script type="text/javascript" src="<?php echo $ruta; ?>js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo $ruta; ?>js/combobox.js"></script>
 <script type="text/javascript">
     $(function() {
         mostrarHora();
+
         $('.menuSetting > a').click(function() {
             $('.menuSetting > ul').fadeToggle(200);
         });
+
+        if($('.listado').length) {
+            $('.listado').each(function(i,e) {
+                if(!$(this).hasClass("destroy")) {
+                    $(".listado").dataTable({
+                        "dom": '<lf>rt<ip>',
+                        stateSave: true,
+                        aLengthMenu: [
+                            [25, 10, 50, 100, -1],
+                            [25, 10, 50, 100, "Todo"]
+                        ],
+                        "bSort": true,
+                        "language": {
+                            "emptyTable": "No hay datos disponibles en la tabla.",
+                            "info": "Se muestran de _START_ a _END_ de _TOTAL_",
+                            "infoEmpty": "Se muestran de 0 a 0 de 0",
+                            "infoFiltered": "(filtrado de _MAX_ totales)",
+                            "infoPostFix": "",
+                            "thousands": ",",
+                            "lengthMenu": "Mostrar _MENU_",
+                            "loadingRecords": "Cargando...",
+                            "processing": "Procesando...",
+                            "search": "Buscar:",
+                            "zeroRecords": "No se encontraron resultados.",
+                            "paginate": {
+                                "first": "Primera",
+                                "last": "Última",
+                                "next": "Sig.",
+                                "previous": "Ant."
+                            },
+                            "aria": {
+                                "sortAscending":  ": activar para ordenar ascendente",
+                                "sortDescending": ": activar para ordenar descendente"
+                            }
+                        },
+                        "pagingType": "full_numbers"
+                    });
+                    //$('.dataTables_filter label').after('<button class="print" onclick="imprimir()">Imprimir</button>');
+                }
+            });
+        }
     });
 </script>
 </head>

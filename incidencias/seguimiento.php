@@ -8,12 +8,12 @@ $empleados = $empleado->mostrar_empleados();
 
 <h1>Incidencias</h1>
 <button class="ex" onclick="goto('form&ac=nuevo','incidencias')">Registrar incidencia</button>
-<table >
+<table class='listado' >
 	<tbody id="">
-	   <?php
+    <?php
        if (count($empleados) > 0) {
             foreach ($empleados as $row) {
-       ?>
+    ?>
        <tr id="<?php echo $row['idEmpleado']; ?>">
            <td>
                <?php echo str_replace('--',' ',$row['nombreEmp']); ?><br>
