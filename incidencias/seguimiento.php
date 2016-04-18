@@ -25,7 +25,7 @@ $empleados = $empleado->mostrar_empleados();
                <button class="nin" onclick="goto('form&ac=nuevo&id=<?php echo $row["idEmpleado"]; ?>','incidencias')">Registrar<br> Incidencia</button>
            </td>
            <td>
-               <button class="ex">Ver perfil</button><br>
+               <button class="ex">Ver perfil</button>&nbsp&nbsp
                <button class="ex">Ver más</button>
            </td>
        </tr>

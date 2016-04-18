@@ -7,11 +7,15 @@ $incidencia = new incidencia;
 
 $msg = "Todos los campos son obligatorios.";
 $stt = "aviso";
-
+$disabled = "";
 if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
 		$form = array('folio'=>'','empleado'=>'','tipoIncidencia'=>'','motivo'=>'');
 	}
+}
+
+if(isset($_GET['id'])){
+	$disabled = 'disabled';
 }
 
 $empleados = $empleado->mostrar_empleados();
@@ -74,9 +78,14 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 		<div>
 			<label>Empleado: </label>
 			<div class="ui-widget">
-		    <select id="empleado" name="empleado" >
-		        <option value="">Select one...</option>
+		    <select id="empleado" name="empleado" readonly>
+		    	<?php if(!isset($_GET['id'])){ ?>
+		        <option value="" >Select one...</option>
+		        <?php } ?>
 		        <?php   foreach ($empleados as $empleado) {
+		        	if(isset($_GET['id']) && $empleado['idEmpleado']!=$_GET['id']){
+		        		continue;
+		        	}
 		        ?>
 		            <option value="<?php echo $empleado['idEmpleado']; ?>"><?php echo str_replace('--',' ',$empleado['nombreEmp']); ?></option>
 		        <?php   }   ?>
