@@ -16,7 +16,7 @@ if(isset($_POST)){
 					echo "eligió 'nuevo' y no agregó responsables.";
 					header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=error1');
 				} else {
-					$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$_POST['responsableN'],'fechaCreacion'=>$dCreate);
+					$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$_POST['responsableN']);
 					echo "<pre>"; print_r($saveArray); echo "</pre>";
 					if ($objRes->insertarResponsable($saveArray)){
 						header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=success');
@@ -27,7 +27,7 @@ if(isset($_POST)){
 			} else {
 				$nameEmp = $objEmp -> verEmpleadoxID($_POST['responsableSel']);
 				echo $nameEmp['nombreEmp'];
-				$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$nameEmp['nombreEmp'],'fechaCreacion'=>$dCreate);
+				$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$nameEmp['nombreEmp']);
 				echo "<pre>"; print_r($saveArray); echo "</pre>";
 				if ($objRes->insertarResponsable($saveArray)){
 					header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=success');

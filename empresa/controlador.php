@@ -16,8 +16,7 @@ if(isset($_POST)){
 		if ($upd){
 			$ubicArray=array(
 				'idEmpresa'=>$_POST['id'],
-				'nombreUbicacion'=>$_POST['nombreNuevo'],
-				'fechaCreacion'=>date('Y-m-d H:i:s')
+				'nombreUbicacion'=>$_POST['nombreNuevo']
 			);
 			$objUbic->insertarUbicacion($ubicArray);
 			header('Location: ../view.php?com=empresa&mod=form&ac=editar&stt=success');

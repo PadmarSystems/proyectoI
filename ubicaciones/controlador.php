@@ -21,8 +21,7 @@ if(isset($_POST)){
 			foreach($ubicaciones as $ubc){
 				$saveArray=array(
 					'idEmpresa'=>$idEmp,
-					'nombreUbicacion'=>$ubc,
-					'fechaCreacion'=>$dCreate
+					'nombreUbicacion'=>$ubc
 				);
 				echo "<pre>"; print_r($saveArray); echo "</pre>";
 				if ($objUbic->insertarUbicacion($saveArray)){
