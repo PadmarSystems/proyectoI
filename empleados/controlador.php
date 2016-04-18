@@ -74,7 +74,6 @@ if(isset($_POST)){
 			case 'Registrar':
 				//$dCreate = date('Y-m-d');
 				
-				echo "<pre>"; print_r($_POST); echo "</pre>";
 				$empleadoValido = $objemp->valida_empleado($nombre);
 				if($empleadoValido){
 					$array = array('idEmpresa'=>$_POST['idEmpresaEmp'],'nombreEmp'=>$nombre,'telEmp'=>$_POST['telefono'],'emailEmp'=>$_POST['correo'],'tipoNomina'=>$_POST['tipoNomina'],'idResponsable'=>$_POST['responsable'],'idUbicacion'=>$_POST['ubicacion'],'idPuesto'=>$_POST['puesto'],'contactoAccidente'=>$_POST['nombreAa'],'numeroAccidente'=>$_POST['telefonoAa'],'fotoEmp'=>$rutaFoto);
