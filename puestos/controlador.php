@@ -1,6 +1,6 @@
 <?php
 require('../clases/puesto.class.php');
-$objPuesto = new puestos;
+$objPuesto = new puesto;
 $idEmp = $_POST['idEmp'];
 
 if(isset($_POST)){

@@ -3,7 +3,7 @@
 require_once 'config.gral.php';
 require_once 'safemysql.php';
 
-class ubicaciones extends SafeMySQL {
+class ubicacion extends SafeMySQL {
     var $con;
 
     function __construct() {
@@ -27,5 +27,10 @@ class ubicaciones extends SafeMySQL {
 		$result = $this->con->query("INSERT INTO `ubicaciones` SET ?u", $datos);
 		if($result) return true;
 	}
+
+	function mostrar_ubicaciones($params="*", $where=""){
+        $sql = "SELECT $params from ubicaciones $where";
+        return $this->con->getAll($sql);
+    }
 }
 ?>

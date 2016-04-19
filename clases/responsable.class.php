@@ -31,5 +31,10 @@ class responsable extends SafeMySQL {
 	function verUsuario($id){
 		return $this->con->getRow("SELECT * FROM usuarios WHERE idUsuario=?i",$id);
 	}
+
+	function mostrar_responsables($params="*", $where=""){
+        $sql = "SELECT $params from responsables $where";
+        return $this->con->getAll($sql);
+    }
 }
 ?>

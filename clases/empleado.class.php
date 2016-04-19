@@ -30,8 +30,9 @@ class empleado extends SafeMySQL {
 	}
 
 	function mostrar_empleados($params="*", $where=""){
-		$sql = "SELECT empleados.*, nombrePuesto,nombreUbicacion,nombreResponsable
+		$sql = "SELECT empleados.*, nombrePuesto,nombreUbicacion,nombreResponsable,nombreEmpresa
 				FROM `empleados`
+				inner join empresas ON empleados.idEmpresa=empresas.idEmpresa
 				LEFT JOIN puestos ON empleados.idPuesto=puestos.idPuesto
 				LEFT JOIN ubicaciones ON empleados.idUbicacion = ubicaciones.idUbicacion
 				LEFT JOIN responsables ON empleados.idResponsable=responsables.idResponsable 

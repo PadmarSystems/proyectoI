@@ -1,6 +1,6 @@
 <?php
 require('../clases/ubicacion.class.php');
-$objUbic = new ubicaciones;
+$objUbic = new ubicacion;
 
 if(isset($_POST)){
 	print_r($_POST);

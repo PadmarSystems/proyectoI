@@ -3,16 +3,23 @@
 require_once 'config.gral.php';
 require_once 'safemysql.php';
 
-class puestos extends SafeMySQL {
+class puesto extends SafeMySQL {
     var $con;
 
     function __construct() {
         $this->con = new SafeMySQL();
     }
+
 	function mostrar_empresas($params="*", $where=""){
         $sql = "SELECT $params from empresas $where";
         return $this->con->getAll($sql);
 	}
+
+	function mostrar_puestos($params="*", $where=""){
+        $sql = "SELECT $params from puestos inner join empresas on puestos.idEmpresa=empresas.idEmpresa $where";
+        return $this->con->getAll($sql);
+	}
+
 	function actualizarPuesto($name,$id){
 		$result = $this->con->query("UPDATE `puestos` SET `nombrePuesto` = ?s  WHERE `idPuesto` = ?i", $name,$id);
 		if($result) return true;
