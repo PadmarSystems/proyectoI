@@ -5,12 +5,15 @@ $usuobj = new usuario;
 $empobj = new empresa;
 $msg = "";
 $stt = "";
+$required = "";
 $empresas = $empobj->mostrar_empresas();
 if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
 		$form = array('nombre'=>'','rfc'=>'','correo'=>'','telefono'=>'','celular'=>'','usuario'=>'','clave'=>$usuobj->generar_clave(8),'accion'=>'Registrar');
 	}elseif ($_GET['ac']=="editar") {
 		//obtener id
+		$row = $usuobj->mostrar_usuario($_GET['id']);
+		$form = array('idUsuario'=>$_GET['id'],'nombre'=>$row['nombreUsuario'],'rfc'=>'','correo'=>$row['email'],'telefono'=>'','celular'=>'','usuario'=>$row['nombreUsuario'],'clave'=>$usuobj->generar_clave(8));
 		$form['accion']="Editar";
 	}else{
 		header('Location: view.php?com=usuarios&mod=form&ac=nuevo&stt=error');
@@ -64,11 +67,15 @@ if (isset($_GET['stt'])) {
 		</div>
 	</div>
 	<div>
-		<label>Contraseña: (Sugerido: <?php echo $form['clave']; ?> )</label>
-		<div><input type="password" name="pass" id="pass" required></div>
+		<?php  if($_GET['ac']=="Editar"){ $required ="required"; } ?>
+		<label>Contraseña: (Sugerido: <?php echo $form['clave'];  ?> Solo ingrese la contraseña si desea cambiarlo de lo contrario deje el campo vacio  )</label>
+		<div><input type="password" name="pass" id="pass" <?php echo $required; ?>></div>
 	</div>
 	<div>
 		<label></label>
+		<?php if($_GET['ac']=="editar"){ ?>
+		<input type="hidden" id="idUsuario" name="idUsuario" value="<?php echo $form['idUsuario']; ?>" required readonly/>
+		<?php } ?>
 		<div style="padding-top:15px;"><input type="submit" name="a" value="<?php echo $form['accion']; ?>"></div>
 	</div>	
 </form>

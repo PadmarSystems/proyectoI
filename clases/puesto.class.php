@@ -20,10 +20,20 @@ class puesto extends SafeMySQL {
         return $this->con->getAll($sql);
 	}
 
+	function mostrar_puesto($id){
+		return $this->con->getRow("SELECT * from puestos WHERE idPuesto=?i",$id);
+	}
+
 	function actualizarPuesto($name,$id){
 		$result = $this->con->query("UPDATE `puestos` SET `nombrePuesto` = ?s  WHERE `idPuesto` = ?i", $name,$id);
 		if($result) return true;
 	}
+
+	function actualizarPuestoarray($datos,$id){
+		$result = $this->con->query("UPDATE puestos SET ?u  WHERE idPuesto = ?i", $datos,$id);
+		if($result) return true;
+	}
+
 	function eliminarempleado($id){
 		$result = $this->con->query("DELETE FROM `puestos` WHERE `idEmpleado`= ?i",$id);
 		if($result) return true;

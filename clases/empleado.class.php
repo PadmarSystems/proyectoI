@@ -80,6 +80,11 @@ class empleado extends SafeMySQL {
 		return $this->con->getAll($sql);
 	}
 
+	function mostrar_tiposnomina($params="*", $where=""){
+		$sql = "SELECT $params FROM tipo_nomina $where";
+		return $this->con->getAll($sql);
+	}
+
 	function valida_empleado($usuario) {
         $result = $this->con->query("SELECT 1 FROM empleados WHERE nombreEmp LIKE ?s",$usuario);
         $nReg = $this->con->numRows($result);

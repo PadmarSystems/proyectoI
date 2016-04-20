@@ -1,6 +1,6 @@
 <?php
-require('clases/empleado.class.php');
-$objEmp = new empleado;
+require('clases/ubicacion.class.php');
+$ubicacion = new ubicacion;
 $msg = "";
 $stt = "";
 if (isset($_GET['ac'])) {
@@ -9,7 +9,8 @@ if (isset($_GET['ac'])) {
 	}elseif ($_GET['ac']=="editar") {
 		# obtener id
 		# arreglo ejemplo:
-		$form = array('ubicacion'=>'prueba','idU'=>'1','empresa'=>'1','accion'=>'Editar');
+		$row = $ubicacion->mostrar_ubicacion($_GET['id']);
+		$form = array('ubicacion'=>$row['nombreUbicacion'],'idU'=>$row['idUbicacion'],'empresa'=>$row['idEmpresa'],'accion'=>'Editar');
 	}else{
 		header('Location: view.php?com=ubicaciones&mod=form&ac=nuevo&stt=error');
 	}

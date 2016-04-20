@@ -14,6 +14,12 @@ class ubicacion extends SafeMySQL {
 		$result = $this->con->query("UPDATE `ubicaciones` SET `nombreUbicacion` = ?s WHERE `idUbicacion` = ?i",$name,$id);
 		if($result) return true;
 	}
+
+	function actualizarUbicacionarray($datos,$id){
+		$result = $this->con->query("UPDATE ubicaciones SET ?u  WHERE idUbicacion = ?i", $datos,$id);
+		if($result) return true;
+	}
+
 	function getEmpleadosxUbic($id){
 		return $this->con->getAll("SELECT COUNT(*) FROM `empleados` WHERE `idUbicacion`=?i",$id);
 	}
@@ -32,5 +38,9 @@ class ubicacion extends SafeMySQL {
         $sql = "SELECT $params from ubicaciones $where";
         return $this->con->getAll($sql);
     }
+
+    function mostrar_ubicacion($id){
+		return $this->con->getRow("SELECT * from ubicaciones WHERE idUbicacion=?i",$id);
+	}
 }
 ?>

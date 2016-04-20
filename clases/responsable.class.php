@@ -14,6 +14,12 @@ class responsable extends SafeMySQL {
 		$result = $this->con->query("UPDATE responsables SET nombreResponsable = ?s  WHERE idResponsable = ?i", $name,$id);
 		if($result) return true;
 	}
+
+	function actualizarResponsablearray($datos,$id){
+		$result = $this->con->query("UPDATE responsables SET ?u  WHERE idResponsable = ?i", $datos,$id);
+		if($result) return true;
+	}
+
 	function eliminarempleado($id){
 		$result = $this->con->query("DELETE FROM empleados WHERE idEmpleado= ?i",$id);
 		if($result) return true;
@@ -36,5 +42,9 @@ class responsable extends SafeMySQL {
         $sql = "SELECT $params from responsables $where";
         return $this->con->getAll($sql);
     }
+
+    function mostrar_responsable($id){
+		return $this->con->getRow("SELECT * from responsables WHERE idResponsable=?i",$id);
+	}
 }
 ?>

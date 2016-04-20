@@ -1,6 +1,10 @@
 <?php
 require('clases/empleado.class.php');
 $objEmp = new empleado;
+
+require('clases/responsable.class.php');
+$responsable = new responsable;
+
 $msg = "";
 $stt = "";
 if (isset($_GET['ac'])) {
@@ -8,8 +12,8 @@ if (isset($_GET['ac'])) {
 		$form = array('nombreResponsable'=>'Empleado Responsable 1','idR'=>'1','empresa'=>'1','accion'=>'Registrar');
 	}elseif ($_GET['ac']=="editar") {
 				# obtener id
-		
-		$form = array('nombreResponsable'=>'Empleado Responsable 1','idR'=>'1','empresa'=>'1','accion'=>'Editar');
+		$row = $responsable->mostrar_responsable($_GET['id']);
+		$form = array('nombreResponsable'=>$row['nombreResponsable'],'idR'=>$row['idResponsable'],'empresa'=>$row['idEmpresa'],'accion'=>'Editar');
 	}else{
 		header('Location: view.php?com=responsables&mod=form&ac=nuevo&stt=error');
 	}

@@ -4,8 +4,7 @@ require('../clases/empleado.class.php');
 $objRes = new responsable;
 $objEmp = new empleado;
 $idEmp = $_POST['idEmp'];
-print_r($_POST);
-echo "<br>";
+
 if(isset($_POST)){
 	$accion=$_POST['a'];
 	switch ($accion){
@@ -43,10 +42,12 @@ if(isset($_POST)){
 				echo "igual";
 				header('Location: ../view.php?com=responsables&mod=form&ac=editar&stt=nochng');
 			} else {
-				if ($objRes->actualizarResponsable($_POST['nombreNuevo'],$_POST['idR'])){
-					header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=success');
+				$array = array('nombreResponsable'=>$_POST['nombreNuevo'],'fechaActualizacion'=>date("Y-m-d H:i:s"));
+				$actualiza = $objRes->actualizarResponsablearray($array,$_POST['idR']);
+				if ($actualiza){
+					header('Location: ../view.php?com=responsables&mod=form&ac=editar&stt=success');
 				} else {
-					header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=error');
+					header('Location: ../view.php?com=responsables&mod=form&ac=editar&stt=error');
 				}
 			}
 		break;

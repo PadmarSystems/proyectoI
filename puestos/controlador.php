@@ -35,7 +35,9 @@ if(isset($_POST)){
 				echo "igual";
 				header('Location: ../view.php?com=puestos&mod=form&ac=editar&stt=nochng');
 			} else {
-				if ($objPuesto->actualizarPuesto($_POST['nombreNuevo'],$_POST['idP'])){
+				$array = array('nombrePuesto'=>$_POST['nombreNuevo'],'fechaActualizacion'=>date("Y-m-d H:i:s"));
+				$actualizar = $objPuesto->actualizarPuestoarray($array,$_POST['idP']);
+				if ($actualizar){
 					echo "guardó info";
 					header('Location: ../view.php?com=puestos&mod=form&ac=editar&stt=success');
 				} else {

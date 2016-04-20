@@ -94,20 +94,68 @@ if(isset($_POST)){
 				//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=success');
 			break;
 			case 'Editar';
-				$saveArray=array(
-					$idEmp,
-					$nombre,
-					$_POST['telefono'],
-					$_POST['correo'],
-					$_POST['tipoNomina'],
-					$responsable,
-					$ubicacion,
-					$_POST['puesto'],
-					$rutaFoto
-				);
-				echo "<pre>"; print_r($saveArray); echo "</pre>".$rutaFoto;
+
+				$array = array();
+
+				$row = $objemp->mostrar_empleado($_POST['idEmpleado']);
+
+				if($nombre != $row['nombreEmp']){
+					$empleadoValido = $objemp->valida_empleado($nombre);
+					$array['nombreEmp'] = $nombre;
+				}else{
+					$empleadoValido = true;
+				}
+
+				if($_POST['telefono'] != $row['telEmp']){
+					$array['telEmp'] = $_POST['telefono'];
+				}
+
+				if ($_POST['correo'] != $row['emailEmp']) {
+					$array['emailEmp'] = $_POST['correo'];
+				}
+
+				if($_POST['tipoNomina'] != $row['tipoNomina']){
+					$array['tipoNomina'] = $_POST['tipoNomina'];
+				}
+
+				if($_POST['responsable'] != $row['idResponsable']){
+					$array['idResponsable'] = $_POST['responsable'];
+				}
+
+				if($_POST['ubicacion'] != $row['idUbicacion']){
+					$array['idUbicacion'] = $_POST['ubicacion'];
+				}
+
+				if($_POST['puesto'] != $row['idPuesto']){
+					$array['idPuesto'] = $_POST['puesto'];
+				}
+
+				if($_POST['nombreAa'] != $row['contactoAccidente']){
+					$array['contactoAccidente'] = $_POST['nombreAa'];
+				}
+
+				if($_POST['telefonoAa'] != $row['numeroAccidente']){
+					$array['numeroAccidente'] = $_POST['telefonoAa'];
+				}
+
+				if($rutaFoto != $row['fotoEmp']){
+					$array['fotoEmp'] = $rutaFoto;
+				}
+
+				if($empleadoValido && count($array) > 0){
+					$array['fechaActualizacion'] = date("Y-m-d H:i:s");
+					$actualiza = $objemp->actualizarempleado($array,$$_POST['idEmpleado']);
+					if($actualiza){
+						$stt = "esuccess";
+					}else{
+						$stt = "efailded";
+					}
+				}else{
+					$stt = "nvuser";
+				}
+				
 				// guardar saveArray sin fechaCreacion
-				header('Location: ../view.php?com=empleados&mod=form&ac=editar&stt=success');
+				header('Location: ../view.php?com=empleados&mod=form&ac=editar&id='.$_POST['id'].'&stt='.$stt);
 			break;
 			default:
 				header('Location: ../view.php?com=empleados&mod=form&ac=editar&stt=error');

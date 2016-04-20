@@ -3,7 +3,6 @@ require('../clases/ubicacion.class.php');
 $objUbic = new ubicacion;
 
 if(isset($_POST)){
-	print_r($_POST);
 	$idEmp = $_POST['idEmp'];
 	$accion=$_POST['a'];
 	switch ($accion){
@@ -41,7 +40,9 @@ if(isset($_POST)){
 				echo "igual";
 				header('Location: ../view.php?com=ubicaciones&mod=form&ac=editar&stt=nochng');
 			} else {
-				if ($objUbic->actualizarUbicacion( $_POST['nombreNuevo'], $_POST['idU'] )){
+				$array = array('nombreUbicacion'=>$_POST['nombreNuevo'],'fechaActualizacion'=>date("Y-m-d H:i:s"));
+				$actualizacion = $objUbic->actualizarUbicacionarray( $array, $_POST['idU'] );
+				if ($actualizacion){
 					echo "ya";
 					header('Location: ../view.php?com=ubicaciones&mod=form&ac=editar&stt=success');
 				} else {

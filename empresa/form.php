@@ -6,9 +6,9 @@ $stt = "";
 
 if (isset($_GET['ac'])) {
 	if ($_GET['ac']=="editar") {
-		$nombre=$objEmp->verEmpresaxID($_SESSION['idEmpresa']);
+		$nombre=$objEmp->verEmpresaxID($_GET['id']);
 		$nombre=$nombre['aliasEmpresa'];
-		$form = array('id'=>$_SESSION['idEmpresa'],'alias'=>$nombre,'clave'=>'','accion'=>'Editar');
+		$form = array('id'=>$_GET['id'],'alias'=>$nombre,'clave'=>'','accion'=>'Editar');
 	}else{
 		header('Location: view.php?com=empresa&mod=form&ac=editar&stt=error');
 	}

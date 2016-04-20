@@ -7,22 +7,30 @@ $stt = "";
 $responsables = $empleado->mostrar_responsables();
 $ubicaciones = $empleado->mostrar_ubicaciones();
 $puestos = $empleado->mostrar_puestos();
+$tiposnomina = $empleado->mostrar_tiposnomina();
 if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
-		$form = array('nombre'=>'----','idEmpresa'=>$_SESSION['idEmpresa'],'empresa'=>$_SESSION['empresa'],'correo'=>'','telefono'=>'','responsable'=>'','ubicacion'=>'','puesto'=>'','clave'=>'','nombreAa'=>'','telAa'=>'','fotoEmp'=>'','accion'=>'Registrar');
-		$name = explode('--', $form['nombre']);
-		$nombre = $name[0];
-		$apePaterno = $name[1];
-		$apeMaterno = $name[2];
+		$form = array('nombre'=>'', 'apellidoPat'=>'', 'apellidoMat'=>'','idEmpresa'=>$_SESSION['idEmpresa'],'empresa'=>$_SESSION['empresa'],'correo'=>'','telefono'=>'','tipoNomina'=>'','responsable'=>'','ubicacion'=>'','puesto'=>'','nombreAa'=>'','telAa'=>'','fotoEmp'=>'','accion'=>'Registrar');
+		
 	}elseif ($_GET['ac']=="editar") {
 		//obtener id
 		//arreglo prueba:
-		$form = array('nombre'=>'Nombre 1--Apellido Uno--Apellido no. Dos','idEmpresa'=>'','empresa'=>'100','correo'=>'empleado@dominio.com','telefono'=>'8334444444','responsable'=>'22','ubicacion'=>'33','puesto'=>'101','clave'=>'','nombreAa'=>'Aa Nombre Comp','telAa'=>'8332998877','fotoEmp'=>'empleados/files/tstFile.jpg','accion'=>'');
-		$form['accion']="Editar";
-		$name = explode('--', $form['nombre']);
-		$nombre = $name[0];
-		$apePaterno = $name[1];
-		$apeMaterno = $name[2];
+		$row = $empleado->mostrar_empleado($_GET['id']);
+		$emp = explode("--", $row['nombreEmp']);
+
+        if(!isset($emp[0])){
+            $emp[0] = '';
+        }
+
+        if(!isset($emp[1])){
+            $emp[1] = '';
+        }
+
+        if(!isset($emp[2])){
+            $emp[2] = '';
+        }
+		$form = array('idEmpleado'=>$_GET['id'],'nombre'=>$emp[0], 'apellidoPat'=>$emp[1], 'apellidoMat'=>$emp[2],'idEmpresa'=>$row['idEmpresa'],'correo'=>$row['emailEmp'],'telefono'=>$row['telEmp'],'tipoNomina'=>$row['tipoNomina'],'responsable'=>$row['idResponsable'],'ubicacion'=>$row['idUbicacion'],'puesto'=>$row['idPuesto'],'nombreAa'=>$row['contactoAccidente'],'telAa'=>$row['numeroAccidente'],'fotoEmp'=>$row['fotoEmp']);
+		$form['accion']="Editar";	
 	}else{
 		header('Location: view.php?com=empleados&mod=form&ac=nuevo&stt=error');
 	}
@@ -53,15 +61,15 @@ if (isset($_GET['stt'])) {
 	<p>Los campos marcados con un asterisco (<b>*</b>) son obligatorios.</p>
 	<div>
 		<label>Nombre: </label>
-		<div><input type="text" id="nombre" name="nombre" value="<?php echo $nombre ?>" required /></div>
+		<div><input type="text" id="nombre" name="nombre" value="<?php echo $form['nombre'] ?>" required /></div>
 	</div>
 	<div>
 		<label>Apellido Paterno: </label>
-		<div><input type="text" id="apellidoPat" name="apellidoPat" value="<?php echo $apePaterno; ?>" required /></div>
+		<div><input type="text" id="apellidoPat" name="apellidoPat" value="<?php echo $form['apellidoPat']; ?>" required /></div>
 	</div>
 	<div>
 		<label>Apellido Materno: </label>
-		<div><input type="text" id="apellidoMat" name="apellidoMat" value="<?php echo $apeMaterno; ?>" required /></div>
+		<div><input type="text" id="apellidoMat" name="apellidoMat" value="<?php echo $form['apellidoMat']; ?>" required /></div>
 	</div>
 	<div>
 		<label>Fotografía de empleado: </label>
@@ -69,6 +77,7 @@ if (isset($_GET['stt'])) {
 			<input type="file" id="foto" name="foto"/>
 			<input type="hidden" id="idEmpresaEmp" name="idEmpresaEmp" value="<?php echo $form['idEmpresa']; ?>" required readonly/>
 		</div>
+
 		<?php #if ($form['fotoEmp'] != ''){
 			echo '
 			<div>
@@ -91,9 +100,14 @@ if (isset($_GET['stt'])) {
 		<div><span>
 			<select id="tipoNomina" name="tipoNomina" required>
 				<option value="0">Seleccione</option>
-				<option value="1">Semanal</option>
-				<option value="2">Quincenal</option>
-				<option value="3">Mensual</option>
+				<?php 	foreach ($tiposnomina as $row) {
+					$selected = "";
+					if($form['tipoNomina'] == $row['idTipoNomina']){
+						$selected = "selected";
+					}
+				?>
+		            <option value="<?php echo $row['idTipoNomina']; ?>" <?php echo $selected; ?>><?php echo $row['tipoNomina']; ?></option>
+		    	<?php 	}	?>
 			</select>
 		</span></div>
 	</div>
@@ -104,7 +118,7 @@ if (isset($_GET['stt'])) {
 				<option value="0">Seleccione</option>
 				<?php 	foreach ($responsables as $responsable) {
 					$selected = "";
-					if($form['responsable'] == $responsable['nombreResponsable']){
+					if($form['responsable'] == $responsable['idResponsable']){
 						$selected = "selected";
 					}
 				?>
@@ -120,7 +134,7 @@ if (isset($_GET['stt'])) {
 				<option value="0">Seleccione</option>
 				<?php 	foreach ($ubicaciones as $ubicacion) {
 					$selected = "";
-					if($form['ubicacion'] == $ubicacion['nombreUbicacion']){
+					if($form['ubicacion'] == $ubicacion['idUbicacion']){
 						$selected = "selected";
 					}
 				?>
@@ -136,7 +150,7 @@ if (isset($_GET['stt'])) {
 				<option value="0">Seleccione</option>
 				<?php 	foreach ($puestos as $puesto) {
 					$selected = "";
-					if($form['ubicacion'] == $puesto['idPuesto']){
+					if($form['puesto'] == $puesto['idPuesto']){
 						$selected = "selected";
 					}
 				?>
@@ -156,6 +170,10 @@ if (isset($_GET['stt'])) {
 	</div>
 	<div>
 		<label></label>
+		<?php if($_GET['ac']=="editar"){ ?>
+		<input type="hidden" id="idEmpleado" name="idEmpleado" value="<?php echo $form['idEmpleado']; ?>" required readonly/>
+		<?php } ?>
 		<div style="padding-top:15px;"><input type="submit" name="a" value="<?php echo $form['accion']; ?>"></div>
+		<input type="button" name="back" onclick="history.back();" value="Regresar">
 	</div>	
 </form>
