@@ -6,7 +6,12 @@ $stt = "";
 
 if (isset($_GET['ac'])) {
 	if ($_GET['ac']=="editar") {
-		$nombre=$objEmp->verEmpresaxID($_GET['id']);
+		$idEmpresa = $_SESSION['idEmpresa'];
+		if(isset($_GET['id'])){
+			$idEmpresa=$_GET['id'];
+		}
+
+		$nombre=$objEmp->verEmpresaxID($idEmpresa);
 		$nombre=$nombre['aliasEmpresa'];
 		$form = array('id'=>$_GET['id'],'alias'=>$nombre,'clave'=>'','accion'=>'Editar');
 	}else{
