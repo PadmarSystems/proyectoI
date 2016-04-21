@@ -34,8 +34,8 @@ class puesto extends SafeMySQL {
 		if($result) return true;
 	}
 
-	function eliminarempleado($id){
-		$result = $this->con->query("DELETE FROM `puestos` WHERE `idEmpleado`= ?i",$id);
+	function eliminarpuesto($id){
+		$result = $this->con->query("DELETE FROM `puestos` WHERE `idPuestos`= ?i",$id);
 		if($result) return true;
 	}
 	function nuevoPuesto($datos){

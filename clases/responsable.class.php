@@ -20,8 +20,8 @@ class responsable extends SafeMySQL {
 		if($result) return true;
 	}
 
-	function eliminarempleado($id){
-		$result = $this->con->query("DELETE FROM empleados WHERE idEmpleado= ?i",$id);
+	function eliminarresponsable($id){
+		$result = $this->con->query("DELETE FROM responsables WHERE idResponsable= ?i",$id);
 		if($result) return true;
 	}
 	function insertarResponsable($datos){

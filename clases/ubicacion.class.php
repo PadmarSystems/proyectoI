@@ -42,5 +42,10 @@ class ubicacion extends SafeMySQL {
     function mostrar_ubicacion($id){
 		return $this->con->getRow("SELECT * from ubicaciones WHERE idUbicacion=?i",$id);
 	}
+
+	function eliminarubicacion($id){
+		$result = $this->con->query("DELETE FROM ubicaciones WHERE idUbicacion= ?i",$id);
+		if($result) return true;
+	}
 }
 ?>

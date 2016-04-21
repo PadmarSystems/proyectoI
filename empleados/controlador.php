@@ -5,27 +5,31 @@ $idEmp = '1'; // =$_SESSION['empresa'];
 $stt = "default";
 if(isset($_POST)){
 	$accion=$_POST['a'];
-	$nombre=$_POST['nombre'].'--'.$_POST['apellidoPat'].'--'.$_POST['apellidoMat'];
-	if(empty($_POST['responsable'])){
-		$responsable = '0';
-	} else {
-		$responsable = $_POST['responsable'];
+
+	if($accion == "Registrar" || $accion == "Editar"){
+		$nombre=$_POST['nombre'].'--'.$_POST['apellidoPat'].'--'.$_POST['apellidoMat'];
+		if(empty($_POST['responsable'])){
+			$responsable = '0';
+		} else {
+			$responsable = $_POST['responsable'];
+		}
+		if(empty($_POST['ubicacion'])){
+			$ubicacion = '0';
+		} else {
+			$ubicacion = $_POST['ubicacion'];
+		}
+		if(empty($_POST['nombreAa'])){
+			$nombreAa = '0';
+		} else {
+			$nombreAa = $_POST['nombreAa'];
+		}
+		if(empty($_POST['telefonoAa'])){
+			$telefonoAa = '0';
+		} else {
+			$telefonoAa = $_POST['telefonoAa'];
+		}
 	}
-	if(empty($_POST['ubicacion'])){
-		$ubicacion = '0';
-	} else {
-		$ubicacion = $_POST['ubicacion'];
-	}
-	if(empty($_POST['nombreAa'])){
-		$nombreAa = '0';
-	} else {
-		$nombreAa = $_POST['nombreAa'];
-	}
-	if(empty($_POST['telefonoAa'])){
-		$telefonoAa = '0';
-	} else {
-		$telefonoAa = $_POST['telefonoAa'];
-	}
+	
 	$fileProcess = 'FALSE';
 	$load="true"; //flag
 	if ( $accion == 'Registrar' ){
@@ -156,6 +160,15 @@ if(isset($_POST)){
 				
 				// guardar saveArray sin fechaCreacion
 				header('Location: ../view.php?com=empleados&mod=form&ac=editar&id='.$_POST['id'].'&stt='.$stt);
+			break;
+			case 'eliminar':
+				
+				$elimina = $objemp->eliminarempleado($_POST['id']);
+				if($elimina){
+					echo "eliminado";
+				}else{
+					echo "";
+				}
 			break;
 			default:
 				header('Location: ../view.php?com=empleados&mod=form&ac=editar&stt=error');

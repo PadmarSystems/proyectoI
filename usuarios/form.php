@@ -46,6 +46,7 @@ if (isset($_GET['stt'])) {
 		});
 	});
 </script>
+<h1>Nuevo usuario</h1>
 <div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
 <form action="usuarios/controlador.php" method="post">
 	<div>

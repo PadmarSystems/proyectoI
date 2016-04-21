@@ -4,6 +4,20 @@ $objemp = new empleado;
 
 $empleados = $objemp->mostrar_empleados(); 
 ?>
+<script type="text/javascript">
+	$(function() {
+		$('.listado tbody').on( 'click', 'i.fa-trash-o', function () {
+			var str = 'empleados/controlador.php';
+			var params = {a: 'eliminar',id: $(this).parents('tr').attr("id")};
+			send_ajax_form(str,params);
+			
+		    $(".listado").DataTable()
+		        .row( $(this).parents('tr') )
+		        .remove()
+		        .draw();
+		} );
+	});
+</script>
 <h2>Empleados </h2>
 <br>
 <table class='listado'>
@@ -45,7 +59,9 @@ $empleados = $objemp->mostrar_empleados();
     		<td><?php echo $row['nombrePuesto']; ?></td>
     		<td><?php echo $row['telEmp']; ?></td>
     		<td><?php echo $row['tipoNomina']; ?></td>
-    		<td><i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpleado"]; ?>','empleados')"></i></td>
+    		<td><i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpleado"]; ?>','empleados')"></i> &nbsp &nbsp 
+    			<i class="fa fa-trash-o" aria-hidden="true" title="Eliminar" style="cursor:pointer"></i>
+    		</td>
     	</tr>
 		<?php } } ?>
 	</tbody>

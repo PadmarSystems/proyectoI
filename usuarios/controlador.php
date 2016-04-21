@@ -61,6 +61,14 @@ if(isset($_POST['a'])){
 			}
 			header('Location: ../view.php?com=usuarios&mod=listar&stt='.$stt);
 			break;
+		case 'eliminar':
+				$elimina = $usuario->eliminarusuario($_POST['id']);
+			if($elimina){
+				echo "eliminado";
+			}else{
+				echo "";
+			}
+			break;
 		default:
 			header('Location: ../view.php?com=usuarios&mod=form&ac=nuevo&stt=error');
 			break;

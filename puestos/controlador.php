@@ -46,6 +46,14 @@ if(isset($_POST)){
 				}
 			}
 		break;
+		case 'eliminar':
+			$elimina = $objPuesto->eliminarpuesto($_POST['id']);
+			if($elimina){
+				echo "eliminado";
+			}else{
+				echo "";
+			}
+		break;
 		default:
 			header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt=error');
 		break;

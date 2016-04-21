@@ -51,6 +51,14 @@ if(isset($_POST)){
 				}
 			}
 		break;
+		case 'eliminar':
+			$elimina = $objRes->eliminarresponsable($_POST['id']);
+			if($elimina){
+				echo "eliminado";
+			}else{
+				echo "";
+			}
+		break;
 		default:
 			header('Location: ../view.php?com=ubicaciones&mod=form&ac=nuevo&stt=error');
 		break;

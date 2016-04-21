@@ -4,6 +4,7 @@ $empresa = new empresa;
 
 $empresas = $empresa->mostrar_empresas();
 ?>
+
 <h2>Empresas </h2>
 <br>
 <table class='listado'>
@@ -22,7 +23,9 @@ $empresas = $empresa->mostrar_empresas();
 		<tr id="<?php echo $row['idEmpresa']; ?>">
     		<td><?php echo $row['aliasEmpresa']; ?></td>
     		<td><?php echo $row['fechaCreacion']; ?></td>
-    		<td><i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpresa"]; ?>','empresa')"></i></td>
+    		<td>
+    			<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpresa"]; ?>','empresa')"></i>
+    		</td>
     	</tr>
 		<?php } } ?>
 	</tbody>
