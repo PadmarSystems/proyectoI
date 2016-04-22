@@ -29,6 +29,16 @@ class empleado extends SafeMySQL {
 		return $this->con->getRow("SELECT * from empleados WHERE nombreEmp like ?s COLLATE utf8_bin",$clave);
 	}
 
+	function mostrar_empleadodetalle($id){
+		return $this->con->getRow("SELECT empleados.*, nombrePuesto,nombreUbicacion,nombreResponsable,nombreEmpresa
+				FROM `empleados`
+				inner join empresas ON empleados.idEmpresa=empresas.idEmpresa
+				LEFT JOIN puestos ON empleados.idPuesto=puestos.idPuesto
+				LEFT JOIN ubicaciones ON empleados.idUbicacion = ubicaciones.idUbicacion
+				LEFT JOIN responsables ON empleados.idResponsable=responsables.idResponsable 
+				 WHERE idEmpleado=?i ORDER by empleados.nombreEmp",$id);
+	}
+
 	function mostrar_empleados($params="*", $where=""){
 		$sql = "SELECT empleados.*, nombrePuesto,nombreUbicacion,nombreResponsable,nombreEmpresa
 				FROM `empleados`

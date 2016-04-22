@@ -41,5 +41,17 @@ class incidencia extends SafeMySQL {
         $sql = "SELECT $params FROM empresas $where";
         return $this->con->getAll($sql);
     }
+
+    function mostrar_ultimaincidencia($id){
+        return $this->con->getRow("SELECT idIncidencia,date(fechaInicio) fechaInicio,tipoIncidencia FROM `incidencias`inner JOIN tipo_incidencia on incidencias.idTipoIncidencia=tipo_incidencia.idTipo where idEmpleado=?i ORDER by idIncidencia DESC LIMIT 1",$id);
+    }
+
+    function mostrar_numincidencias($id,$month){
+        return $this->con->getOne("SELECT count(*)num FROM `incidencias` where idEmpleado=?i and month(fechaInicio) = ?s",$id,$month);
+    }
+
+    function mostrar_numincidenciastotal($id){
+        return $this->con->getOne("SELECT count(*) FROM `incidencias` where idEmpleado=?i",$id);
+    }
 }
 ?>
