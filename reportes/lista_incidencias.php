@@ -1,7 +1,7 @@
 <?php
 require('clases/incidencia.class.php');
 $incidencia = new incidencia;
-$incidencias = $incidencia->mostrar_incidencias();
+
 
 require('clases/empleado.class.php');
 $empleado = new empleado;
@@ -11,6 +11,24 @@ $ubicaciones = $empleado->mostrar_ubicaciones();
 $puestos = $empleado->mostrar_puestos();
 $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 $empresas = $incidencia->mostrar_empresas();
+
+$where = "";
+
+if(isset($_GET['a'])){
+    if($_GET['a'] == 1){
+        $where = " WHERE incidencias.idEmpleado=".$_GET['idEmpleado']." ORDER BY fechaInicio DESC LIMIT 1";
+    }
+
+    if($_GET['a'] == 2){
+        $where = " WHERE incidencias.idEmpleado=".$_GET['idEmpleado']. " AND MONTH(fechaInicio)=".date("m")." ORDER BY fechaInicio DESC";
+    }
+
+    if($_GET['a'] == 3){
+        $where = " WHERE incidencias.idEmpleado=".$_GET['idEmpleado']." ORDER BY fechaInicio DESC";
+    }
+}
+
+$incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
 ?>
 <script type="text/javascript" src="<?php echo $ruta; ?>reportes/reporte.js"></script>
 <style>
@@ -64,7 +82,7 @@ $empresas = $incidencia->mostrar_empresas();
         <option value="">Select one...</option>
         <?php   foreach ($responsables as $responsable) {
         ?>
-            <option value="<?php echo $responsable['idResponsable']; ?>"><?php echo $responsable['nombreResponsable']; ?></option>
+            <option value="<?php echo $responsable['idResponsable']; ?>"><?php echo str_replace('--',' ',$responsable['nombreResponsable']); ?></option>
         <?php   }   ?>
     </select>
 </div>

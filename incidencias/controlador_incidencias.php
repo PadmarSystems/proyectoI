@@ -53,19 +53,19 @@ if(isset($_POST['a'])){
 
 				?>
 				<p>
-					<label>Ultima incidencia:  <?php echo date("d/m/Y",strtotime($row['fechaInicio'])); ?> ( <?php echo $row['tipoIncidencia']; ?> )</label> <a> Ver detalles</a>
+					<label>Ultima incidencia:  <?php echo date("d/m/Y",strtotime($row['fechaInicio'])); ?> ( <?php echo $row['tipoIncidencia']; ?> )</label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=1','reportes')"> Ver detalles</a>
 				</p>
 				<?php
 				$num = $objincidencia->mostrar_numincidencias($_POST['idEmpleado'],date("m"));
 				?>
 				<p>
-					<label>N° de incidencias del mes :  <?php echo $num; ?></label> <a> Ver </a>
+					<label>N° de incidencias del mes :  <?php echo $num; ?></label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=2','reportes')"> Ver </a>
 				</p>
 				<?php
 				$numTotal = $objincidencia->mostrar_numincidenciastotal($_POST['idEmpleado']);
 				?>
 				<p>
-					<label>Incidencias desde su alta :  <?php echo $numTotal; ?></label> <a> Reportes </a>
+					<label>Incidencias desde su alta :  <?php echo $numTotal; ?></label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=3','reportes')"> Reportes </a>
 				</p>
 				<?php
 			break;
