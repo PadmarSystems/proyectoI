@@ -28,7 +28,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 	}
 </style>
 <script src="http://code.highcharts.com/highcharts.js"></script>
-<script src="incidencias/graficas.js"></script>
+<script src="incidencias/incidencias.js"></script>
 <h2>Graficador de Incidencias</h2>
 	<div>
 		<div>
@@ -37,7 +37,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 			<select class="sel" id="tipograf" readonly onchange="showSelect($(this).val());">
 				<option value="">---</option>
 					<option value="1">Incidencias por mes</option>
-					<option value="2">Tipo de incidencias</option> <!----CAMBIAR NOMBRE ---->
+					<option value="2">Por tipo de incidencia</option>
 			</select>
 			</div>
 		</div>
@@ -53,7 +53,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 			</div>
 		</div>
 		<div id="mes" style="display:none">
-			<label>Mes: </label> <!---- revisar el año ----->
+			<label>Mes: </label>
 			<div class="ui-widget">
 			<select class="sel" id="selectMes" readonly>
 				<option value="">---</option>
@@ -79,7 +79,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 				<option value="">---</option>
 				<?php
 				foreach ($tiposincidencias as $tipos){
-					echo '<option value="'.$tipos['idTipo'].'">'.$tipos['tipoIncidencia'].'</option>';
+					echo '<option value="'.$tipos['idTipo'].'*3*'.$tipos['tipoIncidencia'].'">'.$tipos['tipoIncidencia'].'</option>';
 				}?>
 			</select>
 			</div>
@@ -89,4 +89,5 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 	</div><br/>
 	<div align="center">
 		<div id="grafica" style="min-width: 300px; min-height: 400px; width: 1150px; height: 450px"></div>
+		<div id="dialog-message"></div>
 	</div>
