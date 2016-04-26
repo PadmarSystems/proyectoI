@@ -114,14 +114,14 @@ function loadGraph() {
 						categories: ['Ene', 'Feb', 'Mar', 'Abr', 'Mayo', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
 						offset: 5,
 						title: {
-							text: 'Incidencias',
+							text: 'Mes',
 							align: 'middle',
 							margin: 30
 						}
 					},
 					yAxis: {
 						title: {
-							text: 'Mes',
+							text: 'Incidencias',
 							align: 'middle',
 							margin: 30
 						},
