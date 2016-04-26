@@ -46,7 +46,7 @@ switch ($bandera){
 					break;
 				case '04': $Abr++;
 					break;
-				case '05': $Mar++;
+				case '05': $May++;
 					break;
 				case '06': $Jun++;
 					break;
