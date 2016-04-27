@@ -96,7 +96,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 	<div>
 		<label>Tipo de incidencia: </label>
 		<div>
-			<select id="tipoIncidencia" name="tipoIncidencia" required>
+			<select id="tipoIncidencia" name="tipoIncidencia" required onchange="procesar_incidencia(this.value);">
 				<option value="" selected disabled>Seleccione...</option>
 		        <?php   foreach ($tiposincidencias as $tipo) {
 		        ?>
@@ -105,6 +105,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 			</select>
 		</div>
 	</div>
+	<div id="a-campos"></div>
 	<div>
 		<label>Fecha: </label>
 		<div>

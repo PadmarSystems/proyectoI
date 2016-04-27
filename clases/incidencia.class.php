@@ -15,6 +15,11 @@ class incidencia extends SafeMySQL {
         if($result) return true;
     }
 
+    function insertarincidenciaadic($datos){
+        $result = $this->con->query("INSERT INTO incidencias_campos SET ?u", $datos);
+        if($result) return true;
+    }
+
     function mostrar_incidencias($params="incidencias.*", $where=""){
         $sql = "SELECT $params,nombreEmpresa,nombreUsuario,nombreEmp,nombreResponsable,nombrePuesto,nombreUbicacion,tipoIncidencia
 			FROM `incidencias`
@@ -46,12 +51,24 @@ class incidencia extends SafeMySQL {
         return $this->con->getRow("SELECT idIncidencia,date(fechaInicio) fechaInicio,tipoIncidencia FROM `incidencias`inner JOIN tipo_incidencia on incidencias.idTipoIncidencia=tipo_incidencia.idTipo where idEmpleado=?i ORDER by idIncidencia DESC LIMIT 1",$id);
     }
 
+    function ultimoidinsertado(){
+        return $this->con->insertId();
+    }
+
     function mostrar_numincidencias($id,$month){
         return $this->con->getOne("SELECT count(*)num FROM `incidencias` where idEmpleado=?i and month(fechaInicio) = ?s",$id,$month);
     }
 
     function mostrar_numincidenciastotal($id){
         return $this->con->getOne("SELECT count(*) FROM `incidencias` where idEmpleado=?i",$id);
+    }
+
+    function mostrar_campos($id){
+        return $this->con->getAll("SELECT DISTINCT nombreCampo FROM `campos_adicionales` WHERE idTipo=?i GROUP by nombreCampo order by idCampo",$id);
+    }
+
+    function mostrar_valorescampos($nombreCampo){
+        return $this->con->getAll("SELECT valorCampo FROM `campos_adicionales` where nombreCampo = ?s ORDER BY nombreCampo",$nombreCampo);
     }
 }
 ?>

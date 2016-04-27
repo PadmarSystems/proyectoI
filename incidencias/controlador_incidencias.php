@@ -37,6 +37,14 @@ if(isset($_POST['a'])){
 			$array = array('folio'=>$_POST['folio'],'idUsuario' => $_SESSION['idUsuario'],'idEmpresa'=>$row['idEmpresa'],'idUbicacion'=>$row['idUbicacion'],'idEmpleado'=>$row['idEmpleado'],'idPuesto'=>$row['idPuesto'],'idResponsable'=>$row['idResponsable'],'idTipoIncidencia'=>$_POST['tipoIncidencia'],'fechaInicio'=>$_POST['fi_inc'] . ' ' . $_POST['hi_inc'],'fechaFin'=>$_POST['ff_inc'] . ' ' . $_POST['hf_inc'],'motivo'=>$_POST['motivo']);
 			$inserta = $objincidencia->insertarincidencia($array);
 			if ($inserta) {
+				$idIncidencia = $objincidencia->ultimoidinsertado();
+				$campos = $objincidencia->mostrar_campos($_POST['tipoIncidencia']);
+				foreach ($campos as $row) {
+					$array = array('idIncidencia' => $idIncidencia, 'nombreCampo' => $row['nombreCampo'],'valorCampo'=>$_POST[$row['nombreCampo']]);
+					$insertaadic = $objincidencia->insertarincidenciaadic($array);
+					unset($array);
+				}
+
 				echo "success";
 			}else{
 				echo "error";
@@ -88,6 +96,36 @@ if(isset($_POST['a'])){
 					<label><?php echo $row['emailEmp']; ?></label>
 				</p>
 				<?php
+			break;
+		case 'cargar_campos':
+			$campos = $objincidencia->mostrar_campos($_POST['idTipo']);
+			foreach ($campos as $row) {
+				$valores = $objincidencia->mostrar_valorescampos($row['nombreCampo']);
+
+				if(count($valores) == 1){
+					?>
+					<div>
+					<label><?php echo ucfirst(str_replace("_"," ",$row['nombreCampo'])); ?>: </label>
+						<div><input type="text" id="" name="<?php echo $row['nombreCampo']; ?>"></input></div>
+					</div>	
+					<?php
+				}
+				if (count($valores) > 1) {
+					?>
+					<div>
+					<label><?php echo ucfirst(str_replace("_"," ",$row['nombreCampo'])); ?>: </label>
+						<div>
+						<select name="<?php echo $row['nombreCampo']; ?>">
+						<option value="" selected disabled>Seleccione...</option>
+						<?php foreach ($valores as $rowv) { ?>
+							<option value="<?php echo $rowv['valorCampo']; ?>"><?php echo ucfirst($rowv['valorCampo']); ?></option>
+						<?php } ?>
+						</select>
+						</div>
+					</div>
+					<?php
+				}
+			}
 			break;
 		default:
 			header('');
