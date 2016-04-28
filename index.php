@@ -32,12 +32,17 @@ require("ruta.php");
 <script type="text/javascript" src="<?php echo $ruta; ?>js/jquery-ui.min.js"></script>
 </head>
 <body>
-    <form action="view.php" method="post" class="login">
-    	<img src="images/logo.png" />
-        <p><?php echo $msg; ?></p>
-        <div><span><i class="fa fa-user"></i></span><input type="text" placeholder="Usuario" value="" autofocus id="myusername" name="myusername" required/></div>
-    	<div><span><i class="fa fa-lock"></i></span><input type="password" placeholder="Contraseña" value="" id="mypassword" name="mypassword" required/></div>
-        <input type="submit" value="Iniciar Sesión" />
-    </form>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 logoLogin"><img src="images/logo.png" /></div>
+		<form action="view.php" method="post" class="col-md-4 col-md-offset-4 login">
+	        <div class="message">
+				<h4>Iniciar Sesión</h4>
+				<p><?php echo $msg; ?></p>
+			</div>
+	        <div class="inputs"><i class="fa fa-user"></i><input type="text" placeholder="Usuario" value="" autofocus id="myusername" name="myusername" required/></div>
+	    	<div class="inputs"><i class="fa fa-lock"></i><input type="password" placeholder="Contraseña" value="" id="mypassword" name="mypassword" required/></div>
+	        <input type="submit" value="Iniciar Sesión" />
+	    </form>
+	</div>
 </body>
 </html>

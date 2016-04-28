@@ -9,7 +9,7 @@ if (isset($_POST) && !isset($_SESSION['logged'])) {
     $pass = htmlspecialchars($_POST['mypassword']);
 
     $row = $usuario->loginusuario($user, $pass);
-    
+
     if (count($row) > 1) {
         $horaActual = date("H:i:s");
         $_SESSION['idUsuario']=$row['idUsuario'];
@@ -18,10 +18,10 @@ if (isset($_POST) && !isset($_SESSION['logged'])) {
         $_SESSION['empresa'] = $row['aliasEmpresa'];
         $_SESSION['logged'] = TRUE;
         $_SESSION['caducidad'] = date('H:i:s', strtotime($horaActual) + 600);
-        
+
     }else{
         header('Location: index.php?stt=error');
-        exit; 
+        exit;
     }
 }
 unset($_POST);
@@ -46,12 +46,6 @@ require("ruta.php");
 <script type="text/javascript" src="<?php echo $ruta; ?>js/combobox.js"></script>
 <script type="text/javascript">
     $(function() {
-        mostrarHora();
-
-        $('.menuSetting > a').click(function() {
-            $('.menuSetting > ul').fadeToggle(200);
-        });
-
         if($('.listado').length) {
             $('.listado').each(function(i,e) {
                 if(!$(this).hasClass("destroy")) {
@@ -104,36 +98,36 @@ if (isset($_GET['mod'])) {
 } else {
 	$contenido = 'portada';
 	$carpeta = '';
-}
-?>
-<body class="general">
-<div class="top">
-        <a class="logo"><img src="images/logo-05.png" /></a>
-        <div class="info">
-            <h3>
-                <span id="horaActual"></span>
-                <span id="fechaActual" style="margin-left:15px;"></span>
-            </h3>
-            <ul class="menutop">
-                <li><a onclick="goto()"><i class="fa fa-home"></i>Inicio</a></li>
+}?>
+<body>
+    <nav>
+        <a class="btn-menu" id="mainmenu"><i class="fa fa-bars"></i></a>
+        <a class="logo" onclick="goto()"><img src="images/logo2.png" alt="Logotipo" /></a>
+        <div class="navbar">
+            <a class="btn-menu"><i class="fa fa-ellipsis-v"></i></a>
+            <ul>
+                <li><a onclick="goto('configurar','configuracion')"><i class="fa fa-sliders"></i>Configuración</a></li>
+                <li><a href="logout.php"><i class="fa fa-sign-out"></i>Cerrar Sesión</a></li>
             </ul>
-            <div class="menuSetting">
-                <a><i class="fa fa-ellipsis-h"></i></a>
-                <ul>
-                    <li><a><i class="fa fa-user"></i>Perfil</a></li>
-                    <li><a href="logout.php"><i class="fa fa-sign-out"></i>Cerrar Sesión</a></li>
-                </ul>
-            </div>
         </div>
-    </div>
-    <div class="container">
-		<?php include($carpeta.$contenido.".php"); ?>
-    </div>
+    </nav>
+    <section class="sidebar">
+        <ul>
+            <li><span>Menu Principal</span></li>
+            <li><a onclick="goto()"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+            <li><a onclick="goto('listar','empleados');"><i class="fa fa-users"></i>Empleados</a></li>
+            <li><span>Incidencias</span></li>
+            <li><a onclick="goto('seguimiento','incidencias')"><i class="fa fa-plus"></i>Registrar</a></li>
+            <li><a onclick="goto('lista_incidencias','reportes')"><i class="fa fa-file-text"></i>Reportes</a></li>
+        </ul>
+    </section>
+    <section class="layout-content">
+        <?php include($carpeta.$contenido.".php"); ?>
+    </section>
 </body>
 </html>
-<?php }else{
+<?php } else {
     header('Location: index.php');
     exit;
 
 } ?>
-
