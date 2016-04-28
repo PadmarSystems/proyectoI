@@ -70,5 +70,9 @@ class incidencia extends SafeMySQL {
     function mostrar_valorescampos($nombreCampo){
         return $this->con->getAll("SELECT valorCampo FROM `campos_adicionales` where nombreCampo = ?s ORDER BY nombreCampo",$nombreCampo);
     }
+
+    function verIncidenciasTipoFecha($id,$tipo,$month){
+        return $this->con->getAll("SELECT * FROM `incidencias` WHERE idEmpleado=?i AND idTipoIncidencia=?i AND month(fechaInicio)=?s",$id,$tipo,$month);
+    }
 }
 ?>

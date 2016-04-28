@@ -126,6 +126,14 @@ if(isset($_POST['a'])){
 					<?php
 				}
 			}
+
+		case 'Aviso':
+			?>
+			<p>
+				<label>No se encontraron incidencias.</label><br>
+			</p>
+			<?php
+
 			break;
 		default:
 			header('');
