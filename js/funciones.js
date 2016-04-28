@@ -90,3 +90,49 @@ function send_ajax_form(str, params){
         }
     });
 }
+function paginate(id) {
+	$('table'+id).each(function(i,e) {
+		if(!$(this).hasClass("destroy")) {
+			var pag = ($(this).hasClass("nopagination") ? false : true);
+			var order = ($(this).hasClass("no-order") ? false : true);
+			$("table"+id).dataTable({
+				"dom": '<lf>rt<ip>',
+				"language": {
+					"emptyTable": "No hay datos disponibles en la tabla.",
+					"info": "Se muestran de _START_ a _END_ de _TOTAL_",
+					"infoEmpty": "Se muestran de 0 a 0 de 0",
+					"infoFiltered": "(filtrado de _MAX_ totales)",
+					"infoPostFix": "",
+					"thousands": ",",
+					"lengthMenu": "Mostrar _MENU_",
+					"loadingRecords": "Cargando...",
+					"processing": "Procesando...",
+					"search": "Buscar:",
+					"zeroRecords": "No se encontraron resultados.",
+					"paginate": {
+						"first": "Primera",
+						"last": "Última",
+						"next": "Sig.",
+						"previous": "Ant."
+					},
+					"aria": {
+						"sortAscending":  ": activar para ordenar ascendente",
+						"sortDescending": ": activar para ordenar descendente"
+					}
+				},
+				"ordering": order,
+				"bPaginate": pag,
+				"pagingType": "full_numbers",
+				aLengthMenu: [
+			        [10, 25, 50, 100, -1],
+			        [10, 25, 50, 100, "Todo"]
+			    ],
+			    //iDisplayLength: -1,
+				columnDefs: [{
+					targets: 'no-sort',
+					orderable: false
+				}]
+			});
+		}
+    });
+}

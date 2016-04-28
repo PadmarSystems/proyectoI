@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if (isset($_POST) && !isset($_SESSION['logged'])) {
     require('clases/usuario.class.php');
     $usuario = new usuario;
@@ -10,7 +9,7 @@ if (isset($_POST) && !isset($_SESSION['logged'])) {
 
     $row = $usuario->loginusuario($user, $pass);
 
-    if (count($row) > 1) {
+    if(count($row) > 1) {
         $horaActual = date("H:i:s");
         $_SESSION['idUsuario']=$row['idUsuario'];
         $_SESSION['nombre'] = $row['nombreUsuario'];
@@ -19,7 +18,7 @@ if (isset($_POST) && !isset($_SESSION['logged'])) {
         $_SESSION['logged'] = TRUE;
         $_SESSION['caducidad'] = date('H:i:s', strtotime($horaActual) + 600);
 
-    }else{
+    } else {
         header('Location: index.php?stt=error');
         exit;
     }
@@ -37,8 +36,7 @@ require("ruta.php");
 <link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/style.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/font-awesome.css" />
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
 <script type="text/javascript" src="<?php echo $ruta; ?>js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="<?php echo $ruta; ?>js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<?php echo $ruta; ?>js/funciones.js"></script>
@@ -46,46 +44,21 @@ require("ruta.php");
 <script type="text/javascript" src="<?php echo $ruta; ?>js/combobox.js"></script>
 <script type="text/javascript">
     $(function() {
-        if($('.listado').length) {
-            $('.listado').each(function(i,e) {
-                if(!$(this).hasClass("destroy")) {
-                    $(".listado").dataTable({
-                        "dom": '<lf>rt<ip>',
-                        stateSave: true,
-                        aLengthMenu: [
-                            [25, 10, 50, 100, -1],
-                            [25, 10, 50, 100, "Todo"]
-                        ],
-                        "bSort": true,
-                        "language": {
-                            "emptyTable": "No hay datos disponibles en la tabla.",
-                            "info": "Se muestran de _START_ a _END_ de _TOTAL_",
-                            "infoEmpty": "Se muestran de 0 a 0 de 0",
-                            "infoFiltered": "(filtrado de _MAX_ totales)",
-                            "infoPostFix": "",
-                            "thousands": ",",
-                            "lengthMenu": "Mostrar _MENU_",
-                            "loadingRecords": "Cargando...",
-                            "processing": "Procesando...",
-                            "search": "Buscar:",
-                            "zeroRecords": "No se encontraron resultados.",
-                            "paginate": {
-                                "first": "Primera",
-                                "last": "Última",
-                                "next": "Sig.",
-                                "previous": "Ant."
-                            },
-                            "aria": {
-                                "sortAscending":  ": activar para ordenar ascendente",
-                                "sortDescending": ": activar para ordenar descendente"
-                            }
-                        },
-                        "pagingType": "full_numbers"
-                    });
-                    //$('.dataTables_filter label').after('<button class="print" onclick="imprimir()">Imprimir</button>');
-                }
-            });
-        }
+        $(document).tooltip({
+    		track: true
+    	});
+        if($("table.listado").length) {
+    		paginate('.listado');
+    	}
+        if($("table.pages").length) {
+    		paginate('.pages');
+    	}
+        $('#mainmenu').click(function() {
+            $('.sidebar').toggleClass('min');
+        });
+        $('#maincog').click(function() {
+            $(this).siblings('ul').fadeToggle(100);
+        });
     });
 </script>
 </head>
@@ -104,7 +77,7 @@ if (isset($_GET['mod'])) {
         <a class="btn-menu" id="mainmenu"><i class="fa fa-bars"></i></a>
         <a class="logo" onclick="goto()"><img src="images/logo2.png" alt="Logotipo" /></a>
         <div class="navbar">
-            <a class="btn-menu"><i class="fa fa-ellipsis-v"></i></a>
+            <a class="btn-menu" id="maincog"><i class="fa fa-ellipsis-v"></i></a>
             <ul>
                 <li><a onclick="goto('configurar','configuracion')"><i class="fa fa-sliders"></i>Configuración</a></li>
                 <li><a href="logout.php"><i class="fa fa-sign-out"></i>Cerrar Sesión</a></li>
