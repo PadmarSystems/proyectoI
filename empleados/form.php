@@ -55,7 +55,7 @@ if (isset($_GET['stt'])) {
 	}
 }
 ?>
-<h2><?php echo $form['accion'].' empleado'; ?></h2>
+<h1><?php echo $form['accion'].' Empleado'; ?></h1>
 <div class="row">
 	<p class="<?php echo $stt; ?>"><?php echo $msg; ?></p>
 	<form action="empleados/controlador.php" enctype="multipart/form-data" method="post" class="col-md-8 group">
@@ -170,10 +170,10 @@ if (isset($_GET['stt'])) {
 			<?php if($_GET['ac']=="editar"){ ?>
 			<input type="hidden" id="idEmpleado" name="idEmpleado" value="<?php echo $form['idEmpleado']; ?>" required readonly/>
 			<?php } ?>
-			<div class="col-md-3 col-md-offset-4">
+			<div class="col-md-4 col-md-offset-4">
 				<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<input type="button" name="back" onclick="history.back();" value="Regresar">
 			</div>
 		</div>

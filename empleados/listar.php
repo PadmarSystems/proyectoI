@@ -18,7 +18,7 @@ $empleados = $objemp->mostrar_empleados();
 		} );
 	});
 </script>
-<h2>Empleados </h2>
+<h1>Empleados </h1>
 <br>
 <table class='listado'>
 	<thead>

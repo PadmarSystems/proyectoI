@@ -22,6 +22,7 @@ body > .row {
 	margin: 0;
 }
 a {
+	outline: none !important;
 	cursor: pointer;
 }
 img {
@@ -37,14 +38,18 @@ textarea,
 input[type="text"],
 input[type="password"],
 input[type="email"],
-input[type="date"] {
+input[type="date"],
+input[type="time"],
+.custom-combobox-input {
 	border: 1px solid #eceeef;
 }
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus,
-input[type="date"]:focus {
+input[type="date"]:focus,
+input[type="time"]:focus,
+.custom-combobox-input:focus {
 	border-color: #ce523c;
 }
 .button, button,
@@ -110,7 +115,7 @@ nav {
 	background: #ce523c;
 	border-bottom: 1px solid rgba(0,0,0,.1);
 	box-shadow: 0 2px 3px rgba(0,0,0,.2);
-	z-index: 1000;
+	z-index: 100;
 }
 nav .btn-menu {
 	display: block;
@@ -168,7 +173,7 @@ nav .logo {
 	transition: all 0.2s;
 	overflow-x: hidden;
 	overflow-y: auto;
-    z-index: 999;
+    z-index: 99;
 }
 .sidebar ul {
 	list-style-type: none;
@@ -238,6 +243,34 @@ nav .logo {
 .group .row > div > * {
 	width: 100%;
 }
+ul.submenu {
+	display: inline-block;
+	width: 100%;
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 15px;
+	background: #fff;
+	border: 1px solid rgba(0,0,0,.1);
+    box-shadow: 0 2px 3px rgba(0,0,0,.05);
+}
+ul.submenu li {
+	float: left;
+	border-right: 1px dashed #ddd;
+}
+ul.submenu li > a {
+	display: block;
+	color: #666;
+	padding: 0 15px;
+	line-height: 250%;
+}
+ul.submenu li > a:hover {
+	color: #fff;
+	background: #ce523c;
+}
+ul.submenu li > a > i {
+	margin-right: 10px;
+	vertical-align: middle;
+}
 table.listado {
 	width: 100%;
 	border-collapse: collapse;
@@ -279,6 +312,81 @@ table.pages {
 table.pages th,
 table.pages td {
 	width: 50%;
+}
+.card {
+	width: 90%;
+	margin: 10px auto;
+	border: 1px dashed #ccc;
+	background: #fff;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.card .row {
+	margin: 0;
+}
+.card .title {
+	text-transform: uppercase;
+	padding: 10px 0;
+	background: #ededed;
+}
+.card .title h3 {
+	margin: 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.card ul {
+	list-style-type: none;
+	padding: 0;
+}
+.card a {
+	display: block;
+	color: #fff;
+	text-align: center;
+	line-height: 100%;
+	margin: 10px 0;
+	padding: 10px;
+	background: #ed007b;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.card a.nin > i {
+	display: block;
+	font-size: 220%;
+	margin-bottom: 10px;
+}
+.card a.ex {
+	white-space: nowrap;
+	background: #1dc6bc;
+}
+.card a.ex > i {
+	font-size: 130%;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+.card .photo {
+	position: relative;
+	text-align: center;
+	margin: 15px 0;
+	border: 1px solid #ccc;
+	background: #fafafa;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.card .photo:after {
+  /*padding-top: 56.25%; 16:9 ratio */
+  padding-top: 100%;
+  display: block;
+  content: '';
+}
+.card .photo > i {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 700%;
+	line-height: 100%;
 }
 
 /* Paginacion Tabla Listado */
@@ -359,5 +467,71 @@ table.pages td {
 	-webkit-box-shadow: 1px 1px 3px #aaa;
 	-moz-box-shadow: 1px 1px 3px #aaa;
 	box-shadow: 1px 1px 3px #aaa;
-	z-index: 9999;
+	z-index: 98;
+}
+.ui-widget-overlay {
+	background: #000;
+	opacity: 0.2;
+}
+.ui-dialog {
+	border-radius: 5px;
+	background-color: #fff;
+}
+.ui-dialog-titlebar {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.ui-dialog .ui-dialog-titlebar-close {
+	display: none;
+}
+.custom-combobox-input {
+	width: 100%;
+	padding-right: 25px;
+}
+.custom-combobox {
+	display: inline-block;
+	position: relative;
+}
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	color: #777;
+	margin-left: -20px;
+	padding: 0 5px;
+	cursor: pointer;
+}
+.custom-combobox-toggle > i {
+	line-height: 200%;
+}
+.ui-menu {
+	display: block;
+	float: left;
+	list-style: none outside none;
+	margin: 0;
+	padding: 2px;
+}
+.ui-autocomplete.ui-front {
+	z-index: 101;
+}
+.ui-autocomplete {
+	position: absolute;
+	max-height: 200px;
+	background: #fff;
+	border: 1px solid #ccc;
+	overflow: auto;
+	cursor: default;
+}
+.ui-autocomplete li {
+	margin: 0;
+	padding: 0 8px !important;
+}
+.ui-autocomplete li a {
+	font-size: 95%;
+	margin: 0 !important;
+	padding: 2px 5px !important;
+	cursor: pointer;
+}
+.ui-autocomplete li:hover {
+	background: #efefef;
 }
