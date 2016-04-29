@@ -30,6 +30,17 @@ function mostrardetalle(a,id){
 		}
 	});
 }
+
+function procesar_incidencia(id){
+	$.ajax({
+		url: "incidencias/controlador_incidencias.php",
+		type: "POST",
+		data: {a: 'cargar_campos', idTipo:id},
+		success: function(data){
+			$( "#a-campos" ).empty().append(data);
+		}
+	});
+}
 /* GRAFICADOR */
 function showSelect(value){
 	if (value == 1){
