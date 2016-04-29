@@ -6,11 +6,24 @@ require("ruta.php");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Instalación Local</title>
+<title>Reggy.MX</title>
+<link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/style.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/font-awesome.css" />
+<script type="text/javascript" src="<?php echo $ruta; ?>js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $ruta; ?>js/jquery-ui.min.js"></script>
 </head>
 <body>
-    <h1>Bienvenido al Asistente de Instalación</h1>
-    <p>Modo offline...</p>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 logoLogin"><img src="images/logo.png" /></div>
+		<form action="empresa/buscar.php" method="post" class="col-md-4 col-md-offset-4 login">
+	        <div class="message">
+				<h4>Empresa</h4>
+			</div>
+	        <div class="inputs"><i class="fa fa-building"></i><input type="text" placeholder="Empresa" value="" autofocus id="myusername" name="myusername" required/></div>
+	    	<div class="inputs"><i class="fa fa-lock"></i><input type="password" placeholder="Contraseña" value="" id="mypassword" name="mypassword" required/></div>
+	        <input type="submit" value="Buscar" />
+	    </form>
+	</div>
 </body>
 </html>
-

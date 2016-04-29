@@ -24,7 +24,7 @@ require("ruta.php");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>SRin</title>
+<title>Reggy.MX</title>
 <link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/style.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $ruta; ?>css/font-awesome.css" />

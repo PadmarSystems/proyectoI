@@ -33,6 +33,13 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
 <script type="text/javascript">
     $(function() {
         $( "#empresa, #tipoIn, #puesto, #responsable, #ubicacion" ).combobox();
+        $('.custom-combobox-input').attr("placeholder", "Seleccione");
+
+        $('#clicky').click(function() {
+            $('.ui-autocomplete-input').focus().val('');
+            $('.ui-autocomplete-input').autocomplete('close');
+            return false;
+        });
     });
 </script>
 <h1>Reportes de incidencias</h1>
@@ -41,7 +48,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
         <label class="col-md-2">Empresa:</label>
         <div class="col-md-4">
             <select id="empresa" name="empresa">
-                <option value="">Select one...</option>
+                <option value="" >Select one...</option>
                 <?php foreach ($empresas as $empresa) { ?>
                 <option value="<?php echo $empresa['idEmpresa']; ?>"><?php echo $empresa['aliasEmpresa']; ?></option>
                 <?php } ?>
@@ -94,6 +101,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
     <div class="row">
         <div class="col-md-4 col-md-offset-2">
             <button class="button" onclick="filtrar_incidencias(empresa.value,ubicacion.value,responsable.value,puesto.value,tipoIn.value,fechai.value,fechaf.value)"><i class="fa fa-check"></i> Filtrar</button>
+            <a href="#" id="clicky">Limpiar filtros</a>
         </div>
     </div>
 </div>

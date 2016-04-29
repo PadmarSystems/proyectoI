@@ -74,7 +74,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 		<div class="row">
 			<label class="col-md-4">Tipo de incidencia: </label>
 			<div class="col-md-8">
-				<select id="tipoIncidencia" name="tipoIncidencia" required>
+				<select id="tipoIncidencia" name="tipoIncidencia" onchange="procesar_incidencia(this.value);" required>
 					<option value="" selected disabled>Seleccionar...</option>
 			        <?php foreach ($tiposincidencias as $tipo) { ?>
 			            <option value="<?php echo $tipo['idTipo']; ?>"><?php echo str_replace('--',' ',$tipo['tipoIncidencia']); ?></option>

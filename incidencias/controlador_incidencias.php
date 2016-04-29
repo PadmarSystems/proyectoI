@@ -119,29 +119,30 @@ if(isset($_POST['a'])){
 
 				if(count($valores) == 1){
 					?>
-					<div>
-					<label><?php echo ucfirst(str_replace("_"," ",$row['nombreCampo'])); ?>: </label>
-						<div><input type="text" id="" name="<?php echo $row['nombreCampo']; ?>"></input></div>
-					</div>	
+					<div class="row">
+						<label class="col-md-4"><?php echo ucfirst(str_replace("_"," ",$row['nombreCampo'])); ?>:</label>
+						<div class="col-md-8"><input type="text" name="<?php echo $row['nombreCampo']; ?>"  required /></div>
+					</div>
+					
 					<?php
 				}
 				if (count($valores) > 1) {
 					?>
-					<div>
-					<label><?php echo ucfirst(str_replace("_"," ",$row['nombreCampo'])); ?>: </label>
-						<div>
-						<select name="<?php echo $row['nombreCampo']; ?>">
-						<option value="" selected disabled>Seleccione...</option>
-						<?php foreach ($valores as $rowv) { ?>
-							<option value="<?php echo $rowv['valorCampo']; ?>"><?php echo ucfirst($rowv['valorCampo']); ?></option>
-						<?php } ?>
-						</select>
+					<div class="row">
+						<label class="col-md-4"><?php echo ucfirst(str_replace("_"," ",$row['nombreCampo'])); ?>: </label>
+						<div class="col-md-8">
+							<select name="<?php echo $row['nombreCampo']; ?>">
+								<option value="" selected disabled>Seleccione...</option>
+						        <?php foreach ($valores as $rowv) { ?>
+						            <option value="<?php echo $rowv['valorCampo']; ?>"><?php echo ucfirst($rowv['valorCampo']); ?></option>
+						        <?php } ?>
+							</select>
 						</div>
 					</div>
 					<?php
 				}
 			}
-
+			break;
 		case 'Aviso':
 			?>
 			<p>
