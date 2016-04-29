@@ -26,9 +26,9 @@ if(isset($_POST['a'])){
 		case 'crear':
 			require('../clases/empleado.class.php');
 			$empleado = new empleado;
-			
+
 			$row = $empleado->mostrar_empleado($_POST['empleado']);
-			
+
 			if (empty($row)) {
 				echo 'nf_empleado';
 				return;
@@ -51,9 +51,9 @@ if(isset($_POST['a'])){
 			}
 			break;
 		case 'Detalle':
-				
+
 				$row = $objincidencia->mostrar_ultimaincidencia($_POST['idEmpleado']);
-				
+
 				if (count($row) == 0) {
 					echo "No hay incidencias relacionadas al empleado";
 					return;
@@ -83,18 +83,33 @@ if(isset($_POST['a'])){
 				$html = "";
 				$row = $objemp->mostrar_empleadodetalle($_POST['idEmpleado']);
 				?>
-				<p>
-					<div><img src="<?php echo $row['fotoEmp']; ?>"/></div>
-					<h2><?php echo str_replace('--',' ',$row['nombreEmp']); ?></h2>
-				</p>
-				<p>
-					<label><?php echo $_SESSION['empresa']; ?></label><br>
-					<label><?php echo $row['nombrePuesto']; ?></label><br>
-					<label><?php echo $row['nombreUbicacion']; ?></label><br>
-					<label><?php echo $row['nombreResponsable']; ?></label><br>
-					<label><?php echo $row['telEmp']; ?></label><br>
-					<label><?php echo $row['emailEmp']; ?></label>
-				</p>
+				<div class="card">
+					<div class="row title">
+						<div class="col-md-12">
+							<h3><?php echo str_replace('--',' ',$row['nombreEmp']); ?></h3>
+							<small><i><?php echo $row['nombrePuesto']; ?></i></small>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<?php $foto = 'images/usuarios/'.$row['fotoEmp'];
+							if(file_exists($foto)) {
+								echo '<div class="photo"><div style="background-images: url('.$foto.');"></div></div>';
+							} else {
+								echo '<div class="photo"><i class="fa fa-user"></i></div>';
+							} ?>
+						</div>
+						<div class="col-md-9">
+							<ul>
+								<li><b>Empresa:</b> <?php echo $_SESSION['empresa']; ?></li>
+								<li><b>Ubicación:</b> <?php echo $row['nombreUbicacion']; ?></li>
+								<li><b>Responsable:</b> <?php echo $row['nombreResponsable']; ?></li>
+								<li><b>Teléfono:</b> <?php echo $row['telEmp']; ?></li>
+								<li><b>Correo Electrónico:</b> <?php echo $row['emailEmp']; ?></li>
+							</ul>
+						</div>
+					</div>
+				</div>
 				<?php
 			break;
 		case 'cargar_campos':
