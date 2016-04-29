@@ -82,7 +82,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 				</select>
 			</div>
 		</div>
-<<<<<<< HEAD
+		<div id="a-campos"></div>
 		<div class="row">
 			<label class="col-md-4">Fecha: </label>
 			<div class="col-md-4">
@@ -92,7 +92,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 				<input type="time" name="hi_inc">
 			</div>
 		</div>
-		<div class="row">
+		<!--<div class="row">
 			<label class="col-md-4">Hasta: </label>
 			<div class="col-md-4">
 				<input type="date" name="ff_inc" >
@@ -100,27 +100,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 			<div class="col-md-4">
 				<input type="time" name="hf_inc">
 			</div>
-=======
-	</div>
-	<div>
-		<label>Tipo de incidencia: </label>
-		<div>
-			<select id="tipoIncidencia" name="tipoIncidencia" required onchange="procesar_incidencia(this.value);">
-				<option value="" selected disabled>Seleccione...</option>
-		        <?php   foreach ($tiposincidencias as $tipo) {
-		        ?>
-		            <option value="<?php echo $tipo['idTipo']; ?>"><?php echo str_replace('--',' ',$tipo['tipoIncidencia']); ?></option>
-		        <?php   }   ?>	
-			</select>
-		</div>
-	</div>
-	<div id="a-campos"></div>
-	<div>
-		<label>Fecha: </label>
-		<div>
-			<input type="date" name="fi_inc" ><input type="time" name="hi_inc">
->>>>>>> 141b4cbdc79a2bbee95135073c5d67f2bfd92d74
-		</div>
+		</div>-->
 		<div class="row">
 			<label class="col-md-4">Motivo: </label>
 			<div class="col-md-8"><textarea id="motivo" name="motivo"><?php echo $form['motivo']; ?></textarea></div>

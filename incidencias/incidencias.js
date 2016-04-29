@@ -9,22 +9,16 @@ function post_form(){
 		}
 	});
 }
-<<<<<<< HEAD
 function mostrardetalle(a,id,sizeWidth) {
 	if(typeof(sizeWidth) == 'undefined') {
 		sizeWidth = 'auto';
 	}
-=======
-
-function mostrardetalle(a,id){
->>>>>>> 141b4cbdc79a2bbee95135073c5d67f2bfd92d74
 	$.ajax({
 		url: "incidencias/controlador_incidencias.php",
 		type: "POST",
 		data: {a: a, idEmpleado:id},
 		success: function(data){
 			//$( "#dialog-message" ).empty().append(data);
-<<<<<<< HEAD
 			$("#dialog-message").empty().append(data).dialog({
 				modal: true,
 				title: a,
@@ -35,22 +29,11 @@ function mostrardetalle(a,id){
 				buttons: {
 					Ok: function() {
 						$(this).dialog('destroy');
-=======
-			$( "#dialog-message" ).empty().append(data).dialog({
-				modal: true,
-				title: a,
-				buttons: {
-					Ok: function() {
-						$( this ).dialog( "close" );
->>>>>>> 141b4cbdc79a2bbee95135073c5d67f2bfd92d74
 					}
 				}
 			});
 		}
 	});
-<<<<<<< HEAD
-}
-=======
 }
 /* GRAFICADOR */
 function showSelect(value){
@@ -220,7 +203,7 @@ function loadGraph() {
 									fontSize:'13px'
 								}
 							}
-							
+
 						},
 						yAxis: {
 							title: {
@@ -282,4 +265,3 @@ function noData(){
 		}
 	});
 }
->>>>>>> 141b4cbdc79a2bbee95135073c5d67f2bfd92d74

@@ -58,12 +58,6 @@ $empleados = $objemp->mostrar_empleados();
     		<td><?php echo $row['nombreEmpresa']; ?></td>
     		<td><?php echo $row['nombrePuesto']; ?></td>
     		<td><?php echo $row['telEmp']; ?></td>
-<<<<<<< HEAD
-    		<td><?php echo $row['tipoNomina']; ?></td>
-    		<td class="actions">
-				<a aria-hidden="true" title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpleado"]; ?>','empleados')"><i class="fa fa-pencil-square-o"></i></a>
-				<a aria-hidden="true" title="Eliminar"><i class="fa fa-trash-o"></i></a>
-=======
     		<td><?php
     		switch($row['tipoNomina']){
 				case 1:
@@ -76,13 +70,13 @@ $empleados = $objemp->mostrar_empleados();
     				echo "Mensual";
 					break;
 				default:
-					echo "No se especificó un tipo de nómina";
+					echo "Sin Especificar";
 					break;
-    		} 
+    		}
     		//echo $row['tipoNomina']; ?></td>
-    		<td><i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpleado"]; ?>','empleados')"></i> &nbsp &nbsp 
-    			<i class="fa fa-trash-o" aria-hidden="true" title="Eliminar" style="cursor:pointer"></i>
->>>>>>> 141b4cbdc79a2bbee95135073c5d67f2bfd92d74
+			<td class="actions">
+				<a aria-hidden="true" title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpleado"]; ?>','empleados')"><i class="fa fa-pencil-square-o"></i></a>
+				<a aria-hidden="true" title="Eliminar"><i class="fa fa-trash-o"></i></a>
     		</td>
     	</tr>
 		<?php } } ?>
