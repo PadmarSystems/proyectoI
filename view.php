@@ -89,9 +89,16 @@ if (isset($_GET['mod'])) {
             <li><span>Menu Principal</span></li>
             <li><a onclick="goto()"><i class="fa fa-dashboard"></i>Dashboard</a></li>
             <li><a onclick="goto('listar','empleados');"><i class="fa fa-users"></i>Empleados</a></li>
-            <li><span>Incidencias</span></li>
-            <li><a onclick="goto('seguimiento','incidencias')"><i class="fa fa-plus"></i>Registrar</a></li>
+            <li><a onclick="goto('seguimiento','incidencias')"><i class="fa fa-calendar"></i>Incidencias</a></li>
             <li><a onclick="goto('lista_incidencias','reportes')"><i class="fa fa-file-text"></i>Reportes</a></li>
+            <!-- Admin -->
+            <li><span>Administrar</span></li>
+            <li><a href="view.php?com=empresa&mod=form&ac=editar"><i class="fa fa-briefcase"></i>Mi Empresa</a></li>
+            <li><a href="view.php?com=empresa&mod=listar"><i class="fa fa-building"></i>Empresas</a></li>
+			<li><a href="view.php?com=puestos&mod=listar"><i class="fa fa-street-view"></i>Puestos</a></li>
+			<li><a href="view.php?com=ubicaciones&mod=listar"><i class="fa fa-map-marker"></i>Ubicaciones</a></li>
+			<li><a href="view.php?com=responsables&mod=listar"><i class="fa fa-male"></i>Responsables</a></li>
+			<li><a href="view.php?com=usuarios&mod=listar"><i class="fa fa-users"></i>Usuarios</a></li>
         </ul>
     </section>
     <section class="layout-content">

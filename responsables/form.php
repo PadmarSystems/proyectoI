@@ -14,10 +14,10 @@ if (isset($_GET['ac'])) {
 				# obtener id
 		$row = $responsable->mostrar_responsable($_GET['id']);
 		$form = array('nombreResponsable'=>$row['nombreResponsable'],'idR'=>$row['idResponsable'],'empresa'=>$row['idEmpresa'],'accion'=>'Editar');
-	}else{
+	} else {
 		header('Location: view.php?com=responsables&mod=form&ac=nuevo&stt=error');
 	}
-}else{
+} else {
 	header('Location: view.php?mod=notfound');
 }
 
@@ -35,59 +35,63 @@ if (isset($_GET['stt'])) {
 }
 ?>
 <h2><?php echo $form['accion']; ?> responsable</h2>
-<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-
-<form action="responsables/controlador.php" method="post">
-<?php
-switch ($form['accion']) {
-	case 'Registrar':
-		?>
-		<p>Si el empleado al que quiere asignar como responsable ya está dado de alta, búsquelo en la lista. Si no lo encuentra, puede agregarlo.</p>
-		<div>
-			<label>Seleccione un responsable: </label>
-			<div><select id="responsableSel" name="responsableSel" required>
-				<option value="0">Nuevo responsable</option>
-				<?php
-					$lista = $objEmp->verEmpleados($_SESSION['idEmpresa']);
-					foreach ($lista as $val){
-						$fName=explode("--",$val['nombreEmp']);
-						$fName=$fName[0].' '.$fName[1].' '.$fName[2];
-						echo '
-						<option value="'.$val['idEmpleado'].'">'.$fName.'</option>
-						';
-					}
-				?>
-			</select></div>
+<div class="row">
+	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
+	<form action="responsables/controlador.php" method="post" class="col-md-8 group">
+	<?php
+	switch ($form['accion']) {
+		case 'Registrar':
+			?>
+			<p>Si el empleado al que quiere asignar como responsable ya está dado de alta, búsquelo en la lista. Si no lo encuentra, puede agregarlo.</p>
+			<div class="row">
+				<label class="col-md-4">Seleccione un responsable: </label>
+				<div class="col-md-8">
+					<select id="responsableSel" name="responsableSel" required>
+					<option value="0">Nuevo responsable</option>
+					<?php
+						$lista = $objEmp->verEmpleados($_SESSION['idEmpresa']);
+						foreach ($lista as $val){
+							$fName=explode("--",$val['nombreEmp']);
+							$fName=$fName[0].' '.$fName[1].' '.$fName[2];
+							echo '
+							<option value="'.$val['idEmpleado'].'">'.$fName.'</option>
+							';
+						}
+					?>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<label class="col-md-4">Nombre del responsable: </label>
+				<div class="col-md-8"><input type="text" id="responsableN" name="responsableN"/></div>
+			</div>
+			<?php
+		break;
+		case 'Editar':
+			?>
+			<div class="row">
+				<label class="col-md-4">Nombre del responsable: </label>
+				<div class="col-md-8"><label id="responsable" name="resposable"><?php echo $form['nombreResponsable']; ?></label></div>
+			</div>
+			<div class="row">
+				<label class="col-md-4">Nuevo nombre del responsable: </label>
+				<div class="col-md-8"><input type="text" id="nombreNuevo" name="nombreNuevo" required /></div>
+				<input type="hidden" id="idR" name="idR" value="<?php echo $form['idR']; ?>"/>
+			</div>
+			<?php
+		break;
+		default:
+		break;
+	}
+	?>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<input type="hidden" name="idEmp" value="<?php echo $_SESSION['idEmpresa']; ?>"/>
+				<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
+			</div>
+			<div class="col-md-4">
+				<input type="button" name="back" onclick="history.back();" value="Regresar">
+			</div>
 		</div>
-		<div>
-			<label>Nombre del responsable: </label>
-			<div><input type="text" id="responsableN" name="responsableN"/></div>
-		</div>
-		<?php
-	break;
-	case 'Editar':
-		?>
-		<div>
-			<label>Nombre del responsable: </label>
-			<div><label id="responsable" name="resposable"><?php echo $form['nombreResponsable']; ?></label></div>
-		</div>
-		<div>
-			<label>Nuevo nombre del responsable: </label>
-			<div><input type="text" id="nombreNuevo" name="nombreNuevo" required /></div>
-			<input type="hidden" id="idR" name="idR" value="<?php echo $form['idR']; ?>"/>
-		</div>
-		<?php
-	break;
-	default:
-	break;
-}
-?>
-	<div>
-		<label></label>
-		<div style="padding-top:15px;">
-			<input type="hidden" name="idEmp" value="<?php echo $_SESSION['idEmpresa']; ?>"/>
-			<input type="button" name="back" onclick="history.back();" value="Regresar">
-			<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
-		</div>
-	</div>	
-</form>
+	</form>
+</div>
