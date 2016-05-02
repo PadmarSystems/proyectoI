@@ -61,3 +61,17 @@ function filtrar_incidencias(empresa,ubicacion,responsable,puesto,tipoIn,fechai,
         }
     });
 }
+
+function cambiar_estadoincidencia(id,valor){
+    var stt = 0;
+    if (valor == 0) {
+        stt = 1;
+    }
+    var res = id.split("-");
+    var str = "reportes/controlador_reporte.php";
+    var params = {a:'cambiar_estatus', idIncidencia: res[1], estatus: stt};
+
+    $('#'+id).val(stt);
+
+    send_ajax_form(str, params);
+}

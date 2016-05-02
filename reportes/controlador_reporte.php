@@ -105,16 +105,24 @@ if(isset($_POST['a'])){
 			    		<td><?php echo $row['tipoIncidencia']; ?></td>
 			    		<td><?php echo $row['fechaInicio']; ?></td>
 			    		<td><?php echo $row['fechaFin']; ?></td>
+			    		<td>
+                            <label class="switch">
+                                <input class="switch-input" type="checkbox" id="chck-<?php echo $row['idIncidencia']; ?>" <?php echo $checked; ?> value="<?php echo $row['estatus']; ?>" onchange="cambiar_estadoincidencia(this.id,this.value);"/>
+                                <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span>
+                            </label>
+                        </td>
 			    	</tr>			
 					<?php
 				}
 			}
 
-			break;
-		
+		break;
+		case 'cambiar_estatus':
+			$actualizar= $objincidencia->actualizarincidencia(array('estatus'=>$_POST['estatus']),$_POST['idIncidencia']);
+		break;
 		default:
 			header('');
-			break;
+		break;
 	}
 }else{
 	header('Location: ../view.php?mod=notfound');

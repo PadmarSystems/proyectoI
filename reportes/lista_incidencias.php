@@ -105,6 +105,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
         </div>
     </div>
 </div>
+
 <div style="margin-top:15px;">
     <table class='listado'>
         <thead>
@@ -120,6 +121,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                 <th>Tipo de incidencia</th>
                 <th>Fecha de inicio</th>
                 <th>Fecha final</th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="tabla">
@@ -152,6 +154,18 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                         <td><?php echo $row['tipoIncidencia']; ?></td>
                         <td><?php echo $row['fechaInicio']; ?></td>
                         <td><?php echo $row['fechaFin']; ?></td>
+                        <?php
+                        $checked = "";
+                        if($row['estatus'] == 1){
+                            $checked = "checked";
+                        }
+                        ?>
+                        <td>
+                            <label class="switch">
+                                <input class="switch-input" type="checkbox" id="chck-<?php echo $row['idIncidencia']; ?>" <?php echo $checked; ?> value="<?php echo $row['estatus']; ?>" onchange="cambiar_estadoincidencia(this.id,this.value);"/>
+                                <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span>
+                            </label>
+                        </td>
                     </tr>
             <?php }} ?>
         </tbody>

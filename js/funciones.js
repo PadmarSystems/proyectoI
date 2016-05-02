@@ -90,6 +90,7 @@ function send_ajax_form(str, params){
         }
     });
 }
+
 function paginate(id) {
 	$('table'+id).each(function(i,e) {
 		if(!$(this).hasClass("destroy")) {

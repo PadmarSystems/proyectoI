@@ -20,6 +20,11 @@ class incidencia extends SafeMySQL {
         if($result) return true;
     }
 
+    function actualizarincidencia($datos,$id){
+        $result = $this->con->query("UPDATE incidencias SET ?u  WHERE idIncidencia = ?i", $datos,$id);
+        if($result) return true;
+    }
+
     function mostrar_incidencias($params="incidencias.*", $where=""){
         $sql = "SELECT $params,nombreEmpresa,nombreUsuario,nombreEmp,nombreResponsable,nombrePuesto,nombreUbicacion,tipoIncidencia
 			FROM `incidencias`
