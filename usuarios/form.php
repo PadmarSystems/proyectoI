@@ -47,36 +47,42 @@ if (isset($_GET['stt'])) {
 	});
 </script>
 <h1>Nuevo usuario</h1>
-<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-<form action="usuarios/controlador.php" method="post">
-	<div>
-		<label>Correo *:</label>
-		<div><input type="email" name="correo" id="correo" value="<?php echo $form['correo']; ?>"></div>
-	</div>
-	<div>
-		<label>Nombre de usuario:</label>
-		<div><input type="text" name="usuario" id="usuario" pattern"^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" value="<?php echo $form['usuario']; ?>" required></div>
-	</div>
-	<div>
-	<label>Empresa:</label>
-		<div>
-			<select name="empresa" id="idEmpresa">
-	        <?php 	foreach ($empresas as $empresa) {	?>
-	            <option value="<?php echo $empresa['idEmpresa']; ?>"><?php echo $empresa['nombreEmpresa']; ?></option>
-	    	<?php 	}	?>
-	        </select>
+<div class="row">
+	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
+	<form action="usuarios/controlador.php" method="post" class="col-md-8 group">
+		<div class="row">
+			<label class="col-md-4">Correo *:</label>
+			<div class="col-md-8"><input type="email" name="correo" id="correo" value="<?php echo $form['correo']; ?>"></div>
 		</div>
-	</div>
-	<div>
-		<?php  if($_GET['ac']=="Editar"){ $required ="required"; } ?>
-		<label>Contraseña: (Sugerido: <?php echo $form['clave'];  ?> Solo ingrese la contraseña si desea cambiarlo de lo contrario deje el campo vacio  )</label>
-		<div><input type="password" name="pass" id="pass" <?php echo $required; ?>></div>
-	</div>
-	<div>
-		<label></label>
-		<?php if($_GET['ac']=="editar"){ ?>
-		<input type="hidden" id="idUsuario" name="idUsuario" value="<?php echo $form['idUsuario']; ?>" required readonly/>
-		<?php } ?>
-		<div style="padding-top:15px;"><input type="submit" name="a" value="<?php echo $form['accion']; ?>"></div>
-	</div>	
-</form>
+		<div class="row">
+			<label class="col-md-4">Nombre de usuario:</label>
+			<div class="col-md-8"><input type="text" name="usuario" id="usuario" pattern"^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" value="<?php echo $form['usuario']; ?>" required></div>
+		</div>
+		<div class="row">
+			<label class="col-md-4">Empresa:</label>
+			<div class="col-md-8">
+				<select name="empresa" id="idEmpresa">
+		        <?php 	foreach ($empresas as $empresa) {	?>
+		            <option value="<?php echo $empresa['idEmpresa']; ?>"><?php echo $empresa['nombreEmpresa']; ?></option>
+		    	<?php 	}	?>
+		        </select>
+			</div>
+		</div>
+		<div class="row">
+			<?php  if($_GET['ac']=="Editar"){ $required ="required"; } ?>
+			<label class="col-md-4">Contraseña:</label>
+			<div class="col-md-8">
+				<input type="password" name="pass" placeholder="Sugerido <?php echo $form['clave']; ?>" id="pass" <?php echo $required; ?>>
+				<p style="margin-bottom:0;"><i>Solo ingrese la contraseña si desea cambiar a la sugerida, de lo contrario deje el campo vacio</i></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-4">
+			<?php if($_GET['ac']=="editar"){ ?>
+			<input type="hidden" id="idUsuario" name="idUsuario" value="<?php echo $form['idUsuario']; ?>" required readonly />
+			<?php } ?>
+			<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
+			</div>
+		</div>
+	</form>
+</div>

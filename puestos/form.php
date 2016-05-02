@@ -30,48 +30,50 @@ if (isset($_GET['stt'])) {
 	}
 }
 ?>
-<h2><?php echo $form['accion']; ?> puesto</h2>
-<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-
-<form action="puestos/controlador.php" method="post">
-<?php 
-switch ($form['accion']) {
-	case 'Registrar':
-		?>
-		<p>Aquí puede agregar dos puestos a la vez. Tiene que llenar por lo menos un campo.</p>
-		<div>
-			<label>Primer puesto: </label>
-			<div><input type="text" id="puesto1" name="puesto1" required /></div>
+<h1><?php echo $form['accion']; ?> Puesto</h1>
+<div class="row">
+	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
+	<form action="puestos/controlador.php" method="post" class="col-md-8 group">
+	<?php
+	switch ($form['accion']) {
+		case 'Registrar':
+			?>
+			<p>Aquí puede agregar dos puestos a la vez. Tiene que llenar por lo menos un campo.</p>
+			<div class="row">
+				<label class="col-md-4">Primer puesto: </label>
+				<div class="col-md-8"><input type="text" id="puesto1" name="puesto1" required /></div>
+			</div>
+			<div class="row">
+				<label class="col-md-4">Segundo puesto: </label>
+				<div class="col-md-8"><input type="text" id="puesto2" name="puesto2"/></div>
+			</div>
+			<?php
+		break;
+		case 'Editar':
+			?>
+			<div class="row">
+				<label class="col-md-4">Nombre del puesto: </label>
+				<div class="col-md-8"><label id="puesto" name="puesto"><?php echo $form['puesto']; ?></label></div>
+			</div>
+			<div class="row">
+				<label class="col-md-4">Nuevo nombre del puesto: </label>
+				<div class="col-md-8"><input type="text" id="nombreNuevo" name="nombreNuevo" required /></div>
+				<input type="hidden" id="idP" name="idP" value="<?php echo $form['idP']; ?>"/>
+			</div>
+			<?php
+		break;
+		default:
+		break;
+	}
+	?>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<input type="hidden" name="idEmp" value="<?php echo $form['empresa']; ?>"/>
+				<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
+			</div>
+			<div class="col-md-4">
+				<input type="button" onclick="history.back();" value="Regresar">
+			</div>
 		</div>
-		<div>
-			<label>Segundo puesto: </label>
-			<div><input type="text" id="puesto2" name="puesto2"/></div>
-		</div>
-		<?php
-	break;
-	case 'Editar':
-		?>
-		<div>
-			<label>Nombre del puesto: </label>
-			<div><label id="puesto" name="puesto"><?php echo $form['puesto']; ?></label></div>
-		</div>
-		<div>
-			<label>Nuevo nombre del puesto: </label>
-			<div><input type="text" id="nombreNuevo" name="nombreNuevo" required /></div>
-			<input type="hidden" id="idP" name="idP" value="<?php echo $form['idP']; ?>"/>
-		</div>
-		<?php
-	break;
-	default:
-	break;
-}
-?>
-	<div>
-		<label></label>
-		<div style="padding-top:15px;">
-			<input type="hidden" name="idEmp" value="<?php echo $form['empresa']; ?>"/>
-			<input type="button" onclick="history.back();" value="Regresar">
-			<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
-		</div>
-	</div>	
-</form>
+	</form>
+</div>

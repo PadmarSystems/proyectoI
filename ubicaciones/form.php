@@ -32,52 +32,54 @@ if (isset($_GET['stt'])) {
 }
 
 ?>
-<h2><?php echo $form['accion']; ?> ubicación</h2>
-<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-
-<form action="ubicaciones/controlador.php" method="post">
-<?php 
-switch ($form['accion']) {
-	case 'Registrar':
-		?>
-		<p>Aquí puede agregar hasta tres ubicaciones o proyectos a la vez. Tiene que llenar por lo menos un campo.</p>
-		<div>
-			<label>Primera ubicación: </label>
-			<div><input type="text" id="ubicacion1" name="ubicacion1" required /></div>
+<h1><?php echo $form['accion']; ?> ubicación</h1>
+<div class="row">
+	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
+	<form action="ubicaciones/controlador.php" method="post" class="col-md-8 group">
+	<?php
+	switch ($form['accion']) {
+		case 'Registrar':
+			?>
+			<p>Aquí puede agregar hasta tres ubicaciones o proyectos a la vez. Tiene que llenar por lo menos un campo.</p>
+			<div class="row">
+				<label class="col-md-4">Primera ubicación: </label>
+				<div class="col-md-8"><input type="text" id="ubicacion1" name="ubicacion1" required /></div>
+			</div>
+			<div class="row">
+				<label class="col-md-4">Segunda ubicación: </label>
+				<div class="col-md-8"><input type="text" id="ubicacion2" name="ubicacion2"/></div>
+			</div>
+			<div class="row">
+				<label class="col-md-4">Tercera ubicación: </label>
+				<div class="col-md-8"><input type="text" id="ubicacion3" name="ubicacion3"/></div>
+			</div>
+			<?php
+		break;
+		case 'Editar':
+			?>
+			<div class="row">
+				<label class="col-md-4">Nombre de la ubicación: </label>
+				<div class="col-md-8"><label id="ubicacion"><?php echo $form['ubicacion']; ?></label></div>
+			</div>
+			<div class="row">
+				<label class="col-md-4">Nuevo nombre de la ubicación: </label>
+				<div class="col-md-8"><input type="text" id="nombreNuevo" name="nombreNuevo" required /></div>
+				<input type="hidden" id="idU" name="idU" value="<?php echo $form['idU']; ?>"/>
+			</div>
+			<?php
+		break;
+		default:
+		break;
+	}
+	?>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<input type="hidden" name="idEmp" value="<?php echo $_SESSION['idEmpresa']; ?>"/>
+				<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
+			</div>
+			<div class="col-md-4">
+				<input type="button" name="back" onclick="history.back();" value="Regresar">
+			</div>
 		</div>
-		<div>
-			<label>Segunda ubicación: </label>
-			<div><input type="text" id="ubicacion2" name="ubicacion2"/></div>
-		</div>
-		<div>
-			<label>Tercera ubicación: </label>
-			<div><input type="text" id="ubicacion3" name="ubicacion3"/></div>
-		</div>
-		<?php
-	break;
-	case 'Editar':
-		?>
-		<div>
-			<label>Nombre de la ubicación: </label>
-			<div><label id="ubicacion"><?php echo $form['ubicacion']; ?></label></div>
-		</div>
-		<div>
-			<label>Nuevo nombre de la ubicación: </label>
-			<div><input type="text" id="nombreNuevo" name="nombreNuevo" required /></div>
-			<input type="hidden" id="idU" name="idU" value="<?php echo $form['idU']; ?>"/>
-		</div>
-		<?php
-	break;
-	default:
-	break;
-}
-?>
-	<div>
-		<label></label>
-		<div style="padding-top:15px;">
-			<input type="hidden" name="idEmp" value="<?php echo $_SESSION['idEmpresa']; ?>"/>
-			<input type="button" name="back" onclick="history.back();" value="Regresar">
-			<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
-		</div>
-	</div>	
-</form>
+	</form>
+</div>

@@ -202,6 +202,8 @@ nav .logo {
 	color: #ce523c;
 }
 .sidebar ul li > a > i {
+	width: 16px;
+	text-align: center;
 	margin-right: 10px;
 }
 .sidebar.min {
@@ -295,12 +297,17 @@ table.listado tbody tr.even {
 	background-color: #f9f9f9;
 }
 table.listado td.actions {
+	width: 10%;
 	white-space: nowrap;
 }
 table.listado td.actions > a {
 	color: #777;
 	margin: 0 3px;
 	cursor: pointer;
+}
+table.listado td.actions > a > i {
+	font-size: 120%;
+	vertical-align: middle;
 }
 table.listado td.actions > a:hover {
 	color: #ce523c;

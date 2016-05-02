@@ -10,7 +10,7 @@ $usuarios = $usuario->mostrar_usuarios('*',$where);
 			var str = 'usuarios/controlador.php';
 			var params = {a: 'eliminar',id: $(this).parents('tr').attr("id")};
 			send_ajax_form(str,params);
-			
+
 		    $(".listado").DataTable()
 		        .row( $(this).parents('tr') )
 		        .remove()
@@ -18,29 +18,33 @@ $usuarios = $usuario->mostrar_usuarios('*',$where);
 		} );
 	});
 </script>
-<h2>Usuarios </h2>
-<br>
-<table class='listado'>
-	<thead>
-		<tr>
-			<th>Nombre</th>
-			<th>Usuario</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php
-		if (count($usuarios) > 0) {
-			foreach ($usuarios as $row) {
-		?>
-		<tr id="<?php echo $row['idUsuario']; ?>">
-    		<td><?php echo $row['nombreUsuario']; ?></td>
-    		<td><?php echo $row['email']; ?></td>
-    		<td>
-    			<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" onclick="goto('form&ac=editar&id=<?php echo $row["idUsuario"]; ?>','usuarios')"></i>
-    			&nbsp &nbsp <i class="fa fa-trash-o" aria-hidden="true" title="Eliminar" style="cursor:pointer"></i>
-    		</td>
-    	</tr>
-		<?php } } ?>
-	</tbody>
-</table>
+<h1>Usuarios</h1>
+<ul class="submenu">
+    <li><a href="view.php?com=usuarios&mod=form&ac=nuevo"><i class="fa fa-plus"></i>Nuevo Usuario</a></li>
+</ul>
+<div>
+	<table class='listado'>
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Usuario</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+			if (count($usuarios) > 0) {
+				foreach ($usuarios as $row) {
+			?>
+			<tr id="<?php echo $row['idUsuario']; ?>">
+	    		<td><?php echo $row['nombreUsuario']; ?></td>
+	    		<td><?php echo $row['email']; ?></td>
+	    		<td class="actions">
+	    			<a title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idUsuario"]; ?>','usuarios')"><i class="fa fa-pencil-square-o"></i></a>
+	    			<a title="Eliminar"><i class="fa fa-trash-o"></i></a>
+	    		</td>
+	    	</tr>
+			<?php } } ?>
+		</tbody>
+	</table>
+</div>
