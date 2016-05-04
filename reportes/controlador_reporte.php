@@ -96,7 +96,7 @@ if(isset($_POST['a'])){
 					<tr id="<?php echo $row['idIncidencia']; ?>">
 			    		<td><?php echo $row['folio']; ?></td>
 			    		<td><?php echo $row['nombreEmpresa']; ?></td>
-			    		<td><?php echo $row['nombreResponsable']; ?></td>
+			    		<td><?php echo str_replace('--',' ',$row['nombreResponsable']); ?></td>
 			    		<td><?php echo $row['nombreUbicacion']; ?></td>
 			    		<td><?php echo $emp[0]; ?></td>
 			    		<td><?php echo $emp[1]; ?></td>

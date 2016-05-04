@@ -37,7 +37,7 @@ $empleados = $empleado->mostrar_empleados();
                                 <div class="col-md-5">
                                     <ul>
                                         <li><b>Ubicación:</b></br><?php echo $row['nombreUbicacion']; ?></li>
-                                        <li><b>Responsable:</b></br><?php echo $row['nombreResponsable']; ?></li>
+                                        <li><b>Responsable:</b></br><?php echo str_replace('--',' ',$row['nombreResponsable']); ?></li>
                                     </ul>
                                 </div>
                                 <div class="col-md-3 btns">
