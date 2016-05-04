@@ -1,5 +1,4 @@
 <?php
-session_start();
 require('../clases/empleado.class.php');
 $objemp = new empleado;
 $idEmp = '1'; // =$_SESSION['empresa'];
@@ -78,15 +77,7 @@ if(isset($_POST)){
 		switch ($accion){
 			case 'Registrar':
 				//$dCreate = date('Y-m-d');
-				if($_SESSION['plan'] == 1){
-					$ext = " WHERE empleados.idEmpresa=" . $_SESSION['idEmpresa'];
-					$empleados = $objemp->mostrar_empleados("empleados.*",$ext);
-					if (count($empleados) >= 3) {
-						$stt = "limit-user";
-						header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt='.$stt);
-					}
-				}
-
+				
 				$empleadoValido = $objemp->valida_empleado($nombre);
 				if($empleadoValido){
 					$array = array('idEmpresa'=>$_POST['idEmpresaEmp'],'nombreEmp'=>$nombre,'telEmp'=>$_POST['telefono'],'emailEmp'=>$_POST['correo'],'tipoNomina'=>$_POST['tipoNomina'],'idResponsable'=>$_POST['responsable'],'idUbicacion'=>$_POST['ubicacion'],'idPuesto'=>$_POST['puesto'],'contactoAccidente'=>$_POST['nombreAa'],'numeroAccidente'=>$_POST['telefonoAa'],'fotoEmp'=>$rutaFoto);
@@ -105,6 +96,10 @@ if(isset($_POST)){
 				header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt='.$stt);
 				// guardar saveArray
 				//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=success');
+			break;
+			case 'Ver':
+				print_r($_POST);
+				header('Location: ../view.php?com=empleados&mod=form&ac=editar&id='.$_POST['idEmpleado']);
 			break;
 			case 'Editar';
 
@@ -157,7 +152,7 @@ if(isset($_POST)){
 
 				if($empleadoValido && count($array) > 0){
 					$array['fechaActualizacion'] = date("Y-m-d H:i:s");
-					$actualiza = $objemp->actualizarempleado($array,$_POST['idEmpleado']);
+					$actualiza = $objemp->actualizarempleado($array,$$_POST['idEmpleado']);
 					if($actualiza){
 						$stt = "esuccess";
 					}else{
