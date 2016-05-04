@@ -12,7 +12,7 @@ if(isset($_POST)){
 			$dCreate = date('Y-m-d H:i:s');
 			if ( $_POST['responsableSel'] == '0' || $_POST['responsableSel'] == 0){
 				if ( $_POST['responsableN'] == ''){
-					echo "eligió 'nuevo' y no agregó responsables.";
+					//echo "eligió 'nuevo' y no agregó responsables.";
 					header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=error1');
 				} else {
 					$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$_POST['responsableN']);
