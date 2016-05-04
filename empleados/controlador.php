@@ -157,7 +157,7 @@ if(isset($_POST)){
 
 				if($empleadoValido && count($array) > 0){
 					$array['fechaActualizacion'] = date("Y-m-d H:i:s");
-					$actualiza = $objemp->actualizarempleado($array,$$_POST['idEmpleado']);
+					$actualiza = $objemp->actualizarempleado($array,$_POST['idEmpleado']);
 					if($actualiza){
 						$stt = "esuccess";
 					}else{
