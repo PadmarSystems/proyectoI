@@ -39,13 +39,13 @@ class empleado extends SafeMySQL {
 				 WHERE idEmpleado=?i ORDER by empleados.nombreEmp",$id);
 	}
 
-	function mostrar_empleados($params="*", $where=""){
-		$sql = "SELECT empleados.*, nombrePuesto,nombreUbicacion,nombreResponsable,nombreEmpresa
+	function mostrar_empleados($params="empleados.*", $where=""){
+		$sql = "SELECT $params, nombrePuesto,nombreUbicacion,nombreResponsable,nombreEmpresa
 				FROM `empleados`
 				inner join empresas ON empleados.idEmpresa=empresas.idEmpresa
 				LEFT JOIN puestos ON empleados.idPuesto=puestos.idPuesto
 				LEFT JOIN ubicaciones ON empleados.idUbicacion = ubicaciones.idUbicacion
-				LEFT JOIN responsables ON empleados.idResponsable=responsables.idResponsable 
+				LEFT JOIN responsables ON empleados.idResponsable=responsables.idResponsable $where
 				ORDER by empleados.nombreEmp";
 		return $this->con->getAll($sql);
 	}

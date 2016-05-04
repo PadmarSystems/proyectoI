@@ -1,7 +1,8 @@
 <?php
+session_start();
 require('../clases/ubicacion.class.php');
 $objUbic = new ubicacion;
-
+$stt = "";
 if(isset($_POST)){
 	$idEmp = $_POST['idEmp'];
 	$accion=$_POST['a'];
@@ -22,16 +23,23 @@ if(isset($_POST)){
 					'idEmpresa'=>$idEmp,
 					'nombreUbicacion'=>$ubc
 				);
-				echo "<pre>"; print_r($saveArray); echo "</pre>";
+				//echo "<pre>"; print_r($saveArray); echo "</pre>";
+				if($_SESSION['plan'] == 1){
+					$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'];
+					$ubicacionesnum = $objUbic->mostrar_ubicaciones('*',$where);
+					if (count($ubicacionesnum) >= 2) {
+						$stt = "limit-user";
+						header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt='.$stt);
+					}
+				}
+
 				if ($objUbic->insertarUbicacion($saveArray)){
-					echo "ya";
-					header('Location: ../view.php?com=ubicaciones&mod=form&ac=nuevo&stt=success');
+					$stt = "success";
 				} else {
-					echo "no guardó";
-					header('Location: ../view.php?com=ubicaciones&mod=form&ac=nuevo&stt=error');
+					$stt="error";
 				}
 			}
-			
+			header('Location: ../view.php?com=ubicaciones&mod=form&ac=nuevo&stt='.$stt);
 		break;
 		case 'Editar';
 			$nomUbicacion = $objUbic->getUbicacionxID($_POST['idU']);

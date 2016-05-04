@@ -1,8 +1,9 @@
 <?php
+session_start();
 require('../clases/puesto.class.php');
 $objPuesto = new puesto;
 $idEmp = $_POST['idEmp'];
-
+$stt = "";
 if(isset($_POST)){
 	$accion=$_POST['a'];
 	switch ($accion){
@@ -18,15 +19,23 @@ if(isset($_POST)){
 					'idEmpresa'=>$idEmp,
 					'nombrePuesto'=>$pues
 				);
-				echo "<pre>"; print_r($saveArray); echo "</pre>";
+				//echo "<pre>"; print_r($saveArray); echo "</pre>";
+				if($_SESSION['plan'] == 1){
+					$where = "WHERE puestos.idEmpresa= " . $_SESSION['idEmpresa'];
+					$puestosnum = $objPuesto->mostrar_puestos('puestos.*,nombreEmpresa',$where);
+					if (count($puestosnum) >= 3) {
+						$stt = "limit-user";
+						header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt='.$stt);
+					}
+				}
+
 				if ($objPuesto->nuevoPuesto($saveArray)){
-					echo "guardó info";
-					header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt=success');
+					$stt = "success";
 				} else {
-					echo "no guardó";
-					header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt=error');
+					$stt = "error";	
 				}
 			}
+			header('Location: ../view.php?com=puestos&mod=form&ac=nuevo&stt='.$stt);
 		break;
 		case 'Editar';
 			$nomPuesto = $objPuesto->verPuestoxID($_POST['idP']);

@@ -16,7 +16,15 @@ if(isset($_POST)){
 					header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=error1');
 				} else {
 					$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$_POST['responsableN']);
-					echo "<pre>"; print_r($saveArray); echo "</pre>";
+					//echo "<pre>"; print_r($saveArray); echo "</pre>";
+					if($_SESSION['plan'] == 1){
+						$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'] . " ";
+						$responsablesnum = $objRes->mostrar_responsables('*',$where);
+						if (count($responsablesnum) >= 2) {
+							$stt = "limit-user";
+							header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt='.$stt);
+						}
+					}
 					if ($objRes->insertarResponsable($saveArray)){
 						header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=success');
 					} else {
@@ -25,9 +33,17 @@ if(isset($_POST)){
 				}
 			} else {
 				$nameEmp = $objEmp -> verEmpleadoxID($_POST['responsableSel']);
-				echo $nameEmp['nombreEmp'];
+				//echo $nameEmp['nombreEmp'];
 				$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$nameEmp['nombreEmp']);
-				echo "<pre>"; print_r($saveArray); echo "</pre>";
+				//echo "<pre>"; print_r($saveArray); echo "</pre>";
+				if($_SESSION['plan'] == 1){
+					$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'] . " ";
+					$responsablesnum = $objRes->mostrar_responsables('*',$where);
+					if (count($responsablesnum) >= 2) {
+						$stt = "limit-user";
+						header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt='.$stt);
+					}
+				}
 				if ($objRes->insertarResponsable($saveArray)){
 					header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=success');
 				} else {

@@ -40,6 +40,7 @@ if (isset($_GET['ac'])) {
 
 if (isset($_GET['stt'])) {
 	$stt = $_GET['stt'];
+
 	if ($stt == "error") {
 		$msg = "No se pudo llevar a cabo la petición deseada.";
 		if ( isset($_GET['img']) && ($_GET['img'] == 't') ){
@@ -48,6 +49,28 @@ if (isset($_GET['stt'])) {
 		if ( isset($_GET['img']) && ($_GET['img'] == 'z') ){
 			$msg = $msg.'<br>El archivo es mayor que 200KB. Reduzca la imagen o suba una más pequeña.';
 		}
+	}
+
+	if ($stt == "limit-user") {
+		?>
+		<script type="text/javascript">
+			$(function() {
+				$("#dialog-message").dialog({
+					modal: true,
+					title: 'Aviso',
+					draggable: false,
+					resizable: false,
+					width: 'auto',
+					closeText: '',
+					buttons: {
+						Ok: function() {
+							$(this).dialog('destroy');
+						}
+					}
+				});
+    		});
+		</script>
+		<?php
 	}
 
 	if ($stt == "success") {
@@ -178,4 +201,8 @@ if (isset($_GET['stt'])) {
 			</div>
 		</div>
 	</form>
+</div>
+<div id="dialog-message" style="display:none;">
+	<h3>Version Basica</h3>
+	<p>Añade todos los empleados que requieras</p>
 </div>

@@ -15,6 +15,9 @@ if (isset($_POST) && !isset($_SESSION['logged'])) {
         $_SESSION['nombre'] = $row['nombreUsuario'];
         $_SESSION['idEmpresa'] = $row['idEmpresa'];
         $_SESSION['empresa'] = $row['aliasEmpresa'];
+        $_SESSION['rol'] = $row['idRol'];
+        $_SESSION['perfil'] = $row['idPerfil'];
+        $_SESSION['plan'] = $row['idPlan'];
         $_SESSION['logged'] = TRUE;
         $_SESSION['caducidad'] = date('H:i:s', strtotime($horaActual) + 600);
 
@@ -92,6 +95,7 @@ if (isset($_GET['mod'])) {
             <li><a onclick="goto('seguimiento','incidencias')"><i class="fa fa-calendar"></i>Incidencias</a></li>
             <li><a onclick="goto('lista_incidencias','reportes')"><i class="fa fa-file-text"></i>Reportes</a></li>
             <!-- Admin -->
+            <?php if($_SESSION['rol']==1 || $_SESSION['perfil']==1){ ?>
             <li><span>Administrar</span></li>
             <li><a href="view.php?com=empresa&mod=form&ac=editar"><i class="fa fa-briefcase"></i>Mi Empresa</a></li>
             <li><a href="view.php?com=empresa&mod=listar"><i class="fa fa-building"></i>Empresas</a></li>
@@ -99,6 +103,7 @@ if (isset($_GET['mod'])) {
 			<li><a href="view.php?com=ubicaciones&mod=listar"><i class="fa fa-map-marker"></i>Ubicaciones</a></li>
 			<li><a href="view.php?com=responsables&mod=listar"><i class="fa fa-male"></i>Responsables</a></li>
 			<li><a href="view.php?com=usuarios&mod=listar"><i class="fa fa-users"></i>Usuarios</a></li>
+            <?php } ?>
         </ul>
     </section>
     <section class="layout-content">
