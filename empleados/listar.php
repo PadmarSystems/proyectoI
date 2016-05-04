@@ -33,7 +33,7 @@ $empleados = $objemp->mostrar_empleados();
 				<th>Puesto</th>
 				<th>Telefono</th>
 				<th>Tipo de nómina</th>
-				<th></th>
+				<th>Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -78,6 +78,7 @@ $empleados = $objemp->mostrar_empleados();
 	    		}
 	    		//echo $row['tipoNomina']; ?></td>
 				<td class="actions">
+					<a aria-hidden="true" title="Ver" onclick="goto('form&ac=ver&id=<?php echo $row["idEmpleado"]; ?>','empleados')"><i class="fa fa-eye"></i></a>
 					<a aria-hidden="true" title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpleado"]; ?>','empleados')"><i class="fa fa-pencil-square-o"></i></a>
 					<a aria-hidden="true" title="Eliminar"><i class="fa fa-trash-o"></i></a>
 	    		</td>

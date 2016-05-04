@@ -1,5 +1,5 @@
 <?php
-//error_reporting(-1);
+error_reporting(-1);
 session_start();
 require('../clases/incidencia.class.php');
 $objincidencia = new incidencia;
@@ -106,6 +106,8 @@ if(isset($_POST['a'])){
 								<li><b>Responsable:</b> <?php echo $row['nombreResponsable']; ?></li>
 								<li><b>Teléfono:</b> <?php echo $row['telEmp']; ?></li>
 								<li><b>Correo Electrónico:</b> <?php echo $row['emailEmp']; ?></li>
+								<li><b>En caso de accidente llamar a:</b> <?php echo $row['contactoAccidente']; ?></li>
+								<li><b>al número:</b> <?php echo $row['numeroAccidente']; ?></li>
 							</ul>
 						</div>
 					</div>
