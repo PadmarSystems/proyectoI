@@ -120,7 +120,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                 <th>Puesto</th>
                 <th>Tipo de incidencia</th>
                 <th>Fecha de inicio</th>
-                <th>Fecha final</th>
+                <!--<th>Fecha final</th>-->
                 <th></th>
             </tr>
         </thead>
@@ -153,7 +153,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                         <td><?php echo $row['nombrePuesto']; ?></td>
                         <td><?php echo $row['tipoIncidencia']; ?></td>
                         <td><?php echo $row['fechaInicio']; ?></td>
-                        <td><?php echo $row['fechaFin']; ?></td>
+                        <!--<td><?php echo $row['fechaFin']; ?></td>-->
                         <?php
                         $checked = "";
                         if($row['estatus'] == 1){
