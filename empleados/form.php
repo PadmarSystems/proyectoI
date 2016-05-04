@@ -179,11 +179,15 @@ if (isset($_GET['stt'])) {
 			<div class="col-md-8"><input type="text" name="telefonoAa" <?php echo $readonly; ?> id="telefonoAa" pattern="\d{10}" value="<?php echo $form['telAa']; ?>"/></div>
 		</div>
 		<div class="row">
-			<?php if($_GET['ac']=="editar" || $_GET['ac']=="ver"){ ?>
+			<?php if($_GET['ac']=="editar"){ ?>
 			<input type="hidden" id="idEmpleado" name="idEmpleado" value="<?php echo $form['idEmpleado']; ?>" required readonly/>
 			<?php } ?>
 			<div class="col-md-4 col-md-offset-4">
-				<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
+				<?php if($_GET['ac']=="ver"){ ?>
+					<input type="button" name="a" value="Editar" onclick="goto('form&ac=editar&id=<?php echo $form["idEmpleado"]; ?>','empleados');">
+				<?php }else{ ?>
+					<input type="submit" name="a" value="<?php echo $form['accion']; ?>">
+				<?php } ?>
 			</div>
 			<div class="col-md-4">
 				<input type="button" name="back" onclick="history.back();" value="Regresar">
