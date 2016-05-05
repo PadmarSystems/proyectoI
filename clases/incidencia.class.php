@@ -20,6 +20,21 @@ class incidencia extends SafeMySQL {
         if($result) return true;
     }
 
+    function insertartipo($datos){
+        $result = $this->con->query("INSERT INTO tipo_incidencia SET ?u", $datos);
+        if($result) return true;
+    }
+
+    function actualizartipo($datos,$id){
+        $result = $this->con->query("UPDATE tipo_incidencia SET ?u  WHERE idTipo = ?i", $datos,$id);
+        if($result) return true;
+    }
+
+    function eliminartipo($id){
+        $result = $this->con->query("DELETE FROM tipo_incidencia WHERE idTipo = ?i",$id);
+        if($result) return true;
+    }
+
     function actualizarincidencia($datos,$id){
         $result = $this->con->query("UPDATE incidencias SET ?u  WHERE idIncidencia = ?i", $datos,$id);
         if($result) return true;
@@ -45,6 +60,10 @@ class incidencia extends SafeMySQL {
     function mostrar_tipo_incidencias($params="*", $where=""){
         $sql = "SELECT $params FROM tipo_incidencia $where";
         return $this->con->getAll($sql);
+    }
+
+    function mostrar_tipo_incidencia($id){
+        return $this->con->getRow("SELECT * FROM `tipo_incidencia` WHERE idTipo=?i",$id);
     }
 
     function mostrar_empresas($params="*", $where=""){

@@ -103,6 +103,7 @@ if (isset($_GET['mod'])) {
 			<li><a href="view.php?com=ubicaciones&mod=listar"><i class="fa fa-map-marker"></i>Ubicaciones</a></li>
 			<li><a href="view.php?com=responsables&mod=listar"><i class="fa fa-male"></i>Responsables</a></li>
 			<li><a href="view.php?com=usuarios&mod=listar"><i class="fa fa-users"></i>Usuarios</a></li>
+            <li><a href="view.php?com=tiposincidencias&mod=listar"><i class="fa fa-calendar"></i>Tipos de incidencias</a></li>
             <?php } ?>
         </ul>
     </section>
