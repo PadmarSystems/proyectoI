@@ -110,3 +110,4 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 		</div>
 	</form>
 </div>
+<div id="dialog-message" style="display:none;"></div>

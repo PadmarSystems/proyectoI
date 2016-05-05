@@ -30,7 +30,7 @@ if(isset($_POST['a'])){
 			$row = $empleado->mostrar_empleado($_POST['empleado']);
 
 			if (empty($row)) {
-				echo 'nf_empleado';
+				echo 'Error no se encontro el empleado solicitado.';
 				return;
 			}
 
@@ -45,9 +45,9 @@ if(isset($_POST['a'])){
 					unset($array);
 				}
 
-				echo "success";
+				echo "La incidencia se registro correctamente.";
 			}else{
-				echo "error";
+				echo "No se inserto la incidencia.";
 			}
 			break;
 		case 'Detalle':

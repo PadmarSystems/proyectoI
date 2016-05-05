@@ -5,7 +5,20 @@ function post_form(){
 		type: "POST",
 		data: formulario+"&a=crear",
 		success: function(data){
-			console.log(data);
+			$("#dialog-message").empty().append(data).dialog({
+				modal: true,
+				title: 'Mensaje',
+				draggable: false,
+				resizable: false,
+				width: 'auto',
+				closeText: '',
+				buttons: {
+					Ok: function() {
+						$(this).dialog('destroy');
+						window.location.replace("view.php?com=incidencias&mod=seguimiento");
+					}
+				}
+			});
 		}
 	});
 }
