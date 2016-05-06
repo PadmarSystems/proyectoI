@@ -105,12 +105,19 @@ if(isset($_POST['a'])){
 			    		<td><?php echo $row['tipoIncidencia']; ?></td>
 			    		<td><?php echo $row['fechaInicio']; ?></td>
 			    		<!--<td><?php echo $row['fechaFin']; ?></td>-->
+			    		<?php
+                        $checked = "";
+                        if($row['estatus'] == 1){
+                            $checked = "checked";
+                        }
+                        ?>
 			    		<td>
                             <label class="switch">
                                 <input class="switch-input" type="checkbox" id="chck-<?php echo $row['idIncidencia']; ?>" <?php echo $checked; ?> value="<?php echo $row['estatus']; ?>" onchange="cambiar_estadoincidencia(this.id,this.value);"/>
                                 <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span>
                             </label>
                         </td>
+                        <td><a aria-hidden="true" title="Ver" onclick="goto('ver&id=<?php echo $row["idIncidencia"]; ?>','reportes')"><i class="fa fa-eye"></i></a></td>
 			    	</tr>			
 					<?php
 				}

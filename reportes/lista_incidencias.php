@@ -38,6 +38,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
         $('#clicky').click(function() {
             $('.ui-autocomplete-input').focus().val('');
             $('.ui-autocomplete-input').autocomplete('close');
+            filtrar_incidencias(<?php echo $_SESSION['idEmpresa']; ?>);
             return false;
         });
     });
