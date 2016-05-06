@@ -53,6 +53,19 @@ class incidencia extends SafeMySQL {
         return $this->con->getAll($sql);
     }
 
+    function mostrar_incidencia($params="incidencias.*", $where=""){
+        $sql = "SELECT $params,nombreEmpresa,nombreUsuario,nombreEmp,nombreResponsable,nombrePuesto,nombreUbicacion,tipoIncidencia
+            FROM `incidencias`
+            INNER JOIN usuarios ON incidencias.idUsuario=usuarios.idUsuario
+            INNER JOIN empresas ON incidencias.idEmpresa=empresas.idEmpresa
+            INNER JOIN empleados ON incidencias.idEmpleado=empleados.idEmpleado
+            INNER JOIN tipo_incidencia ON incidencias.idTipoIncidencia=tipo_incidencia.idTipo
+            LEFT JOIN puestos ON incidencias.idPuesto=puestos.idPuesto
+            LEFT JOIN ubicaciones ON incidencias.idUbicacion=ubicaciones.idUbicacion
+            LEFT JOIN responsables ON incidencias.idResponsable=responsables.idResponsable $where";
+        return $this->con->getRow($sql);
+    }
+
     function mostrar_incidenciasfiltro($sql){
         return $this->con->getAll($sql);
     }

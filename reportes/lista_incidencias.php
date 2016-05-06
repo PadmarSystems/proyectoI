@@ -122,6 +122,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                 <th>Fecha de inicio</th>
                 <!--<th>Fecha final</th>-->
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="tabla">
@@ -166,6 +167,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                                 <span class="switch-label" data-on="On" data-off="Off"></span> <span class="switch-handle"></span>
                             </label>
                         </td>
+                        <td><a aria-hidden="true" title="Ver" onclick="goto('ver&id=<?php echo $row["idIncidencia"]; ?>','reportes')"><i class="fa fa-eye"></i></a></td>
                     </tr>
             <?php }} ?>
         </tbody>
