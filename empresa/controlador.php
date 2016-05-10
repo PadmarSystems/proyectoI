@@ -2,7 +2,7 @@
 require('../clases/empresa.class.php');
 require('../clases/ubicacion.class.php');
 $objEmp = new empresa;
-$objUbic = new ubicacion;
+$objUbic = new ubicaciones;
 
 if(isset($_POST)){
 	print_r($_POST);

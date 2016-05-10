@@ -29,10 +29,12 @@ $empleados = $objemp->mostrar_empleados();
 				<th>Nombre Empleado</th>
 				<th>A. Paterno Empleado</th>
 				<th>A. Materno Empleado</th>
-				<th>Empresa</th>
+				<!--<th>Empresa</th>-->
 				<th>Puesto</th>
 				<th>Telefono</th>
-				<th>Tipo de nómina</th>
+				<!--<th>Tipo de nómina</th>-->
+				<th>Contacto</th>
+				<th>Tel. Contacto</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -58,10 +60,10 @@ $empleados = $objemp->mostrar_empleados();
 	    		<td><?php echo $emp[0]; ?></td>
 	    		<td><?php echo $emp[1]; ?></td>
 	    		<td><?php echo $emp[2]; ?></td>
-	    		<td><?php echo $row['nombreEmpresa']; ?></td>
+	    		<!--<td><?php echo $row['nombreEmpresa']; ?></td>-->
 	    		<td><?php echo $row['nombrePuesto']; ?></td>
 	    		<td><?php echo $row['telEmp']; ?></td>
-	    		<td><?php
+	    		<!--<td><?php
 	    		switch($row['tipoNomina']){
 					case 1:
 	    				echo "Semanal";
@@ -76,7 +78,9 @@ $empleados = $objemp->mostrar_empleados();
 						echo "Sin Especificar";
 						break;
 	    		}
-	    		//echo $row['tipoNomina']; ?></td>
+	    		//echo $row['tipoNomina']; ?></td>-->
+	    		<td><?php echo $row['contactoAccidente']; ?></td>
+	    		<td><?php echo $row['numeroAccidente']; ?></td>
 				<td class="actions">
 					<a aria-hidden="true" title="Ver" onclick="goto('form&ac=ver&id=<?php echo $row["idEmpleado"]; ?>','empleados')"><i class="fa fa-eye"></i></a>
 					<a aria-hidden="true" title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpleado"]; ?>','empleados')"><i class="fa fa-pencil-square-o"></i></a>

@@ -18,9 +18,9 @@ require("ruta.php");
 		<div class="col-md-4 col-md-offset-4 logoLogin"><img src="images/logo.png" /></div>
 		<form action="empresa/buscar.php" method="post" class="col-md-4 col-md-offset-4 login">
 	        <div class="message">
-				<h4>Empresa</h4>
+				<h4>Registra una Empresa</h4>
 			</div>
-	        <div class="inputs"><i class="fa fa-building"></i><input type="text" placeholder="Empresa" value="" autofocus id="myusername" name="myusername" required/></div>
+	        <div class="inputs"><i class="fa fa-building"></i><input type="text" placeholder="Empresa" value="" autofocus id="miempresa" name="miempresa" required/></div>
 	    	<div class="inputs"><i class="fa fa-lock"></i><input type="password" placeholder="Contraseña" value="" id="mypassword" name="mypassword" required/></div>
 	        <input type="submit" value="Buscar" />
 	    </form>
