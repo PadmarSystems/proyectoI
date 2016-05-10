@@ -28,6 +28,7 @@ if(isset($_GET['a'])){
 }
 
 $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
+
 ?>
 <script type="text/javascript" src="<?php echo $ruta; ?>reportes/reporte.js"></script>
 <script type="text/javascript">
@@ -112,7 +113,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
         <thead>
             <tr class='head'>
                 <th>Folio</th>
-                <th>Empresa</th>
+                <!--<th>Empresa</th>-->
                 <th>Responsable</th>
                 <th>Ubicación</th>
                 <th>Nombre Empleado</th>
@@ -126,6 +127,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                 <th></th>
             </tr>
         </thead>
+        <h3 style="text-align:center;background:#ccc;font-weight:normal;padding:5px;margin-bottom:20px;">nombre de la empresa</h3>
         <tbody id="tabla">
             <?php
             if (count($incidencias) > 0) {
@@ -144,9 +146,10 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                         $emp[2] = '';
                     }
                     ?>
+                    
                     <tr id="<?php echo $row['idIncidencia']; ?>">
                         <td><?php echo $row['folio']; ?></td>
-                        <td><?php echo $row['nombreEmpresa']; ?></td>
+                        <!--<td><?php echo $row['nombreEmpresa']; ?></td>-->
                         <td><?php echo str_replace('--',' ',$row['nombreResponsable']); ?></td>
                         <td><?php echo $row['nombreUbicacion']; ?></td>
                         <td><?php echo $emp[0]; ?></td>
