@@ -1,7 +1,7 @@
 <?php
 require('clases/responsable.class.php');
 $responsable = new responsable;
-$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'] . " ";
+$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'];
 $responsables = $responsable->mostrar_responsables('*',$where);
 ?>
 <script type="text/javascript">

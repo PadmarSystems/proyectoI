@@ -1,7 +1,7 @@
 <?php
 require('clases/puesto.class.php');
 $puesto = new puesto;
-$where = "WHERE puestos.idEmpresa= " . $_SESSION['idEmpresa'] . " ";
+$where = "WHERE puestos.idEmpresa= " . $_SESSION['idEmpresa'];
 $puestos = $puesto->mostrar_puestos('puestos.*,nombreEmpresa',$where);
 ?>
 <script type="text/javascript">

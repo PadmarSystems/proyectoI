@@ -1,8 +1,8 @@
 <?php
 require('clases/empresa.class.php');
 $empresa = new empresa;
-
-$empresas = $empresa->mostrar_empresas();
+$where = "WHERE idEmpresa = ".$_SESSION['idEmpresa'];
+$empresas = $empresa->mostrar_empresas('*',$where);
 ?>
 
 <h2>Empresas </h2>

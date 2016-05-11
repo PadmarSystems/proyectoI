@@ -1,8 +1,8 @@
 <?php
 require('clases/empleado.class.php');
 $objemp = new empleado;
-
-$empleados = $objemp->mostrar_empleados();
+$where = " WHERE empresas.idEmpresa=".$_SESSION['idEmpresa'];
+$empleados = $objemp->mostrar_empleados('empleados.*',$where);
 ?>
 <script type="text/javascript">
 	$(function() {

@@ -1,7 +1,7 @@
 <?php
 require('clases/ubicacion.class.php');
 $ubicacion = new ubicacion;
-$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'] . " ";
+$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'];
 $ubicaciones = $ubicacion->mostrar_ubicaciones('*',$where);
 ?>
 <script type="text/javascript">

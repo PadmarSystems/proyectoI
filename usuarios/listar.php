@@ -1,7 +1,7 @@
 <?php
 require('clases/usuario.class.php');
 $usuario = new usuario;
-$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'] . " ";
+$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'];
 $usuarios = $usuario->mostrar_usuarios('*',$where);
 ?>
 <script type="text/javascript">
