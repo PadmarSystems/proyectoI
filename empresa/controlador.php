@@ -14,11 +14,6 @@ if(isset($_POST)){
 	} else {
 		$upd = $objEmp->actualizarEmpresa($_POST['nombreNuevo'],$_POST['id']);
 		if ($upd){
-			$ubicArray=array(
-				'idEmpresa'=>$_POST['id'],
-				'nombreUbicacion'=>$_POST['nombreNuevo']
-			);
-			$objUbic->insertarUbicacion($ubicArray);
 			header('Location: ../view.php?com=empresa&mod=form&ac=editar&stt=success');
 		}
 	}

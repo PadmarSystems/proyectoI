@@ -9,6 +9,12 @@ class empresa extends SafeMySQL {
     function __construct() {
         $this->con = new SafeMySQL();
     }
+
+    function insertarempresa($datos){
+        $result = $this->con->query("INSERT INTO empresas SET ?u", $datos);
+        if($result) return true;
+    }
+
 	function actualizarEmpresa($name,$id){
 		$result = $this->con->query("UPDATE `empresas` SET `aliasEmpresa` = ?s WHERE `idEmpresa` = ?i",$name,$id);
 		if($result) return true;
@@ -37,6 +43,17 @@ class empresa extends SafeMySQL {
 	function mostrar_empresas($params="*", $where=""){
         $sql = "SELECT $params from empresas $where";
         return $this->con->getAll($sql);
+    }
+
+    function valida_empresa($empresa) {
+        $result = $this->con->query("SELECT 1 FROM empresas WHERE nombreEmpresa LIKE ?s",$empresa);
+        $nReg = $this->con->numRows($result);
+        if($nReg>0) return FALSE;
+        else return TRUE;
+    }
+
+    function ultimoidinsertado(){
+        return $this->con->insertId();
     }
 }
 ?>

@@ -13,7 +13,7 @@ if (isset($_GET['ac'])) {
 
 		$nombre=$objEmp->verEmpresaxID($idEmpresa);
 		$nombre=$nombre['aliasEmpresa'];
-		$form = array('id'=>$_GET['id'],'alias'=>$nombre,'clave'=>'','accion'=>'Editar');
+		$form = array('id'=>$idEmpresa,'alias'=>$nombre,'clave'=>'','accion'=>'Editar');
 	}else{
 		header('Location: view.php?com=empresa&mod=form&ac=editar&stt=error');
 	}
@@ -33,24 +33,27 @@ if (isset($_GET['stt'])) {
 		$msg="No se detectaron cambios en el nombre de su empresa.";
 	}
 }
+
 ?>
 <h2>Cambiar nombre de mi empresa</h2>
-<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-<form action="empresa/controlador.php" method="post">
-	<div>
-		<label>Nombre de la empresa: </label>
-		<div><label id="nombre" name="nombre"><?php echo $form['alias'] ?></label></div>
-	</div>
-	<div>
-		<label>Nuevo nombre de la empresa: </label>
-		<div><input type="text" id="nombreNuevo" name="nombreNuevo" required /></div>
-		<input type="hidden" name="id" value="<?php echo $form['id']?>"/>
-	</div>
-	<div>
-		<label></label>
-		<div style="padding-top:15px;">
-			<input type="button" name="back" onclick="history.back();" value="Regresar">
-			<input type="submit" name="a" value="Editar">
+<div class="row">
+	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
+	<form action="empresa/controlador.php" method="post" class="col-md-8 group">
+		<div class="row">
+			<label class="col-md-4">Nombre actual de la empresa: </label>
+			<div class="col-md-8"><label id="nombre" name="nombre"><?php echo $form['alias'] ?></label></div>
 		</div>
-	</div>
-</form>
+		<div class="row">
+			<label class="col-md-4">Nuevo nombre de la empresa: </label>
+			<div class="col-md-8"><input type="text" id="nombreNuevo" name="nombreNuevo" required/></div>
+			<input type="hidden" name="id" value="<?php echo $form['id']?>"/>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-4">
+			<!--<div style="padding-top:15px;">-->
+				<!--<input type="button" name="back" onclick="history.back();" value="Regresar">-->
+				<input type="submit" name="a" value="Editar">
+			</div>
+		</div>
+	</form>
+</div>

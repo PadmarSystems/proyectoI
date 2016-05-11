@@ -16,6 +16,11 @@ class usuario extends SafeMySQL {
         if($result) return true;
     }
 
+    function insertarprp($datos){
+        $result = $this->con->query("INSERT INTO usuarios_prp SET ?u", $datos);
+        if($result) return true;
+    }
+
     function actualizarusuario($datos,$id){
         $result = $this->con->query("UPDATE usuarios SET ?u  WHERE idUsuario = ?i", $datos,$id);
         if($result) return true;
@@ -66,6 +71,11 @@ WHERE email LIKE '$usuario' AND contrasena LIKE '$password' LIMIT 1";
         $nReg = $this->con->numRows($result);
         if ($nReg > 0) return $this->con->fetch($result);
         else return false;
+    }
+
+    function mostrar_planes($params="*", $where=""){
+        $sql = "SELECT $params from planes $where";
+        return $this->con->getAll($sql);
     }
 }
 ?>
