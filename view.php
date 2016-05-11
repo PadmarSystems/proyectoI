@@ -90,12 +90,14 @@ if (isset($_GET['mod'])) {
     <section class="sidebar">
         <ul>
             <li><span>Menu Principal</span></li>
+            <?php if($_SESSION['rol']== 1 || $_SESSION['rol']== 0){ ?>
             <li><a onclick="goto()"><i class="fa fa-dashboard"></i>Dashboard</a></li>
             <li><a onclick="goto('listar','empleados');"><i class="fa fa-users"></i>Empleados</a></li>
             <li><a onclick="goto('seguimiento','incidencias')"><i class="fa fa-calendar"></i>Incidencias</a></li>
             <li><a onclick="goto('lista_incidencias','reportes')"><i class="fa fa-file-text"></i>Reportes</a></li>
+            <?php } ?>
             <!-- Admin -->
-            <?php if($_SESSION['rol']==1 || $_SESSION['perfil']==1){ ?>
+            <?php if($_SESSION['rol'] == 1 || $_SESSION['perfil'] == 2 || $_SESSION['rol']== 0 ){ ?>
             <li><span>Administrar</span></li>
             <li><a href="view.php?com=empresa&mod=form&ac=editar"><i class="fa fa-briefcase"></i>Mi Empresa</a></li>
             <li><a href="view.php?com=empresa&mod=listar"><i class="fa fa-building"></i>Empresas</a></li>
@@ -106,7 +108,9 @@ if (isset($_GET['mod'])) {
 			<li><a href="view.php?com=usuarios&mod=listar"><i class="fa fa-users"></i>Usuarios</a></li>
             <li><a href="view.php?com=tiposincidencias&mod=listar"><i class="fa fa-calendar"></i>Tipos de incidencias</a></li>
             <?php } ?>
+            <?php if($_SESSION['rol']== 0 ){ ?>
             <li><a href="view.php?com=empresa&mod=buscar"><i class="fa fa-cogs"></i>frm nw mprs</a></li>
+            <?php } ?>
         </ul>
     </section>
     <section class="layout-content">
