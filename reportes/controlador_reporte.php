@@ -16,7 +16,7 @@ if(isset($_POST['a'])){
 				}else{
 					$sql .= " AND ";
 				}
-				$sql .= " incidencias.idEmpresa=" . $_POST['empresa'] . " ";
+				$sql .= " incidencias.idEmpresa=".$_POST['empresa']." ";
 			}
 
 			//$sql .= " INNER JOIN empleados ON incidencias.idEmpleado=empleados.idEmpleado";
@@ -28,7 +28,7 @@ if(isset($_POST['a'])){
 				}else{
 					$sql .= " AND ";
 				}
-				$sql .= " incidencias.idTipoIncidencia=" . $_POST['tipoIn']. " ";
+				$sql .= " incidencias.idTipoIncidencia=".$_POST['tipoIn']." ";
 			}
 
 			//$sql .= " LEFT JOIN puestos ON incidencias.idPuesto=puestos.idPuesto";
@@ -39,7 +39,7 @@ if(isset($_POST['a'])){
 				}else{
 					$sql .= " AND ";
 				}
-				$sql .= " incidencias.idPuesto=" . $_POST['puesto'] . " ";
+				$sql .= " incidencias.idPuesto=".$_POST['puesto']." ";
 			}
 
 			//$sql .= " LEFT JOIN ubicaciones ON incidencias.idUbicacion=ubicaciones.idUbicacion";
@@ -50,7 +50,7 @@ if(isset($_POST['a'])){
 				}else{
 					$sql .= " AND ";
 				}
-				$sql .= " incidencias.idUbicacion=" . $_POST['ubicacion'] . " ";
+				$sql .= " incidencias.idUbicacion=".$_POST['ubicacion']." ";
 			}
 
 			//$sql .= " LEFT JOIN responsables ON incidencias.idResponsable=responsables.idResponsable";
@@ -61,7 +61,7 @@ if(isset($_POST['a'])){
 				}else{
 					$sql .= " AND ";
 				}
-				$sql .= " incidencias.idResponsable=" . $_POST['responsable'] . " ";
+				$sql .= " incidencias.idResponsable=".$_POST['responsable']." ";
 			}
 			
 			if($_POST['fechai'] != '' && $_POST['fechaf'] != ''){
@@ -70,7 +70,7 @@ if(isset($_POST['a'])){
 				}else{
 					$sql .= " AND ";
 				}
-				$sql .= " fechaInicio BETWEEN  '" . $_POST['fechai'] . " 00:00:00' AND  '" . $_POST['fechaif'] . " 23:59:59'";
+				$sql .= " fechaInicio BETWEEN '".$_POST['fechai']." 00:00:00' AND  '".$_POST['fechaif']." 23:59:59'";
 			}
 			
 
@@ -95,7 +95,7 @@ if(isset($_POST['a'])){
 					?>
 					<tr id="<?php echo $row['idIncidencia']; ?>">
 			    		<td><?php echo $row['folio']; ?></td>
-			    		<td><?php echo $row['nombreEmpresa']; ?></td>
+			    		<!---<td><?php echo $row['nombreEmpresa']; ?></td>--->
 			    		<td><?php echo str_replace('--',' ',$row['nombreResponsable']); ?></td>
 			    		<td><?php echo $row['nombreUbicacion']; ?></td>
 			    		<td><?php echo $emp[0]; ?></td>

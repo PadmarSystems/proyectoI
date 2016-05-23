@@ -47,7 +47,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
 <h1>Reportes de incidencias</h1>
 <div class="group">
     <div class="row ui-widget">
-        <label class="col-md-2">Empresa:</label>
+		<label class="col-md-2">Empresa:</label>
         <div class="col-md-4">
             <select id="empresa" name="empresa">
                 <option value="" >Select one...</option>
@@ -102,7 +102,8 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
     </div>
     <div class="row">
         <div class="col-md-4 col-md-offset-2">
-            <button class="button" onclick="filtrar_incidencias(empresa.value,ubicacion.value,responsable.value,puesto.value,tipoIn.value,fechai.value,fechaf.value)"><i class="fa fa-check"></i> Filtrar</button>
+			<button class="button" onclick="filtrar_incidencias(empresa.value,ubicacion.value,responsable.value,puesto.value,tipoIn.value,fechai.value,fechaf.value)"><i class="fa fa-check"></i> Filtrar</button>
+			<!---<button class="button" onclick="filtrar_incidencias(ubicacion.value,responsable.value,puesto.value,tipoIn.value,fechai.value,fechaf.value)"><i class="fa fa-check"></i> Filtrar</button>--->
             <a href="#" id="clicky">Limpiar filtros</a>
         </div>
     </div>
@@ -133,23 +134,20 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
             if (count($incidencias) > 0) {
                 foreach ($incidencias as $row) {
                     $emp = explode("--", $row['nombreEmp']);
-
                     if(!isset($emp[0])){
                         $emp[0] = '';
-                    }
-
+					}
                     if(!isset($emp[1])){
                         $emp[1] = '';
-                    }
-
+					}
                     if(!isset($emp[2])){
                         $emp[2] = '';
-                    }
+					}
                     ?>
                     
                     <tr id="<?php echo $row['idIncidencia']; ?>">
                         <td><?php echo $row['folio']; ?></td>
-                        <!--<td><?php echo $row['nombreEmpresa']; ?></td>-->
+                        <!---<td><?php echo $row['nombreEmpresa']; ?></td>--->
                         <td><?php echo str_replace('--',' ',$row['nombreResponsable']); ?></td>
                         <td><?php echo $row['nombreUbicacion']; ?></td>
                         <td><?php echo $emp[0]; ?></td>
