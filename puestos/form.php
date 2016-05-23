@@ -5,9 +5,8 @@ $msg = "";
 $stt = "";
 if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
-		$form = array('puesto'=>'','idP'=>'','empresa'=>'','accion'=>'Registrar');
+		$form = array('puesto'=>'','idP'=>'','empresa'=>$_SESSION['idEmpresa'],'accion'=>'Registrar');
 	}elseif ($_GET['ac']=="editar") {
-		# FALTA OBTENER ID
 		$row = $puesto->mostrar_puesto($_GET['id']);
 		$form = array('puesto'=>$row['nombrePuesto'],'idP'=>$row['idPuesto'],'empresa'=>$row['idEmpresa'],'accion'=>'Editar');
 	}else{
@@ -31,9 +30,10 @@ if (isset($_GET['stt'])) {
 }
 ?>
 <h1><?php echo $form['accion']; ?> Puesto</h1>
+<script src="js/validacion.js"></script>
 <div class="row">
 	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-	<form action="puestos/controlador.php" method="post" class="col-md-8 group">
+	<form action="puestos/controlador.php" method="post" class="col-md-8 group" onsubmit="return validPuesto()">
 	<?php
 	switch ($form['accion']) {
 		case 'Registrar':

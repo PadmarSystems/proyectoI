@@ -95,7 +95,13 @@ class incidencia extends SafeMySQL {
     function mostrar_numincidencias($id,$month){
         return $this->con->getOne("SELECT count(*)num FROM `incidencias` where idEmpleado=?i and month(fechaInicio) = ?s",$id,$month);
     }
-
+	
+	function verIncidenciasEmpTipo($id,$tipo,$yr,$mon){
+		return $this->con->getOne("SELECT count(*) FROM `incidencias` WHERE idEmpleado=?i AND idTipoIncidencia=?i AND year(fechaInicio)=?i AND month(fechaInicio)=?i",$id,$tipo,$yr,$mon);
+    }
+	function verIncidenciasAño($id,$tipo,$yr){
+		return $this->con->getOne("SELECT count(*) FROM `incidencias` WHERE idEmpleado=?i AND idTipoIncidencia=?i AND year(fechaInicio)=?i",$id,$tipo,$yr);
+    }
     function mostrar_numincidenciastotal($id){
         return $this->con->getOne("SELECT count(*) FROM `incidencias` where idEmpleado=?i",$id);
     }

@@ -9,9 +9,8 @@ $msg = "";
 $stt = "";
 if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
-		$form = array('nombreResponsable'=>'Empleado Responsable 1','idR'=>'1','empresa'=>'1','accion'=>'Registrar');
+		$form = array('nombreResponsable'=>'','idR'=>'','empresa'=>$_SESSION['idEmpresa'],'accion'=>'Registrar');
 	}elseif ($_GET['ac']=="editar") {
-				# obtener id
 		$row = $responsable->mostrar_responsable($_GET['id']);
 		$form = array('nombreResponsable'=>$row['nombreResponsable'],'idR'=>$row['idResponsable'],'empresa'=>$row['idEmpresa'],'accion'=>'Editar');
 	} else {
@@ -34,15 +33,16 @@ if (isset($_GET['stt'])) {
 	}
 }
 ?>
-<h2><?php echo $form['accion']; ?> responsable</h2>
+<h1><?php echo $form['accion']; ?> responsable</h1>
+<script src="js/validacion.js"></script>
 <div class="row">
 	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-	<form action="responsables/controlador.php" method="post" class="col-md-8 group">
+	<form action="responsables/controlador.php" method="post" class="col-md-8 group" onsubmit="return validResp();">
 	<?php
 	switch ($form['accion']) {
 		case 'Registrar':
 			?>
-			<p>Si el empleado al que quiere asignar como responsable ya está dado de alta, búsquelo en la lista. Si no lo encuentra, puede agregarlo.</p>
+			<p>Si quiere asignar como responsable a un empleado registrado, búsquelo en la lista. Si no lo encuentra, puede agregarlo.</p>
 			<div class="row">
 				<label class="col-md-4">Seleccione un responsable: </label>
 				<div class="col-md-8">

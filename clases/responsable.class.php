@@ -34,6 +34,7 @@ class responsable extends SafeMySQL {
 	function verResponsablexID($id){
 		return $this->con->getRow("SELECT * FROM responsables WHERE idResponsable = ?i",$id);
 	}
+	
 	function verUsuario($id){
 		return $this->con->getRow("SELECT * FROM usuarios WHERE idUsuario=?i",$id);
 	}
@@ -41,6 +42,9 @@ class responsable extends SafeMySQL {
 	function mostrar_responsables($params="*", $where=""){
         $sql = "SELECT $params from responsables $where";
         return $this->con->getAll($sql);
+    }
+	function verResponsables($empresa){
+        return $this->con->getAll("SELECT * FROM responsables WHERE idEmpresa=?i",$empresa);
     }
 
     function mostrar_responsable($id){

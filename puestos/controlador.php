@@ -19,7 +19,6 @@ if(isset($_POST)){
 					'idEmpresa'=>$idEmp,
 					'nombrePuesto'=>$pues
 				);
-				//echo "<pre>"; print_r($saveArray); echo "</pre>";
 				if($_SESSION['plan'] == 1){
 					$where = "WHERE puestos.idEmpresa= " . $_SESSION['idEmpresa'];
 					$puestosnum = $objPuesto->mostrar_puestos('puestos.*,nombreEmpresa',$where);

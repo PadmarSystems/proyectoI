@@ -7,8 +7,6 @@ if (isset($_GET['ac'])) {
 	if($_GET['ac'] == "nuevo"){
 		$form = array('ubicacion'=>'','idU'=>'','empresa'=>'','accion'=>'Registrar');
 	}elseif ($_GET['ac']=="editar") {
-		# obtener id
-		# arreglo ejemplo:
 		$row = $ubicacion->mostrar_ubicacion($_GET['id']);
 		$form = array('ubicacion'=>$row['nombreUbicacion'],'idU'=>$row['idUbicacion'],'empresa'=>$row['idEmpresa'],'accion'=>'Editar');
 	}else{
@@ -33,9 +31,10 @@ if (isset($_GET['stt'])) {
 
 ?>
 <h1><?php echo $form['accion']; ?> ubicación</h1>
+<script src="js/validacion.js"></script>
 <div class="row">
 	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-	<form action="ubicaciones/controlador.php" method="post" class="col-md-8 group">
+	<form action="ubicaciones/controlador.php" method="post" class="col-md-8 group" onsubmit="return validUbic();">
 	<?php
 	switch ($form['accion']) {
 		case 'Registrar':

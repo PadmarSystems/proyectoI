@@ -7,10 +7,6 @@ $stt = "";
 if (isset($_GET['ac'])) {
 	if ($_GET['ac']=="editar") {
 		$idEmpresa = $_SESSION['idEmpresa'];
-		if(isset($_GET['id'])){
-			$idEmpresa=$_GET['id'];
-		}
-
 		$nombre=$objEmp->verEmpresaxID($idEmpresa);
 		$nombre=$nombre['aliasEmpresa'];
 		$form = array('id'=>$idEmpresa,'alias'=>$nombre,'clave'=>'','accion'=>'Editar');
@@ -33,26 +29,27 @@ if (isset($_GET['stt'])) {
 		$msg="No se detectaron cambios en el nombre de su empresa.";
 	}
 }
-
 ?>
-<h2>Cambiar nombre de mi empresa</h2>
+<h1>Cambiar nombre de mi empresa</h1>
+<script src="js/validacion.js"></script>
 <div class="row">
-	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-	<form action="empresa/controlador.php" method="post" class="col-md-8 group">
+	<p class="<?php echo $stt; ?>"><?php echo $msg; ?></p>
+	<form action="empresa/controlador.php" method="post" class="col-md-8 group" onsubmit="return validAlias();">
 		<div class="row">
-			<label class="col-md-4">Nombre actual de la empresa: </label>
-			<div class="col-md-8"><label id="nombre" name="nombre"><?php echo $form['alias'] ?></label></div>
-		</div>
+			<label class="col-md-4">Nombre de la empresa: </label>
+			<div class="col-md-8"><label id="nombre" name="nombre"><?php echo $form['alias']?></label></div>
+		</div><br>
 		<div class="row">
 			<label class="col-md-4">Nuevo nombre de la empresa: </label>
-			<div class="col-md-8"><input type="text" id="nombreNuevo" name="nombreNuevo" required/></div>
+			<div class="col-md-8"><input type="text" id="nombreNuevo" name="nombreNuevo" required /></div>
 			<input type="hidden" name="id" value="<?php echo $form['id']?>"/>
 		</div>
 		<div class="row">
-			<div class="col-md-8 col-md-offset-4">
-			<!--<div style="padding-top:15px;">-->
-				<!--<input type="button" name="back" onclick="history.back();" value="Regresar">-->
+			<div class="col-md-4 col-md-offset-4">
 				<input type="submit" name="a" value="Editar">
+			</div>
+			<div class="col-md-4">
+				<input type="button" name="back" onclick="history.back();" value="Regresar">
 			</div>
 		</div>
 	</form>

@@ -1,11 +1,12 @@
 <?php
 require('../clases/empleado.class.php');
 $objemp = new empleado;
-$idEmp = '1'; // =$_SESSION['empresa'];
+//$idEmp = '1'; // =$_SESSION['empresa'];
 $stt = "default";
 if(isset($_POST)){
 	$accion=$_POST['a'];
-
+	$idEmp = $_POST['idEmpresaEmp'];
+	
 	if($accion == "Registrar" || $accion == "Editar"){
 		$nombre=$_POST['nombre'].'--'.$_POST['apellidoPat'].'--'.$_POST['apellidoMat'];
 		if(empty($_POST['responsable'])){
@@ -31,7 +32,7 @@ if(isset($_POST)){
 	}
 	
 	$fileProcess = 'FALSE';
-	$load="true"; //flag
+	$load="true";
 	if ( $accion == 'Registrar' ){
 		if ($_FILES['foto']['error'] != 4 OR $_FILES['foto']['error'] != '4'){
 			$fileProcess = 'TRUE';
@@ -55,12 +56,10 @@ if(isset($_POST)){
 		$size=$_FILES['foto']['size'];
 		if ($size>200000){
 			$load='false';
-			echo "ñam1 tamaño";
 			header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=error&img=z');
 		}
 		if (!($_FILES['foto']['type'] =="image/jpeg" OR $_FILES['foto']['type'] =="image/bmp" OR $_FILES['foto']['type'] =="image/gif" OR $_FILES['foto']['type'] =="image/png" )) {
 			$load='false';
-			echo "ñam tipo";
 			header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=error&img=t');
 		}
 		$target_path = "files/";
@@ -77,43 +76,36 @@ if(isset($_POST)){
 		switch ($accion){
 			case 'Registrar':
 				//$dCreate = date('Y-m-d');
-				
 				$empleadoValido = $objemp->valida_empleado($nombre);
 				if($empleadoValido){
 					$array = array('idEmpresa'=>$_POST['idEmpresaEmp'],'nombreEmp'=>$nombre,'telEmp'=>$_POST['telefono'],'emailEmp'=>$_POST['correo'],'tipoNomina'=>$_POST['tipoNomina'],'idResponsable'=>$_POST['responsable'],'idUbicacion'=>$_POST['ubicacion'],'idPuesto'=>$_POST['puesto'],'contactoAccidente'=>$_POST['nombreAa'],'numeroAccidente'=>$_POST['telefonoAa'],'fotoEmp'=>$rutaFoto);
 					$inserta = $objemp->insertarempleado($array);
 					if($inserta){
 						$stt = "csuccess";
-						//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=csuccess');
 					}else{
 						$stt = "cfailded";
-						//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=cfailed');
 					}	
 				}else{
 					$stt = "nvuser";
-					//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=nvuser');
 				}
 				header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt='.$stt);
-				// guardar saveArray
-				//header('Location: ../view.php?com=empleados&mod=form&ac=nuevo&stt=success');
 			break;
+			
 			case 'Ver':
 				print_r($_POST);
 				header('Location: ../view.php?com=empleados&mod=form&ac=editar&id='.$_POST['idEmpleado']);
 			break;
+			
 			case 'Editar';
-
 				$array = array();
-
 				$row = $objemp->mostrar_empleado($_POST['idEmpleado']);
-
+				//print_r($row);
 				if($nombre != $row['nombreEmp']){
 					$empleadoValido = $objemp->valida_empleado($nombre);
 					$array['nombreEmp'] = $nombre;
 				}else{
 					$empleadoValido = true;
 				}
-
 				if($_POST['telefono'] != $row['telEmp']){
 					$array['telEmp'] = $_POST['telefono'];
 				}
@@ -152,7 +144,7 @@ if(isset($_POST)){
 
 				if($empleadoValido && count($array) > 0){
 					$array['fechaActualizacion'] = date("Y-m-d H:i:s");
-					$actualiza = $objemp->actualizarempleado($array,$$_POST['idEmpleado']);
+					$actualiza = $objemp->actualizarempleado($array,$_POST['idEmpleado']);
 					if($actualiza){
 						$stt = "esuccess";
 					}else{
@@ -161,13 +153,11 @@ if(isset($_POST)){
 				}else{
 					$stt = "nvuser";
 				}
-				
-				// guardar saveArray sin fechaCreacion
-				header('Location: ../view.php?com=empleados&mod=form&ac=editar&id='.$_POST['id'].'&stt='.$stt);
+				header('Location: ../view.php?com=empleados&mod=form&ac=editar&id='.$_POST['idEmpleado'].'&stt='.$stt);
 			break;
+			
 			case 'eliminar':
-				
-				$elimina = $objemp->eliminarempleado($_POST['id']);
+				$elimina = $objemp->eliminarempleado($_POST['idEmpleado']);
 				if($elimina){
 					echo "eliminado";
 				}else{
