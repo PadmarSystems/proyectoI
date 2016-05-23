@@ -31,7 +31,7 @@ $empleados = $objemp->mostrar_empleados('empleados.*',$where);
 				<th>A. Materno Empleado</th>
 				<!--<th>Empresa</th>-->
 				<th>Puesto</th>
-				<th>Telefono</th>
+				<th>Teléfono</th>
 				<!--<th>Tipo de nómina</th>-->
 				<th>Contacto</th>
 				<th>Tel. Contacto</th>
@@ -56,13 +56,13 @@ $empleados = $objemp->mostrar_empleados('empleados.*',$where);
 	                    $emp[2] = '';
 	                }
 			?>
-			<tr id="<?php echo $row['idEmpleado']; ?>">
-	    		<td><?php echo $emp[0]; ?></td>
-	    		<td><?php echo $emp[1]; ?></td>
-	    		<td><?php echo $emp[2]; ?></td>
+			<tr id="<?php echo $row['idEmpleado']; ?>" style="text-align:center">
+	    		<td style="text-align:center"><?php echo $emp[0]; ?></td>
+	    		<td style="text-align:center"><?php echo $emp[1]; ?></td>
+	    		<td style="text-align:center"><?php echo $emp[2]; ?></td>
 	    		<!--<td><?php echo $row['nombreEmpresa']; ?></td>-->
-	    		<td><?php echo $row['nombrePuesto']; ?></td>
-	    		<td><?php echo $row['telEmp']; ?></td>
+	    		<td style="text-align:center"><?php echo $row['nombrePuesto']; ?></td>
+	    		<td style="text-align:center"><?php echo $row['telEmp']; ?></td>
 	    		<!--<td><?php
 	    		switch($row['tipoNomina']){
 					case 1:
@@ -79,9 +79,9 @@ $empleados = $objemp->mostrar_empleados('empleados.*',$where);
 						break;
 	    		}
 	    		//echo $row['tipoNomina']; ?></td>-->
-	    		<td><?php echo $row['contactoAccidente']; ?></td>
-	    		<td><?php echo $row['numeroAccidente']; ?></td>
-				<td class="actions">
+	    		<td style="text-align:center"><?php echo $row['contactoAccidente']; ?></td>
+	    		<td style="text-align:center"><?php echo $row['numeroAccidente']; ?></td>
+				<td style="text-align:center" class="actions">
 					<a aria-hidden="true" title="Ver" onclick="goto('form&ac=ver&id=<?php echo $row["idEmpleado"]; ?>','empleados')"><i class="fa fa-eye"></i></a>
 					<a aria-hidden="true" title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpleado"]; ?>','empleados')"><i class="fa fa-pencil-square-o"></i></a>
 					<a aria-hidden="true" title="Eliminar"><i class="fa fa-trash-o"></i></a>

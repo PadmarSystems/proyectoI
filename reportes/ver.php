@@ -54,5 +54,13 @@ $row = $incidencia->mostrar_incidencia("incidencias.*",$where);
 			<label class="col-md-4">Motivo: </label>
 			<div class="col-md-8"><textarea id="" name="" readonly><?php echo $row['motivo']; ?></textarea></div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<input type="button" onclick="goto('lista_incidencias','reportes');" value="Regresar">
+			</div>
+			
+		</div>
+		
 	</div>
 </div>

@@ -109,7 +109,7 @@ if (isset($_GET['mod'])) {
             <li><a href="view.php?com=tiposincidencias&mod=listar"><i class="fa fa-calendar"></i>Tipos de incidencias</a></li>
             <?php } ?>
             <?php if($_SESSION['rol']== 0 ){ ?>
-            <li><a href="view.php?com=empresa&mod=buscar"><i class="fa fa-cogs"></i>frm nw mprs</a></li>
+            <li><a href="view.php?com=empresa&mod=buscar"><i class="fa fa-cogs"></i>Nueva Empresa</a></li>
             <?php } ?>
         </ul>
     </section>

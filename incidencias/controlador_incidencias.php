@@ -30,7 +30,7 @@ if(isset($_POST['a'])){
 			$row = $empleado->mostrar_empleado($_POST['empleado']);
 
 			if (empty($row)) {
-				echo 'Error no se encontro el empleado solicitado.';
+				echo 'Error. No se encontró el empleado solicitado.';
 				return;
 			}
 
@@ -45,9 +45,9 @@ if(isset($_POST['a'])){
 					unset($array);
 				}
 
-				echo "La incidencia se registro correctamente.";
+				echo "La incidencia se registró correctamente.";
 			}else{
-				echo "No se inserto la incidencia.";
+				echo "No se insertó la incidencia.";
 			}
 			break;
 		case 'Detalle':
@@ -55,25 +55,25 @@ if(isset($_POST['a'])){
 				$row = $objincidencia->mostrar_ultimaincidencia($_POST['idEmpleado']);
 
 				if (count($row) == 0) {
-					echo "No hay incidencias relacionadas al empleado";
+					echo "No hay incidencias relacionadas al empleado.";
 					return;
 				}
 
 				?>
 				<p>
-					<label>Última incidencia:  <?php echo date("d/m/Y",strtotime($row['fechaInicio'])); ?> ( <?php echo $row['tipoIncidencia']; ?> )</label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=1','reportes')"> Ver detalles</a>
+					<label>Última incidencia: <?php echo date("d/m/Y",strtotime($row['fechaInicio'])); ?> (<?php echo $row['tipoIncidencia']; ?>)</label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=1','reportes')"> OK</a>
 				</p>
 				<?php
 				$num = $objincidencia->mostrar_numincidencias($_POST['idEmpleado'],date("m"));
 				?>
 				<p>
-					<label>N° de incidencias del mes :  <?php echo $num; ?></label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=2','reportes')"> Ver </a>
+					<label>N° de incidencias del mes:  <?php echo $num; ?></label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=2','reportes')"> Ver incidencias del mes</a>
 				</p>
 				<?php
 				$numTotal = $objincidencia->mostrar_numincidenciastotal($_POST['idEmpleado']);
 				?>
 				<p>
-					<label>Incidencias desde su alta :  <?php echo $numTotal; ?></label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=3','reportes')"> Reportes </a>
+					<label>Incidencias desde su alta:  <?php echo $numTotal; ?></label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=3','reportes')"> Ver reportes</a>
 				</p>
 				<?php
 			break;
@@ -107,7 +107,7 @@ if(isset($_POST['a'])){
 								<li><b>Teléfono:</b> <?php echo $row['telEmp']; ?></li>
 								<li><b>Correo Electrónico:</b> <?php echo $row['emailEmp']; ?></li>
 								<li><b>En caso de accidente llamar a:</b> <?php echo $row['contactoAccidente']; ?></li>
-								<li><b>al número:</b> <?php echo $row['numeroAccidente']; ?></li>
+								<li><b>Al número:</b> <?php echo $row['numeroAccidente']; ?></li>
 							</ul>
 						</div>
 					</div>
@@ -123,7 +123,7 @@ if(isset($_POST['a'])){
 					?>
 					<div class="row">
 						<label class="col-md-4"><?php echo ucfirst(str_replace("_"," ",$row['nombreCampo'])); ?>:</label>
-						<div class="col-md-8"><input type="text" name="<?php echo $row['nombreCampo']; ?>"  required /></div>
+						<div class="col-md-8"><input type="text" name="<?php echo $row['nombreCampo']; ?>" required /></div>
 					</div>
 					
 					<?php

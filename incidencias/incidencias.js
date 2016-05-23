@@ -13,7 +13,7 @@ function post_form(){
 				width: 'auto',
 				closeText: '',
 				buttons: {
-					Ok: function() {
+					OK: function() {
 						$(this).dialog('destroy');
 						window.location.replace("view.php?com=incidencias&mod=seguimiento");
 					}
@@ -40,7 +40,7 @@ function mostrardetalle(a,id,sizeWidth) {
 				width: sizeWidth,
 				closeText: '',
 				buttons: {
-					Ok: function() {
+					OK: function() {
 						$(this).dialog('destroy');
 					}
 				}
