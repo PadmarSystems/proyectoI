@@ -140,7 +140,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                 <th></th>
             </tr>
         </thead>
-        <h3 style="text-align:center;background:#ccc;font-weight:normal;padding:5px;margin-bottom:20px;">nombre de la empresa</h3>
+        <h3 style="text-align:center;background:#ccc;font-weight:normal;padding:5px;margin-bottom:20px;"><?php echo $_SESSION['empresa']; ?> </h3>
         <tbody id="tabla">
             <?php
             if (count($incidencias) > 0) {

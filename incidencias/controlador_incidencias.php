@@ -61,7 +61,7 @@ if(isset($_POST['a'])){
 
 				?>
 				<p>
-					<label>Última incidencia: <?php echo date("d/m/Y",strtotime($row['fechaInicio'])); ?> (<?php echo $row['tipoIncidencia']; ?>)</label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=1','reportes')"> OK</a>
+					<label>Última incidencia: <?php echo date("d/m/Y",strtotime($row['fechaInicio'])); ?> (<?php echo $row['tipoIncidencia']; ?>)</label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=1','reportes')"> Ver detalles</a>
 				</p>
 				<?php
 				$num = $objincidencia->mostrar_numincidencias($_POST['idEmpleado'],date("m"));
