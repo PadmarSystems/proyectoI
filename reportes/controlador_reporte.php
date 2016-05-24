@@ -4,6 +4,7 @@ require('../clases/incidencia.class.php');
 $objincidencia = new incidencia;
 
 if(isset($_POST['a'])){
+	#print_r($_POST);
 	$accion=$_POST['a'];
 	switch ($accion){
 		case 'filtrar':
@@ -18,7 +19,16 @@ if(isset($_POST['a'])){
 				}
 				$sql .= " incidencias.idEmpresa=".$_POST['empresa']." ";
 			}
-
+			
+			if($_POST['empleado'] != ''){
+				if($sql==''){
+					$sql .= "WHERE";
+				}else{
+					$sql .= " AND ";
+				}
+				echo $sql;
+				$sql .= " incidencias.idEmpleado=".$_POST['empleado']." ";
+			}
 			//$sql .= " INNER JOIN empleados ON incidencias.idEmpleado=empleados.idEmpleado";
 			//$sql .= " INNER JOIN tipo_incidencia ON incidencias.idTipoIncidencia=tipo_incidencia.idTipo";
 

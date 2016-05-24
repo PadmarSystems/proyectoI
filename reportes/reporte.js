@@ -1,6 +1,7 @@
-function filtrar_incidencias(empresa,ubicacion,responsable,puesto,tipoIn,fechai,fechaf){
-	//console.log(arguments);
-	var emmpresa = empresa|| "";
+function filtrar_incidencias(empresa,empleado,ubicacion,responsable,puesto,tipoIn,fechai,fechaf){
+	console.log(arguments);
+	var empresa = empresa|| "";
+	var empleado = empleado || "";
 	var ubicacion = ubicacion|| "";
 	var responsable = responsable || "";
 	var puesto = puesto || "";
@@ -13,6 +14,7 @@ function filtrar_incidencias(empresa,ubicacion,responsable,puesto,tipoIn,fechai,
         type: "POST",
         data: {
         	empresa: empresa,
+			empleado: empleado,
         	ubicacion: ubicacion,
         	responsable: responsable,
         	puesto: puesto,
@@ -23,6 +25,7 @@ function filtrar_incidencias(empresa,ubicacion,responsable,puesto,tipoIn,fechai,
         },
         async: true,
         success: function (msg) {
+			console.log(msg);
         	$(".listado").dataTable().fnDestroy();
             $("#tabla").empty().append(msg);
             $(".listado").dataTable({
@@ -52,8 +55,8 @@ function filtrar_incidencias(empresa,ubicacion,responsable,puesto,tipoIn,fechai,
                         "previous": "Ant."
                     },
                     "aria": {
-                        "sortAscending":  ": activar para ordenar ascendente",
-                        "sortDescending": ": activar para ordenar descendente"
+                        "sortAscending":  ": activar para orden ascendente",
+                        "sortDescending": ": activar para orden descendente"
                     }
                 },
                 "pagingType": "full_numbers"

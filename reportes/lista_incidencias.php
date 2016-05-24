@@ -6,6 +6,7 @@ require('clases/empleado.class.php');
 $empleado = new empleado;
 
 $responsables = $empleado->mostrar_responsables();
+$empleados = $empleado->verEmpleados($_SESSION['idEmpresa']);
 $ubicaciones = $empleado->mostrar_ubicaciones();
 $puestos = $empleado->mostrar_puestos();
 $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
@@ -33,7 +34,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
 <script type="text/javascript" src="<?php echo $ruta; ?>reportes/reporte.js"></script>
 <script type="text/javascript">
     $(function() {
-        $( "#empresa, #tipoIn, #puesto, #responsable, #ubicacion" ).combobox();
+        $( "#empresa, #empleado, #tipoIn, #puesto, #responsable, #ubicacion" ).combobox();
         $('.custom-combobox-input').attr("placeholder", "Seleccione");
 
         $('#clicky').click(function() {
@@ -50,7 +51,7 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
 		<label class="col-md-2">Empresa:</label>
         <div class="col-md-4">
             <select id="empresa" name="empresa">
-                <option value="" >Select one...</option>
+                <option value="">Select one...</option>
                 <?php foreach ($empresas as $empresa) { ?>
                 <option value="<?php echo $empresa['idEmpresa']; ?>"><?php echo $empresa['aliasEmpresa']; ?></option>
                 <?php } ?>
@@ -62,51 +63,62 @@ $incidencias = $incidencia->mostrar_incidencias("incidencias.*",$where);
                 <option value="">Select one...</option>
                 <?php foreach ($ubicaciones as $ubicacion) { ?>
                 <option value="<?php echo $ubicacion['idUbicacion']; ?>"><?php echo $ubicacion['nombreUbicacion']; ?></option>
-                <?php } ?>
-            </select>
-        </div>
-    </div>
-    <div class="row ui-widget">
-        <label class="col-md-2">Responsable:</label>
-        <div class="col-md-4">
-            <select id="responsable" name="responsable">
-                <option value="">Select one...</option>
-                <?php foreach ($responsables as $responsable) { ?>
-                <option value="<?php echo $responsable['idResponsable']; ?>"><?php echo str_replace('--',' ',$responsable['nombreResponsable']); ?></option>
-                <?php } ?>
-            </select>
-        </div>
-        <label class="col-md-2">Puesto:</label>
-        <div class="col-md-4">
-            <select id="puesto" name="puesto">
-                <option value="">Select one...</option>
-                <?php foreach ($puestos as $puesto) { ?>
-                <option value="<?php echo $puesto['idPuesto']; ?>"><?php echo $puesto['nombrePuesto']; ?></option>
-                <?php } ?>
-            </select>
-        </div>
-    </div>
-    <div class="row ui-widget">
-        <label class="col-md-2">Tipo de incidencias:</label>
-        <div class="col-md-4">
-            <select id="tipoIn" name="tipoIn">
-                <option value="">Select one...</option>
-                <?php foreach ($tiposincidencias as $tipoin) { ?>
-                <option value="<?php echo $tipoin['idTipo']; ?>"><?php echo $tipoin['tipoIncidencia']; ?></option>
-                <?php } ?>
-            </select>
-        </div>
-        <label class="col-md-2">Fecha:</label>
-        <div class="col-md-2"><input type="date" name="fechai" id="fechai"></div>
-        <div class="col-md-2"><input type="date" name="fechaf" id="fechaf"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-2">
-			<button class="button" onclick="filtrar_incidencias(empresa.value,ubicacion.value,responsable.value,puesto.value,tipoIn.value,fechai.value,fechaf.value)"><i class="fa fa-check"></i> Filtrar</button>
-			<!---<button class="button" onclick="filtrar_incidencias(ubicacion.value,responsable.value,puesto.value,tipoIn.value,fechai.value,fechaf.value)"><i class="fa fa-check"></i> Filtrar</button>--->
+				<?php } ?>
+			</select>
+		</div>
+	</div>
+	<div class="row ui-widget">
+		<label class="col-md-2">Empleado:</label>
+		<div class="col-md-4">
+			<select id="empleado" name="empleado">
+				<option value="">Select one...</option>
+				<?php foreach ($empleados as $empleado) {
+				echo '<option value="'.$empleado['idEmpleado'].'">'.str_replace('--',' ',$empleado['nombreEmp']).'</option>';
+				} ?>
+			</select>
+		</div>
+		<label class="col-md-2">Puesto:</label>
+		<div class="col-md-4">
+			<select id="puesto" name="puesto">
+				<option value="">Select one...</option>
+				<?php foreach ($puestos as $puesto) { ?>
+				<option value="<?php echo $puesto['idPuesto']; ?>"><?php echo $puesto['nombrePuesto']; ?></option>
+				<?php } ?>
+			</select>
+		</div>
+	</div>
+	<div class="row ui-widget">
+		<label class="col-md-2">Responsable:</label>
+		<div class="col-md-4">
+			<select id="responsable" name="responsable">
+				<option value="">Select one...</option>
+				<?php foreach ($responsables as $responsable) { ?>
+				<option value="<?php echo $responsable['idResponsable']; ?>"><?php echo str_replace('--',' ',$responsable['nombreResponsable']); ?></option>
+				<?php } ?>
+			</select>
+		</div>
+		<label class="col-md-2">Tipo de incidencias:</label>
+		<div class="col-md-4">
+			<select id="tipoIn" name="tipoIn">
+				<option value="">Select one...</option>
+				<?php foreach ($tiposincidencias as $tipoin) { ?>
+				<option value="<?php echo $tipoin['idTipo']; ?>"><?php echo $tipoin['tipoIncidencia']; ?></option>
+				<?php } ?>
+			</select>
+		</div>
+	</div>
+	<div class="row ui-widget">
+		<label class="col-md-2">Fecha:</label>
+		<div class="col-md-2"><input type="date" name="fechai" id="fechai"></div>
+		<div class="col-md-2"><input type="date" name="fechaf" id="fechaf"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-2">
+			<button class="button" onclick="filtrar_incidencias(empresa.value,empleado.value,ubicacion.value,responsable.value,puesto.value,tipoIn.value,fechai.value,fechaf.value)"><i class="fa fa-check"></i> Filtrar</button>
+			<!---<button class="button" onclick="filtrar_incidencias(empleado.value,ubicacion.value,responsable.value,puesto.value,tipoIn.value,fechai.value,fechaf.value)"><i class="fa fa-check"></i> Filtrar</button>--->
             <a href="#" id="clicky">Limpiar filtros</a>
         </div>
-    </div>
+	</div>
 </div>
 
 <div style="margin-top:15px;">
