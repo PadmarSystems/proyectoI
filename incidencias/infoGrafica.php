@@ -31,7 +31,7 @@ switch ($bandera){
 		} else {
 			$tst = 0;
 		}
-		if ($tst != 0){
+		/*if ($tst != 0){
 			#print_r($tst);
 			foreach ($tst as $ts){
 				$nmE = $ts['nombre'];
@@ -45,7 +45,7 @@ switch ($bandera){
 					/*
 					$fecha=explode('-',$fecha[0]);
 					$tiempo = mktime($hora[0]-6,$hora[1],$hora[2],$fecha[1],$fecha[2],$fecha[0]);
-					*/
+					
 					$a = (double)$idE;
 					$res++;
 					$data1[] = array($fecha[0],$res,$idE);
