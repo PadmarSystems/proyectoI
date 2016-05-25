@@ -89,12 +89,14 @@ if (isset($_GET['mod'])) {
     </nav>
     <section class="sidebar">
         <ul>
-            <li><span>Menu Principal</span></li>
+            <li><span>Menú Principal</span></li>
             <?php if($_SESSION['rol']== 1 || $_SESSION['rol']== 0){ ?>
             <li><a onclick="goto()"><i class="fa fa-dashboard"></i>Dashboard</a></li>
             <li><a onclick="goto('listar','empleados');"><i class="fa fa-users"></i>Empleados</a></li>
             <li><a onclick="goto('seguimiento','incidencias')"><i class="fa fa-calendar"></i>Incidencias</a></li>
             <li><a onclick="goto('lista_incidencias','reportes')"><i class="fa fa-file-text"></i>Reportes</a></li>
+			<li><a onclick="goto('graficasTstGggl','incidencias')"><i class="fa fa-tasks"></i>Gráficos</a></li>
+			<!---<li><a onclick="goto('graficas','incidencias')"><i class="fa fa-tasks"></i>Gráficos</a></li>--->
             <?php } ?>
             <!-- Admin -->
             <?php if($_SESSION['rol'] == 1 || $_SESSION['perfil'] == 2 || $_SESSION['rol']== 0 ){ ?>
