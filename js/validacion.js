@@ -57,9 +57,19 @@ function validResp(){
 	switch( $('input[name=a]').val() ){
 		case 'Registrar':
 			if ( $('#responsableSel').val() == 0){
-				if ( $('#responsableN').val() == 0 || $('#responsableN').val() == null || $('#responsableN').val().length <= 1){
+				if ( $('#responsableNm').val() == 0 || $('#responsableNm').val() == null || $('#responsableNm').val().length <= 1){
 					alert('El nombre del responsable no es válido.');
-					$('#responsableN').focus();
+					$('#responsableNm').focus();
+					return false;
+				}
+				if ( $('#responsableApP').val() == 0 || $('#responsableApP').val() == null || $('#responsableApP').val().length <= 1){
+					alert('Uno de los apellidos no es válido.');
+					$('#responsableApP').focus();
+					return false;
+				}
+				if ( $('#responsableApM').val() == 0 || $('#responsableApM').val() == null || $('#responsableApM').val().length <= 1){
+					alert('Uno de los apellidos no es válido.');
+					$('#responsableApM').focus();
 					return false;
 				}
 			}
@@ -68,6 +78,16 @@ function validResp(){
 			if ( $('#nombreNuevo').val() == 0 || $('#nombreNuevo').val() == null || $('#nombreNuevo').val().length <= 1){
 				alert('El nombre del responsable no es válido.');
 				$('#nombreNuevo').focus();
+				return false;
+			}
+			if ( $('#ApPnuevo').val() == 0 || $('#ApPnuevo').val() == null || $('#ApPnuevo').val().length <= 1){
+				alert('Uno de los apellidos no es válido.');
+				$('#ApPnuevo').focus();
+				return false;
+			}
+			if ( $('#ApMnuevo').val() == 0 || $('#ApMnuevo').val() == null || $('#ApMnuevo').val().length <= 1){
+				alert('Uno de los apellidos no es válido.');
+				$('#ApMnuevo').focus();
 				return false;
 			}
 		break;

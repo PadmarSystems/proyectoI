@@ -37,9 +37,9 @@ $usuarios = $usuario->mostrar_usuarios('*',$where);
 				foreach ($usuarios as $row) {
 			?>
 			<tr id="<?php echo $row['idUsuario']; ?>">
-	    		<td><?php echo $row['nombreUsuario']; ?></td>
-	    		<td><?php echo $row['email']; ?></td>
-	    		<td class="actions">
+	    		<td style="text-align:center"><?php echo $row['nombreUsuario']; ?></td>
+	    		<td style="text-align:center"><?php echo $row['email']; ?></td>
+	    		<td style="text-align:center" class="actions">
 	    			<a title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idUsuario"]; ?>','usuarios')"><i class="fa fa-pencil-square-o"></i></a>
 	    			<a title="Eliminar"><i class="fa fa-trash-o"></i></a>
 	    		</td>

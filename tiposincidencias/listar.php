@@ -35,8 +35,8 @@ $tipos = $incidencia->mostrar_tipo_incidencias();
 				foreach ($tipos as $row) {
 			?>
 			<tr id="<?php echo $row['idTipo']; ?>">
-	    		<td><?php echo $row['tipoIncidencia']; ?></td>
-	    		<td class="actions">
+	    		<td style="text-align:center"><?php echo $row['tipoIncidencia']; ?></td>
+	    		<td style="text-align:center" class="actions">
 	    			<a title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idTipo"]; ?>','tiposincidencias')"><i class="fa fa-pencil-square-o"></i></a>
 	    			<a title="Eliminar"><i class="fa fa-trash-o"></i></a>
 	    		</td>

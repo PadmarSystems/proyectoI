@@ -46,7 +46,7 @@ if (isset($_GET['stt'])) {
 			<div class="row">
 				<label class="col-md-4">Seleccione un responsable: </label>
 				<div class="col-md-8">
-					<select id="responsableSel" name="responsableSel" required>
+					<select id="responsableSel" name="responsableSel">
 					<option value="0">Nuevo responsable</option>
 					<?php
 						$lista = $objEmp->verEmpleados($_SESSION['idEmpresa']);
@@ -63,7 +63,11 @@ if (isset($_GET['stt'])) {
 			</div>
 			<div class="row">
 				<label class="col-md-4">Nombre del responsable: </label>
-				<div class="col-md-8"><input type="text" id="responsableN" name="responsableN"/></div>
+				<div class="col-md-8">
+					<input type="text" id="responsableNm" name="responsableNm" placeholder="Nombre(s)"/><p></p>
+					<input type="text" id="responsableApP" name="responsableApP" placeholder="Apellido paterno"/><p></p>
+					<input type="text" id="responsableApM" name="responsableApM" placeholder="Apellido materno"/>
+				</div>
 			</div>
 			<?php
 		break;
@@ -71,11 +75,34 @@ if (isset($_GET['stt'])) {
 			?>
 			<div class="row">
 				<label class="col-md-4">Nombre del responsable: </label>
-				<div class="col-md-8"><label id="responsable" name="resposable"><?php echo $form['nombreResponsable']; ?></label></div>
+				<div class="col-md-8"><label id="responsable" name="resposable"><?php echo str_replace('--',' ',$form['nombreResponsable']); ?></label></div>
 			</div>
+			<br/>
 			<div class="row">
-				<label class="col-md-4">Nuevo nombre del responsable: </label>
-				<div class="col-md-8"><input type="text" id="nombreNuevo" name="nombreNuevo" required /></div>
+				<label class="col-md-4"><b>Nuevo nombre del responsable</b></label>
+				<div class="col-md-8"><label></label></div>
+			</div>
+			
+			<div class="row"> 
+				<?php
+					$respon=explode('--',$form['nombreResponsable']);
+					if (count($respon) == 1){
+						$respon[1] = '';
+						$respon[2] = '';
+					}
+				?>
+				<label class="col-md-4">Nombre:</label>
+				<div class="col-md-8">
+					<input type="text" id="nombreNuevo" name="nombreNuevo" value="<?php echo $respon[0]; ?>"/><p></p>
+				</div>
+				<label class="col-md-4">Apellido Paterno:</label>
+				<div class="col-md-8">
+					<input type="text" id="ApPnuevo" name="ApPnuevo" value="<?php echo $respon[1]; ?>"/><p></p>
+				</div>
+				<label class="col-md-4">Apellido Materno:</label>
+				<div class="col-md-8">
+					<input type="text" id="ApMnuevo" name="ApMnuevo" value="<?php echo $respon[2]; ?>"/>
+				</div>
 				<input type="hidden" id="idR" name="idR" value="<?php echo $form['idR']; ?>"/>
 			</div>
 			<?php

@@ -11,14 +11,16 @@ if(isset($_POST)){
 		case 'Registrar':
 			$dCreate = date('Y-m-d H:i:s');
 			if ( $_POST['responsableSel'] == '0' || $_POST['responsableSel'] == 0){
-				if ( $_POST['responsableN'] == ''){
-					//echo "eligió 'nuevo' y no agregó responsables.";
-					header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=error1');
+				if ($_POST['responsableNm'] == ''){
+					header('Location: ../view.php?com=responsables&mod=form&ac=nuevo&stt=error');
 				} else {
-					$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$_POST['responsableN']);
-					//echo "<pre>"; print_r($saveArray); echo "</pre>";
+					print_r($_POST);
+					$nombre = $_POST['responsableNm'].'--'.$_POST['responsableApP'].'--'.$_POST['responsableApM'];
+					echo $nombre;
+					$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$nombre);
+					echo "<pre>"; print_r($saveArray); echo "</pre>";
 					if($_SESSION['plan'] == 1){
-						$where = "WHERE idEmpresa= " . $_SESSION['idEmpresa'] . " ";
+						$where = "WHERE idEmpresa= ".$_SESSION['idEmpresa']." ";
 						$responsablesnum = $objRes->mostrar_responsables('*',$where);
 						if (count($responsablesnum) >= 2) {
 							$stt = "limit-user";
@@ -33,7 +35,7 @@ if(isset($_POST)){
 				}
 			} else {
 				$nameEmp = $objEmp -> verEmpleadoxID($_POST['responsableSel']);
-				//echo $nameEmp['nombreEmp'];
+				echo $nameEmp['nombreEmp'];
 				$saveArray = array('idEmpresa'=>$idEmp,'nombreResponsable'=>$nameEmp['nombreEmp']);
 				//echo "<pre>"; print_r($saveArray); echo "</pre>";
 				if($_SESSION['plan'] == 1){
@@ -53,17 +55,19 @@ if(isset($_POST)){
 		break;
 		case 'Editar';
 			$nomResponsable = $objRes->verResponsablexID($_POST['idR']);
+			$nombre = $_POST['nombreNuevo'].'--'.$_POST['ApPnuevo'].'--'.$_POST['ApMnuevo'];
 			$nomResponsable=$nomResponsable['nombreResponsable'];
-			if($_POST['nombreNuevo'] == $nomResponsable){
-				echo "igual";
-				header('Location: ../view.php?com=responsables&mod=form&ac=editar&stt=nochng');
+		print_r($_POST);
+			if($nombre == $nomResponsable){
+				header('Location: ../view.php?com=responsables&mod=form&ac=editar&id='.$_POST['idR'].'&stt=nochng');
 			} else {
-				$array = array('nombreResponsable'=>$_POST['nombreNuevo'],'fechaActualizacion'=>date("Y-m-d H:i:s"));
+				$array = array('nombreResponsable'=>$nombre,'fechaActualizacion'=>date("Y-m-d H:i:s"));
+				print_r($array);
 				$actualiza = $objRes->actualizarResponsablearray($array,$_POST['idR']);
 				if ($actualiza){
-					header('Location: ../view.php?com=responsables&mod=form&ac=editar&stt=success');
+					header('Location: ../view.php?com=responsables&mod=form&ac=editar&id='.$_POST['idR'].'&stt=success');
 				} else {
-					header('Location: ../view.php?com=responsables&mod=form&ac=editar&stt=error');
+					header('Location: ../view.php?com=responsables&mod=form&ac=editar&id='.$_POST['idR'].'&stt=error');
 				}
 			}
 		break;

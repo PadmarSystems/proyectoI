@@ -36,8 +36,8 @@ $ubicaciones = $ubicacion->mostrar_ubicaciones('*',$where);
 				foreach ($ubicaciones as $row) {
 			?>
 			<tr id="<?php echo $row['idUbicacion']; ?>">
-	    		<td><?php echo $row['nombreUbicacion']; ?></td>
-	    		<td class="actions">
+	    		<td style="text-align:center"><?php echo $row['nombreUbicacion']; ?></td>
+	    		<td style="text-align:center" class="actions">
 	    			<a title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idUbicacion"]; ?>','ubicaciones')"><i class="fa fa-pencil-square-o"></i></a>
 	    			<a title="Eliminar"><i class="fa fa-trash-o"></i></a>
 	    		</td>

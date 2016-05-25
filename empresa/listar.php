@@ -5,7 +5,7 @@ $where = "WHERE idEmpresa = ".$_SESSION['idEmpresa'];
 $empresas = $empresa->mostrar_empresas('*',$where);
 ?>
 
-<h2>Empresas </h2>
+<h1>Empresas </h1>
 <br>
 <table class='listado'>
 	<thead>
@@ -20,10 +20,10 @@ $empresas = $empresa->mostrar_empresas('*',$where);
 		if (count($empresas) > 0) {
 			foreach ($empresas as $row) {
 		?>
-		<tr id="<?php echo $row['idEmpresa']; ?>">
-    		<td><?php echo $row['aliasEmpresa']; ?></td>
-    		<td><?php echo $row['fechaCreacion']; ?></td>
-    		<td>
+			<tr id="<?php echo $row['idEmpresa']; ?>">
+    		<td style="text-align:center"><?php echo $row['aliasEmpresa']; ?></td>
+    		<td style="text-align:center"><?php echo $row['fechaCreacion']; ?></td>
+    		<td style="text-align:center">
     			<i class="fa fa-pencil-square-o" aria-hidden="true" title="Editar" style="cursor:pointer" onclick="goto('form&ac=editar&id=<?php echo $row["idEmpresa"]; ?>','empresa')"></i>
     		</td>
     	</tr>

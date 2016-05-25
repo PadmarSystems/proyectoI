@@ -37,9 +37,9 @@ $puestos = $puesto->mostrar_puestos('puestos.*,nombreEmpresa',$where);
 				foreach ($puestos as $row) {
 			?>
 			<tr id="<?php echo $row['idPuesto']; ?>">
-	    		<td><?php echo $row['nombrePuesto']; ?></td>
-	    		<td><?php echo $row['fechaCreacion']; ?></td>
-	    		<td class="actions">
+	    		<td style="text-align:center"><?php echo $row['nombrePuesto']; ?></td>
+	    		<td style="text-align:center"><?php echo $row['fechaCreacion']; ?></td>
+	    		<td style="text-align:center" class="actions">
 	    			<a title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idPuesto"]; ?>','puestos')"><i class="fa fa-pencil-square-o"></i></a>
 	    			<a title="Eliminar"><i class="fa fa-trash-o"></i></a>
 	    		</td>

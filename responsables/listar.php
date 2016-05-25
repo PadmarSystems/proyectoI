@@ -26,9 +26,9 @@ $responsables = $responsable->mostrar_responsables('*',$where);
 	<table class='listado'>
 		<thead>
 			<tr>
-				<th>Nombre </th>
-				<th>A. Paterno </th>
-				<th>A. Materno </th>
+				<th>Nombre</th>
+				<th>A. Paterno</th>
+				<th>A. Materno</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -37,24 +37,21 @@ $responsables = $responsable->mostrar_responsables('*',$where);
 			if (count($responsables) > 0) {
 				foreach ($responsables as $row) {
 					$emp = explode("--", $row['nombreResponsable']);
-
 	                if(!isset($emp[0])){
 	                    $emp[0] = '';
 	                }
-
 	                if(!isset($emp[1])){
 	                    $emp[1] = '';
 	                }
-
 	                if(!isset($emp[2])){
 	                    $emp[2] = '';
 	                }
 			?>
 			<tr id="<?php echo $row['idResponsable']; ?>">
-	    		<td><?php echo $emp[0]; ?></td>
-	    		<td><?php echo $emp[1]; ?></td>
-	    		<td><?php echo $emp[2]; ?></td>
-	    		<td class="actions">
+	    		<td style="text-align:center"><?php echo $emp[0]; ?></td>
+	    		<td style="text-align:center"><?php echo $emp[1]; ?></td>
+	    		<td style="text-align:center"><?php echo $emp[2]; ?></td>
+	    		<td style="text-align:center" class="actions">
 	    			<a title="Editar" onclick="goto('form&ac=editar&id=<?php echo $row["idResponsable"]; ?>','responsables')"><i class="fa fa-pencil-square-o"></i></a>
 	    			<a title="Eliminar"><i class="fa fa-trash-o"></i></a>
 	    		</td>
