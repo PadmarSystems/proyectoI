@@ -54,7 +54,7 @@ $fecha = date('Y-m-d');
 			<select class="sel" id="selResponsable" readonly>
 				<option value="">---</option>
 				<?php foreach ($responsables as $resp) {
-					echo '<option value="'.$resp['idResponsable'].'">'.$resp['nombreResponsable'].'</option>';
+					echo '<option value="'.$resp['idResponsable'].'">'.str_replace('--',' ',$resp['nombreResponsable']).'</option>';
 				}?>
 			</select>
 			</div>

@@ -146,7 +146,7 @@ function loadGraph() {
 		case '1':
 			mes = 0; id=0;
 			var tipo = $('#selIncidencia').val().split('*3*');
-			alert(tipo[0]);
+			//alert(tipo[0]);
 			tipoIn = tipo[0];
 			tipoNm = tipo[1];
 		break;
@@ -196,7 +196,8 @@ function loadGraph() {
 		var j=0;
 		switch (caso){
 			case '1':
-				console.log(obj);
+				//console.log(obj);
+				google.charts.setOnLoadCallback(drawChart6(obj,tipoNm));
 			break;
 			case '2':
 				for (var i=0; i<obj.length; i++){
@@ -254,6 +255,34 @@ function loadGraph() {
 				}
 			break;
 		}
+	});
+}
+function drawChart6(obj){
+	var max = [];
+	$.each(obj,function (i,v){
+		max.push(v.NUM);
+	});
+	Array.prototype.max = function() {
+		return Math.max.apply(null, this);
+	};
+	var M = max.max();
+	alert(M);
+	return;
+	
+	var datos = new google.visualization.DataTable();
+	datos.addColumn('date', 'Fecha');
+	
+	$.each(obj, function(index,value){
+		var array = new Array();
+		datos.addColumn('number', value.name);
+		// alguna columna extra de texto
+		
+		$.each(value.data,function(nInd,nVal){
+			//console.log(nVal);
+			array.push(nVal[0]); // fecha
+			array.push(nVal[1]); // $res
+		});
+		console.log(array);
 	});
 }
 function drawChart1(obj) {

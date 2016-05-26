@@ -36,20 +36,14 @@ switch ($bandera){
 			#print_r($tst);
 			foreach ($tst as $ts){
 				$nmE = $ts['nombre'];
-				$idE = $ts['id'];
-				
+				$idE = $ts['id'];	
 				$data1=array(); 
 				$listaIncid=$incidencia->mostrar_incidenciasfiltro("SELECT idEmpleado,idTipoIncidencia,fechaInicio FROM incidencias WHERE idTipoIncidencia = ".$_POST['incidencia']." AND idEmpleado=".$idE." ORDER BY fechaInicio");
 				$res=0;
 				foreach ($listaIncid as $val){
 					$fecha=explode(' ',$val['fechaInicio']);
-					/*
-					$fecha=explode('-',$fecha[0]);
-					$tiempo = mktime($hora[0]-6,$hora[1],$hora[2],$fecha[1],$fecha[2],$fecha[0]);
-					*/
-					$a = (double)$idE;
 					$res++;
-					$data1[] = array($fecha[0],$res,$idE);
+					$data1[] = array($fecha[0],$res);
 				}
 				$aux=[];
 				foreach ($data1 as $key => $row) {
