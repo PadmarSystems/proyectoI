@@ -50,7 +50,7 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 <h1>Registrar Incidencia</h1>
 <div class="row">
 	<p class="<?php echo $stt; ?>" id="msg" ><?php echo $msg; ?></p>
-	<form id="formIncidencia" class="col-md-8 group">
+	<form id="formIncidencia" class="col-md-8 group" onsubmit="return validReporte();">
 		<div class="row">
 			<label class="col-md-4">Folio: </label>
 			<div class="col-md-8"><input type="text" id="folio" name="folio" value="<?php echo $form['folio'] ?>" required /></div>
@@ -86,10 +86,10 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 		<div class="row">
 			<label class="col-md-4">Fecha: </label>
 			<div class="col-md-4">
-				<input type="date" name="fi_inc" >
+				<input type="date" name="fi_inc" id="fechaIn"/>
 			</div>
 			<div class="col-md-4">
-				<input type="time" name="hi_inc">
+				<input type="time" name="hi_inc" id="horaIn"/>
 			</div>
 		</div>
 		<!--<div class="row">

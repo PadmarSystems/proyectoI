@@ -37,7 +37,6 @@ if (isset($_GET['stt'])) {
 }
 ?>
 <script src="usuarios/js/formulario.js"></script>
-<script src="js/validacion.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$( "#correo" ).change(function() {

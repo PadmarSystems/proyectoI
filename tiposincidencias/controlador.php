@@ -6,13 +6,13 @@ if(isset($_POST['a'])){
 	$accion=$_POST['a'];
 	switch ($accion){
 		case 'Registrar':
-				$array = array('tipoIncidencia'=>$_POST['tipo']);
-				$inserta = $incidencia->insertartipo($array);
-				if($inserta){
-					$stt = "success";
-				}else{
-					$stt = "error"
-				}	
+			$array = array('tipoIncidencia'=>$_POST['tipo']);
+			$inserta = $incidencia->insertartipo($array);
+			if($inserta){
+				$stt = "success";
+			}else{
+				$stt = "error";
+			}	
 			
 			header('Location: ../view.php?com=tiposincidencias&mod=listar&stt='.$stt);
 			break;

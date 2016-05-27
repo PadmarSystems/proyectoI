@@ -1,5 +1,9 @@
 /* se deben introducir dos caracteres como mínimo */
-
+/* 
+   reporte de incidencia en incidencias/incidencias.js
+   usuarios en usuarios/js/formulario.js
+   
+*/
 function validEmp(){
 	if ( $('#nombre').val() == 0 || $('#nombre').val() == null || $('#nombre').val().length <= 1){
 		alert('El nombre no es válido.');
@@ -143,16 +147,11 @@ function validUbic(){
 	return true;
 }
 
-function validUsr(){
-	if ($('#correo').val() == null || $('#correo').val().length <= 3){
-		alert('Verifique el correo electrónico.');
-		$('#correo').focus();
-		return false;
-	} else if ( $('#usuario').val().length <= 0 || $('#usuario').val().length > 20 ){
-		alert('El nombre de usuario no es válido.');
-		$('#usuario').focus();
+function validTipo(){
+	if ( $('#tipo').val() == 0 || $('#tipo').val() == null || $('#tipo').val().length <= 1){
+		alert('El tipo de incidencia no es válido.');
+		$('#tipo').focus();
 		return false;
 	}
-	console.log('OK');
-	return false;
+	return true;
 }

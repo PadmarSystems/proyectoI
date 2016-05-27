@@ -32,12 +32,13 @@ if (isset($_GET['stt'])) {
 	}
 }
 ?>
+<script src="js/validacion.js"></script>
 <h1><?php echo $form['accion'] ?> tipo de incidencia</h1>
 <div class="row">
 	<div class="<?php echo $stt; ?>"><p><?php echo $msg; ?></p></div>
-	<form action="tiposincidencias/controlador.php" method="post" class="col-md-8 group">
+	<form action="tiposincidencias/controlador.php" method="post" class="col-md-8 group" onsubmit="return validTipo();">
 		<div class="row">
-			<label class="col-md-4">Tipo de incidencia *:</label>
+			<label class="col-md-4">Tipo de incidencia:</label>
 			<div class="col-md-8"><input type="text" name="tipo" id="tipo" value="<?php echo $form['tipo']; ?>"></div>
 		</div>
 		<div class="row">

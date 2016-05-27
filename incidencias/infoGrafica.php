@@ -31,9 +31,7 @@ switch ($bandera){
 		} else {
 			$tst = 0;
 		}
-		#print_r($tst);
 		if ($tst != 0){
-			#print_r($tst);
 			foreach ($tst as $ts){
 				$nmE = $ts['nombre'];
 				$idE = $ts['id'];	
@@ -53,6 +51,8 @@ switch ($bandera){
 				array_multisort($aux,SORT_ASC,$data1);
 				$arregloDatos[] = array('name'=>$nmE,'data'=>$data1,'NUM'=>$cuenta);
 			}
+		} else {
+			$arregloDatos = 0;
 		}
 		echo json_encode($arregloDatos);
 			 /*foreach ($listaEmp as $emp){
