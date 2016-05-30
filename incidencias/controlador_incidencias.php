@@ -20,21 +20,19 @@ if(isset($_POST['a'])){
 				$listaObjetos[] = str_replace('--',' ',$row['nombreEmp']);
 			}
 
-			echo '' . json_encode($listaObjetos) . '';
+			echo ''.json_encode($listaObjetos).'';
 
 			break;
 		case 'crear':
 			require('../clases/empleado.class.php');
 			$empleado = new empleado;
-
 			$row = $empleado->mostrar_empleado($_POST['empleado']);
-
 			if (empty($row)) {
 				echo 'Error. No se encontró el empleado solicitado.';
 				return;
 			}
-
-			$array = array('folio'=>$_POST['folio'],'idUsuario' => $_SESSION['idUsuario'],'idEmpresa'=>$row['idEmpresa'],'idUbicacion'=>$row['idUbicacion'],'idEmpleado'=>$row['idEmpleado'],'idPuesto'=>$row['idPuesto'],'idResponsable'=>$row['idResponsable'],'idTipoIncidencia'=>$_POST['tipoIncidencia'],'fechaInicio'=>$_POST['fi_inc'] . ' ' . $_POST['hi_inc'],'fechaFin'=>$_POST['ff_inc'] . ' ' . $_POST['hf_inc'],'motivo'=>$_POST['motivo']);
+			//$array = array('folio'=>$_POST['folio'],'idUsuario' => $_SESSION['idUsuario'],'idEmpresa'=>$row['idEmpresa'],'idUbicacion'=>$row['idUbicacion'],'idEmpleado'=>$row['idEmpleado'],'idPuesto'=>$row['idPuesto'],'idResponsable'=>$row['idResponsable'],'idTipoIncidencia'=>$_POST['tipoIncidencia'],'fechaInicio'=>$_POST['fi_inc'] . ' ' . $_POST['hi_inc'],'fechaFin'=>$_POST['ff_inc'] . ' ' . $_POST['hf_inc'],'motivo'=>$_POST['motivo']);
+			$array = array('folio'=>$_POST['folio'],'idUsuario'=>$_SESSION['idUsuario'],'idEmpresa'=>$row['idEmpresa'],'idUbicacion'=>$row['idUbicacion'],'idEmpleado'=>$row['idEmpleado'],'idPuesto'=>$row['idPuesto'],'idResponsable'=>$row['idResponsable'],'idTipoIncidencia'=>$_POST['tipoIncidencia'],'fechaInicio'=>$_POST['fi_inc'].' '.$_POST['hi_inc'],'motivo'=>$_POST['motivo']);
 			$inserta = $objincidencia->insertarincidencia($array);
 			if ($inserta) {
 				$idIncidencia = $objincidencia->ultimoidinsertado();
@@ -44,21 +42,17 @@ if(isset($_POST['a'])){
 					$insertaadic = $objincidencia->insertarincidenciaadic($array);
 					unset($array);
 				}
-
 				echo "La incidencia se registró correctamente.";
 			}else{
 				echo "No se insertó la incidencia.";
 			}
 			break;
 		case 'Detalle':
-
 				$row = $objincidencia->mostrar_ultimaincidencia($_POST['idEmpleado']);
-
 				if (count($row) == 0) {
 					echo "No hay incidencias relacionadas al empleado.";
 					return;
 				}
-
 				?>
 				<p>
 					<label>Última incidencia: <?php echo date("d/m/Y",strtotime($row['fechaInicio'])); ?> (<?php echo $row['tipoIncidencia']; ?>)</label> <a onclick="goto('lista_incidencias&idEmpleado=<?php echo $_POST['idEmpleado']; ?>&a=1','reportes')"> Ver detalles</a>

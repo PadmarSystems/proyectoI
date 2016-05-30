@@ -64,6 +64,7 @@ function procesar_incidencia(id){
 		}
 	});
 }
+//// VALIDACIÓN
 function validReporte(){
 	if ( $('#folio').val() == 0 || $('#folio').val() == null || $('#folio').val().length <=1 ){
 		alert('El folio no es válido.');
@@ -92,6 +93,7 @@ function validReporte(){
 	}
 	return 1;
 }
+//// AVISO
 function noData(){
 	$('#grafica').empty();
 	$.ajax({
@@ -113,6 +115,7 @@ function noData(){
 		}
 	});
 }
+//// GRÁFICAS
 function chgnVal(value){
 	$('#boton').val(value);
 	showSelect(value);

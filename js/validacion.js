@@ -2,8 +2,9 @@
 /* 
    reporte de incidencia en incidencias/incidencias.js
    usuarios en usuarios/js/formulario.js
-   
 */
+
+//empleados
 function validEmp(){
 	if ( $('#nombre').val() == 0 || $('#nombre').val() == null || $('#nombre').val().length <= 1){
 		alert('El nombre no es válido.');
@@ -40,7 +41,16 @@ function validEmp(){
 	}
 	return true;
 }
-
+//empresa
+function validAlias(){
+	if ( $('#nombreNuevo').val() == 0 || $('#nombreNuevo').val() == null || $('#nombreNuevo').val().length <= 1){
+		alert('Elija otro nombre para su empresa.');
+		$('#nombreNuevo').focus();
+		return false;
+	}
+	return true;
+}
+//puestos
 function validPuesto(){
 	if ( $('#puesto1').val() == 0 || $('#puesto1').val() == null || $('#puesto1').val().length <= 1){
 		alert('El puesto no es válido.');
@@ -56,7 +66,7 @@ function validPuesto(){
 	}
 	return true;
 }
-
+//responsables
 function validResp(){
 	switch( $('input[name=a]').val() ){
 		case 'Registrar':
@@ -100,16 +110,16 @@ function validResp(){
 	}
 	return true;
 }
-
-function validAlias(){
-	if ( $('#nombreNuevo').val() == 0 || $('#nombreNuevo').val() == null || $('#nombreNuevo').val().length <= 1){
-		alert('Elija otro nombre para su empresa.');
-		$('#nombreNuevo').focus();
+//tipos incidencias
+function validTipo(){
+	if ( $('#tipo').val() == 0 || $('#tipo').val() == null || $('#tipo').val().length <= 1){
+		alert('El tipo de incidencia no es válido.');
+		$('#tipo').focus();
 		return false;
 	}
 	return true;
 }
-
+//ubicaciones
 function validUbic(){
 	switch( $('input[name=a]').val() ){
 		case 'Registrar':
@@ -143,15 +153,6 @@ function validUbic(){
 		break;
 		default:
 			console.log('default');
-	}
-	return true;
-}
-
-function validTipo(){
-	if ( $('#tipo').val() == 0 || $('#tipo').val() == null || $('#tipo').val().length <= 1){
-		alert('El tipo de incidencia no es válido.');
-		$('#tipo').focus();
-		return false;
 	}
 	return true;
 }
