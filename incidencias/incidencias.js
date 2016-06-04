@@ -386,8 +386,8 @@ function drawChart3(obj,incidencia){
 		'height':500,
 		'legend': {	position: 'none'},
 		'annotations': { 'alwaysOutside': true },
-		'vAxis': { title: "No. de Incidencias" },
-		'hAxis': { title: "Empleado", format: '#,###', minValue: 0, maxValue: j-1 }
+		'vAxis': { title: "Empleado " },
+		'hAxis': { title: "No. de Incidencias", format: '#,###', minValue: 0, maxValue: j-1 }
 	}
 	var grafica = new google.visualization.BarChart(document.getElementById('grafica'));
 	grafica.draw(datos, options);

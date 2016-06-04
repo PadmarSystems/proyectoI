@@ -22,7 +22,7 @@ $fecha = date('Y-m-d');
 	}
 </style>
 <script src="incidencias/loader.js"></script>
-<script src="incidencias/incidenciasTstGggl.js"></script>
+<script src="incidencias/incidencias.js"></script>
 <h2>Graficador de Incidencias</h2>
 	<div>
 		<div>
