@@ -229,7 +229,7 @@ function loadGraph() {
 				if (obj == 0){
 					noData();
 				} else {
-					//console.log(obj);
+					console.log(obj);
 					google.charts.setOnLoadCallback(drawChart6(obj,tipoNm));
 				}
 			break;
@@ -342,8 +342,8 @@ function drawChart1(obj) {
 		'title':'Número de incidencias por empleado',
 		'width':800,
 		'height':500,
-		'vAxis': {title: "No. de Incidencias"},
-		'hAxis': { title: "Incidencias", format: '#,###', minValue: 0, maxValue: 4 },
+		'vAxis': {title: "Incidencias"},
+		'hAxis': { title: "No. de Incidencias", format: '#,###', minValue: 0, maxValue: 4 },
 		'legend': {	position: 'none'},
 		'annotations': {'alwaysOutside': true}
 	};
