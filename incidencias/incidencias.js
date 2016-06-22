@@ -119,6 +119,7 @@ function noData(){
 function chgnVal(value){
 	$('#boton').val(value);
 	showSelect(value);
+	console.log("corrección de año (2015 a actual)");
 }
 function showSelect(value){
 	switch (value){
@@ -166,7 +167,6 @@ function showSelect(value){
 		break;
 	}
 }
-
 function loadGraph() {
 	var caso = $('#tipograf').val();
 	var id = $('#selEmpleado').val();
@@ -293,7 +293,7 @@ function loadGraph() {
 }
 function drawChart6(obj){
 	// FALTA AGREGAR CORRECTAMENTE COLUMNAS DE LA TABLA
-	var Max = [];
+	/*var Max = [];
 	$.each(obj,function (i,v){
 		Max.push(v.NUM);
 	});
@@ -302,21 +302,20 @@ function drawChart6(obj){
 	};
 	alert(Max.max());
 	//return;
-	
+	*/
 	var datos = new google.visualization.DataTable();
 	datos.addColumn('date', 'Fecha');
+	datos.addColumn('number','Incidencia de '+obj.name);
+	datos.addColumn('string','Empleado');
 	var k=1;
+	
 	$.each(obj, function(index,value){
-		var M = Max.max();
-		var array = new Array();
-		datos.addColumn('number', value.name);
-		// alguna columna extra de texto
-		
+		//var M = Max.max();
 		$.each(value.data,function(nInd,nVal){
-			//console.log(nVal);
-			array.push(nVal[0],nVal[1]); // fecha, $res
+			var val = nVal[0].split('-');
+			datos.addRow([new Date(val[0],val[1]-1,val[2]), nVal[1], value.name]); //array.push(nVal[0],nVal[1],value.name); // fecha, $res
 		});
-		var x = array.length;
+	/*	var x = array.length;
 		M=M*2;
 		if (x!=M){
 			var j=M-x;
@@ -324,9 +323,11 @@ function drawChart6(obj){
 				array.push('');
 			}
 		}
-		k++;
-		console.log(array);
+		k++;*/
 	});
+	var options={ displayAnnotations: true };
+	var grafica = new google.visualization.AnnotationChart(document.getElementById('grafica'));
+	grafica.draw(datos,options);
 }
 function drawChart1(obj) {
 	var datos = new google.visualization.DataTable();

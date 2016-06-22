@@ -8,11 +8,8 @@ $tiposincidencias = $incidencia->mostrar_tipo_incidencias();
 $yr = date('Y');
 	$yr = 2015;
 $bandera = $_POST['bandera'];
-#if ($bandera != '3punto1'){
-	$id=$_POST['empleado'];
-	$empresa=$_POST['empresa'];
-#}
-#print_r($_POST);
+$id=$_POST['empleado'];
+$empresa=$_POST['empresa'];
 switch ($bandera){
 	case 1:
 		$emp = $incidencia->mostrar_incidenciasfiltro("SELECT DISTINCT idEmpleado FROM incidencias WHERE idTipoIncidencia=".$_POST['incidencia'].' AND idEmpresa='.$empresa.' ORDER BY idIncidencia');
@@ -55,21 +52,6 @@ switch ($bandera){
 			$arregloDatos = 0;
 		}
 		echo json_encode($arregloDatos);
-			 /*foreach ($listaEmp as $emp){
-				$datos11 = array();
-				$nm = str_replace('--',' ',$emp['nombreEmp']);
-				$datos[]=array('name'=>$nm);
-				foreach ($idIncid as $incid){
-					$listaIncid = $incidencia->verIncidenciasEmpTipo($emp['idEmpleado'],$incid['idTipo'],$yr,$mes);
-					$datos11[]=array('incidencia'=>$incid['tipoIncidencia'],'num'=>$listaIncid);
-				}
-				$datos[]=array($datos11);
-			}
-		} else {
-			$datos=0;
-		}
-		echo json_encode($datos); */
-	
 	break;
 	case 2:
 		$mes=$_POST['fecha'];

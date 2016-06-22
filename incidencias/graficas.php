@@ -13,7 +13,11 @@ $responsables = $responsbale -> verResponsables($_SESSION['idEmpresa']);
 $ubicaciones = $ubicacion->getUbicacionesxEmp($_SESSION['idEmpresa']);
 	$x = date_default_timezone_get();
 	date_default_timezone_get('America/Mexico City');
-$mes = date('n');
+if (date('n') == 1){
+	$mes = 12;
+} else {
+	$mes = date('n')-1;
+}
 $fecha = date('Y-m-d');
 ?>
 <style>
@@ -86,7 +90,7 @@ $fecha = date('Y-m-d');
 			<div class="ui-widget">
 			<select class="sel" id="selectMes" readonly>
 				<option value="">---</option>
-				<!--- MES ACTUAL -1 --->
+				<!--- QUE SEA EL AÑO ACTUAL (NO 2015) --->
 				<option value="1" <?php if ($mes == 1){ echo "selected"; } ?>>Enero</option>
 				<option value="2" <?php if ($mes == 2){ echo "selected"; } ?>>Febrero</option>
 				<option value="3" <?php if ($mes == 3){ echo "selected"; } ?>>Marzo</option>
