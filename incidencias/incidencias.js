@@ -119,9 +119,9 @@ function noData(){
 function chgnVal(value){
 	$('#boton').val(value);
 	showSelect(value);
-	console.log("corrección de año (2015 a actual)");
 }
 function showSelect(value){
+	console.log("corrección de año (2015 a actual)");
 	switch (value){
 		case '1':
 			$('#incidencia').show(300);
@@ -325,7 +325,7 @@ function drawChart6(obj){
 		}
 		k++;*/
 	});
-	var options={ displayAnnotations: true };
+	var options={ displayAnnotations: true, displayZoomButtons: false };
 	var grafica = new google.visualization.AnnotationChart(document.getElementById('grafica'));
 	grafica.draw(datos,options);
 }
