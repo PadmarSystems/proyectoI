@@ -325,7 +325,10 @@ function drawChart6(obj){
 		}
 		k++;*/
 	});
-	var options={ displayAnnotations: true, displayZoomButtons: false };
+	var options={
+		displayAnnotations: true,
+		displayZoomButtons: false
+	};
 	var grafica = new google.visualization.AnnotationChart(document.getElementById('grafica'));
 	grafica.draw(datos,options);
 }

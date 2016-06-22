@@ -13,25 +13,17 @@ $empresa=$_POST['empresa'];
 switch ($bandera){
 	case 1:
 		$listaIncid=$incidencia->mostrar_incidenciasfiltro("SELECT idEmpleado,idTipoIncidencia,fechaInicio FROM incidencias WHERE idTipoIncidencia=".$_POST['incidencia']." ORDER BY fechaInicio");
-		$listaIncid=array(
-			array('idEmpleado' => 5,'idTipoIncidencia' => 4,'fechaInicio' => '2015-01-20 17:30:00'),
-			array('idEmpleado' => 2,'idTipoIncidencia' => 4,'fechaInicio' => '2015-02-15 17:30:00'),
-			array('idEmpleado' => 3,'idTipoIncidencia' => 4,'fechaInicio' => '2015-02-15 17:30:00'),
-			array('idEmpleado' => 1,'idTipoIncidencia' => 4,'fechaInicio' => '2015-02-15 17:30:00'),
-			array('idEmpleado' => 1,'idTipoIncidencia' => 4,'fechaInicio' => '2015-03-12 17:30:00'),
-			array('idEmpleado' => 4,'idTipoIncidencia' => 4,'fechaInicio' => '2015-04-19 17:30:00'),
-			array('idEmpleado' => 4,'idTipoIncidencia' => 4,'fechaInicio' => '2015-05-01 17:30:00'),
-			array('idEmpleado' => 2,'idTipoIncidencia' => 4,'fechaInicio' => '2015-05-15 17:30:00'),
-			array('idEmpleado' => 1,'idTipoIncidencia' => 4,'fechaInicio' => '2015-06-12 17:30:00'),
-			array('idEmpleado' => 3,'idTipoIncidencia' => 4,'fechaInicio' => '2015-06-12 17:30:00'),
-			array('idEmpleado' => 4,'idTipoIncidencia' => 4,'fechaInicio' => '2015-07-25 17:30:00'),
-			array('idEmpleado' => 4,'idTipoIncidencia' => 4,'fechaInicio' => '2015-08-04 17:30:00'),
-			array('idEmpleado' => 2,'idTipoIncidencia' => 4,'fechaInicio' => '2015-08-25 17:30:00'),
-			array('idEmpleado' => 2,'idTipoIncidencia' => 4,'fechaInicio' => '2015-08-25 17:30:00'),
-			array('idEmpleado' => 5,'idTipoIncidencia' => 4,'fechaInicio' => '2015-09-12 17:30:00'),
-			array('idEmpleado' => 1,'idTipoIncidencia' => 4,'fechaInicio' => '2016-02-25 17:30:00'),
+	/*	ARRAY TEST
+		$listaIncid=array( 	array('idEmpleado' => 5,'idTipoIncidencia' => 4,'fechaInicio' => '2015-01-20 17:30:00'), array('idEmpleado' => 2,'idTipoIncidencia' => 4,'fechaInicio' => '2015-02-15 17:30:00'),
+			array('idEmpleado' => 3,'idTipoIncidencia' => 4,'fechaInicio' => '2015-02-15 17:30:00'),array('idEmpleado' => 1,'idTipoIncidencia' => 4,'fechaInicio' => '2015-02-15 17:30:00'),
+			array('idEmpleado' => 1,'idTipoIncidencia' => 4,'fechaInicio' => '2015-03-12 17:30:00'),array('idEmpleado' => 4,'idTipoIncidencia' => 4,'fechaInicio' => '2015-04-19 17:30:00'),
+			array('idEmpleado' => 4,'idTipoIncidencia' => 4,'fechaInicio' => '2015-05-01 17:30:00'),array('idEmpleado' => 2,'idTipoIncidencia' => 4,'fechaInicio' => '2015-05-15 17:30:00'),
+			array('idEmpleado' => 1,'idTipoIncidencia' => 4,'fechaInicio' => '2015-06-12 17:30:00'),array('idEmpleado' => 3,'idTipoIncidencia' => 4,'fechaInicio' => '2015-06-12 17:30:00'),
+			array('idEmpleado' => 4,'idTipoIncidencia' => 4,'fechaInicio' => '2015-07-25 17:30:00'),array('idEmpleado' => 4,'idTipoIncidencia' => 4,'fechaInicio' => '2015-08-04 17:30:00'),
+			array('idEmpleado' => 2,'idTipoIncidencia' => 4,'fechaInicio' => '2015-08-25 17:30:00'),array('idEmpleado' => 2,'idTipoIncidencia' => 4,'fechaInicio' => '2015-08-25 17:30:00'),
+			array('idEmpleado' => 5,'idTipoIncidencia' => 4,'fechaInicio' => '2015-09-12 17:30:00'),array('idEmpleado' => 1,'idTipoIncidencia' => 4,'fechaInicio' => '2016-02-25 17:30:00'),
 		);
-		$fiBck = 0; $res=0;
+	*/	$fiBck = 0; $res=0;
 		if (!empty($listaIncid)){
 			foreach ($listaIncid as $ts){
 				$tst = $incidencia->mostrar_incidenciasfiltro("SELECT nombreEmp FROM empleados WHERE idEmpleado=".$ts['idEmpleado']);
