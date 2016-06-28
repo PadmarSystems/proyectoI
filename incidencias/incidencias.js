@@ -176,7 +176,6 @@ function loadGraph() {
 		case '1':
 			mes = 0; id=0;
 			var tipo = $('#selIncidencia').val().split('*3*');
-			//alert(tipo[0]);
 			tipoIn = tipo[0];
 			tipoNm = tipo[1];
 		break;
@@ -305,15 +304,14 @@ function drawChart6(obj){
 	*/
 	var datos = new google.visualization.DataTable();
 	datos.addColumn('date', 'Fecha');
-	datos.addColumn('number','Incidencia de '+obj.name);
+	datos.addColumn('number','Incidencia');
 	datos.addColumn('string','Empleado');
-	var k=1;
-	
+	//var k=1;
 	$.each(obj, function(index,value){
 		//var M = Max.max();
 		$.each(value.data,function(nInd,nVal){
 			var val = nVal[0].split('-');
-			datos.addRow([new Date(val[0],val[1]-1,val[2]), nVal[1], value.name]); //array.push(nVal[0],nVal[1],value.name); // fecha, $res
+			datos.addRow([new Date(val[0],val[1]-1,val[2]), nVal[1], value.name]);
 		});
 	/*	var x = array.length;
 		M=M*2;
@@ -327,7 +325,8 @@ function drawChart6(obj){
 	});
 	var options={
 		displayAnnotations: true,
-		displayZoomButtons: false
+		displayZoomButtons: false,
+		tooltip: {isHtml: true}
 	};
 	var grafica = new google.visualization.AnnotationChart(document.getElementById('grafica'));
 	grafica.draw(datos,options);

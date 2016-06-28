@@ -47,7 +47,7 @@ switch ($bandera){
 				$arregloDatos[] = array('name'=>$nmE,'data'=>$data1,'NUM'=>$cuenta);	
 			}
 		} else {
-			$listaIncid=0;
+			$arregloDatos=0;
 		}
 		echo json_encode($arregloDatos);
 	
