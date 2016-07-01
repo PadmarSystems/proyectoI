@@ -52,3 +52,8 @@ Es necesario que conserve los cambios del archivo **constants.php** localmente, 
 ```
 git rm --cached clases/constants.php
 ```
+
+incidencias/infoGrafica.php
+-------------------
+
+Para el funcionamiento adecuado del módulo de gráficos, será necesario comentar o eliminar las líneas no. 9 y 77 del archivo infoGraficas.php de la carpeta incidencias ("$yr = 2015;") para que así tome el año actual y devuelva los registros de esas incidencias.
