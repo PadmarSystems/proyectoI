@@ -145,7 +145,21 @@ if(isset($_POST['a'])){
 				<label>No se encontraron resultados. Intente cambiar los parámetros de búsqueda.</label><br>
 			</p>
 			<?php
-
+			break;
+		case 'campos_vacios':
+			switch ($_POST['X']){
+				case 1:
+					?><p>
+						<label>Seleccione un tipo de gráfica.</label><br>
+					</p><?php
+					break;
+				case 2:
+					?><p>
+						<label>Llene todos los campos para ver una gráfica.</label><br>
+					</p>
+				<?php
+				break;
+			}
 			break;
 		default:
 			header('');

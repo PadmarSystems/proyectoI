@@ -93,7 +93,7 @@ function validReporte(){
 	}
 	return 1;
 }
-//// AVISO
+//// AVISOS
 function noData(){
 	$('#grafica').empty();
 	$.ajax({
@@ -101,6 +101,28 @@ function noData(){
 		type: "POST",
 		data: {
 			'a': 'Aviso'
+		},
+		success: function(data){
+			$("#dialog-message").empty().append(data).dialog({
+				modal: true,
+				title: 'Aviso',
+				buttons: {
+					OK: function() {
+						$( this ).dialog("close");
+					}
+				}
+			});
+		}
+	});
+}
+function emptyFields(X){
+	$('#grafica').empty();
+	$.ajax({
+		url: "incidencias/controlador_incidencias.php",
+		type: "POST",
+		data: {
+			'a': 'campos_vacios',
+			'X': X
 		},
 		success: function(data){
 			$("#dialog-message").empty().append(data).dialog({
@@ -172,161 +194,173 @@ function loadGraph() {
 	var id = $('#selEmpleado').val();
 	var empresa = $('#idEmp').val();
 	var mes, tipoIn, resubic=0, tipoNm=0;
-	switch (caso){
-		case '1':
-			mes = 0; id=0;
-			var tipo = $('#selIncidencia').val().split('*3*');
-			tipoIn = tipo[0];
-			tipoNm = tipo[1];
-		break;
-		case '2':
-			mes = $('#selectMes').val();
-			tipoIn = 0;
-		break;
-		case '3':
-			id = 0;
-			var tipo = $('#selIncidencia').val().split('*3*');
-			tipoIn = tipo[0];
-			tipoNm = tipo[1];
-			mes = $('#selectMes').val();
-		break;
-		case '4':
-			mes = 0;
-			var tipo = $('#selIncidencia').val().split('*3*');
-			tipoIn = tipo[0];
-			tipoNm = tipo[1];
-		break;
-		case '5':
-			id = 0; tipoIn=0;
-			var resubic = $('#selResponsable').val();
-			var mes = $('#selectMes').val();
-		break;
-		case '6':
-			id = 0; tipoIn=0;
-			var resubic = $('#selUbicacion').val();
-			var mes = $('#selectMes').val()
-		break;
-	}
-	request = $.ajax({
-		method: 'post',
-		url: 'incidencias/infoGrafica.php',
-		data:{
-			'bandera': caso,
-			'empleado': id,
-			'fecha': mes,
-			'incidencia': tipoIn,
-			'empresa': empresa,
-			'respOubic': resubic
-		},
-		success: function(data) {}
-	});
-	request.done(function(response, textStatus, jqXHR) {
-		var obj = jQuery.parseJSON(response);
-		var j=0;
+	if (caso!=''){
+		var flag = true;
 		switch (caso){
 			case '1':
-				if (obj == 0){
-					noData();
-				} else {
-					console.log(obj);
-					google.charts.setOnLoadCallback(drawChart6(obj,tipoNm));
+				mes = 0; id=0;
+				var tipo = $('#selIncidencia').val().split('*3*');
+				tipoIn = tipo[0];
+				tipoNm = tipo[1];
+				if (tipo==''){
+					flag = false;
+					console.log('000');
 				}
 			break;
 			case '2':
-				for (var i=0; i<obj.length; i++){
-					if (obj[i].data == 0){
-						j++
-					}
-				}
-				if (j == obj.length) {
-					noData();
-				} else {
-					console.log(obj);
-					google.charts.setOnLoadCallback(drawChart1(obj));
+				tipoIn = 0;
+				mes = $('#selectMes').val();
+				if (id=='' || mes==''){
+					flag = false;
+					console.log('000');
 				}
 			break;
 			case '3':
-				for (var i=0; i<obj.length; i++){
-					if (obj[i].num == 0){
-						j++
-					}
-				}
-				if (j == obj.length) {
-					noData();
-				} else {
-					console.log(tipoNm);
-					google.charts.setOnLoadCallback(drawChart3(obj,tipoNm));
+				id = 0;
+				var tipo = $('#selIncidencia').val().split('*3*');
+				tipoIn = tipo[0];
+				tipoNm = tipo[1];
+				mes = $('#selectMes').val();
+				if (tipo=='' || mes==''){
+					flag = false;
+					console.log('000');
 				}
 			break;
 			case '4':
-				for (var i=0; i<obj.length; i++){
-					if (obj[i] == 0){
-						j++
-					}
-				}
-				if (j == obj.length) {
-					noData();
-				} else {
-					console.log(obj);
-					google.charts.setOnLoadCallback(drawChart2(obj,tipoNm));
+				mes = 0;
+				var tipo = $('#selIncidencia').val().split('*3*');
+				tipoIn = tipo[0];
+				tipoNm = tipo[1];
+				if (tipo=='' || id==''){
+					flag = false;
+					console.log('000');
 				}
 			break;
 			case '5':
-				if (obj == 0) {
-					noData();
-				} else {
-					console.log(obj);
-					google.charts.setOnLoadCallback(drawChart4(obj));
+				id = 0; tipoIn=0;
+				resubic = $('#selResponsable').val();
+				mes = $('#selectMes').val();
+				if (resubic=='' || mes==''){
+					flag = false;
+					console.log('000');
 				}
 			break;
 			case '6':
-				if (obj == 0) {
-					noData();
-				} else {
-					console.log(obj);
-					google.charts.setOnLoadCallback(drawChart5(obj));
+				id = 0; tipoIn=0;
+				resubic = $('#selUbicacion').val();
+				mes = $('#selectMes').val()
+				if (resubic=='' || mes==''){
+					flag = false;
+					console.log('000');
 				}
 			break;
 		}
-	});
+		if (flag){
+			request = $.ajax({
+				method: 'post',
+				url: 'incidencias/infoGrafica.php',
+				data:{
+					'bandera': caso,
+					'empleado': id,
+					'fecha': mes,
+					'incidencia': tipoIn,
+					'empresa': empresa,
+					'respOubic': resubic
+				},
+				success: function(data) {}
+			});
+			request.done(function(response, textStatus, jqXHR) {
+				var obj = jQuery.parseJSON(response);
+				var j=0;
+				switch (caso){
+					case '1':
+						if (obj == 0){
+							noData();
+						} else {
+							console.log(obj);
+							google.charts.setOnLoadCallback(drawChart6(obj,tipoNm));
+						}
+					break;
+					case '2':
+						for (var i=0; i<obj.length; i++){
+							if (obj[i].data == 0){
+								j++
+							}
+						}
+						if (j == obj.length) {
+							noData();
+						} else {
+							console.log(obj);
+							google.charts.setOnLoadCallback(drawChart1(obj));
+						}
+					break;
+					case '3':
+						for (var i=0; i<obj.length; i++){
+							if (obj[i].num == 0){
+								j++
+							}
+						}
+						if (j == obj.length) {
+							noData();
+						} else {
+							console.log(tipoNm);
+							google.charts.setOnLoadCallback(drawChart3(obj,tipoNm));
+						}
+					break;
+					case '4':
+						for (var i=0; i<obj.length; i++){
+							if (obj[i] == 0){
+								j++
+							}
+						}
+						if (j == obj.length) {
+							noData();
+						} else {
+							console.log(obj);
+							google.charts.setOnLoadCallback(drawChart2(obj,tipoNm));
+						}
+					break;
+					case '5':
+						if (obj == 0) {
+							noData();
+						} else {
+							console.log(obj);
+							google.charts.setOnLoadCallback(drawChart4(obj));
+						}
+					break;
+					case '6':
+						if (obj == 0) {
+							noData();
+						} else {
+							console.log(obj);
+							google.charts.setOnLoadCallback(drawChart5(obj));
+						}
+					break;
+				}
+			});
+		} else {
+			emptyFields(2);
+		}
+	} else {
+		emptyFields(1);
+		document.getElementById('tipograf').focus();
+	}
 }
 function drawChart6(obj){
 	// FALTA AGREGAR CORRECTAMENTE COLUMNAS DE LA TABLA
-	/*var Max = [];
-	$.each(obj,function (i,v){
-		Max.push(v.NUM);
-	});
-	Array.prototype.max = function() {
-		return Math.max.apply(null, this);
-	};
-	alert(Max.max());
-	//return;
-	*/
 	var datos = new google.visualization.DataTable();
 	datos.addColumn('date', 'Fecha');
 	datos.addColumn('number','Incidencia');
 	datos.addColumn('string','Empleado');
-	//var k=1;
 	$.each(obj, function(index,value){
-		//var M = Max.max();
 		$.each(value.data,function(nInd,nVal){
 			var val = nVal[0].split('-');
 			datos.addRow([new Date(val[0],val[1]-1,val[2]), nVal[1], value.name]);
 		});
-	/*	var x = array.length;
-		M=M*2;
-		if (x!=M){
-			var j=M-x;
-			for (var i=1;i<=j;i++){	
-				array.push('');
-			}
-		}
-		k++;*/
 	});
 	var options={
 		displayAnnotations: true,
-		displayZoomButtons: false,
-		tooltip: {isHtml: true}
+		displayZoomButtons: false
 	};
 	var grafica = new google.visualization.AnnotationChart(document.getElementById('grafica'));
 	grafica.draw(datos,options);
