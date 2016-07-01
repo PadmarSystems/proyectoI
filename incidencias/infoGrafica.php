@@ -50,47 +50,6 @@ switch ($bandera){
 			$arregloDatos=0;
 		}
 		echo json_encode($arregloDatos);
-	
-		/*$emp = $incidencia->mostrar_incidenciasfiltro("SELECT DISTINCT idEmpleado FROM incidencias WHERE idTipoIncidencia=".$_POST['incidencia'].' AND idEmpresa='.$empresa.' ORDER BY idIncidencia');
-		if (!empty($emp)){
-			foreach($emp as $val){
-				$lista=$incidencia->mostrar_incidenciasfiltro("SELECT idEmpleado,nombreEmp FROM empleados WHERE idEmpleado=".$val['idEmpleado']." AND idEmpresa=".$empresa);
-				if (!empty($lista)){
-					foreach ($lista as $val){
-						$nombre = str_replace('--',' ',$val['nombreEmp']);
-						$tst[] = array('nombre'=>$nombre,'id'=>$val['idEmpleado']);
-					}
-				} else {
-					$tst=0;
-				}
-			}
-		} else {
-			$tst = 0;
-		}
-		if ($tst != 0){
-			foreach ($tst as $ts){
-				$nmE = $ts['nombre'];
-				$idE = $ts['id'];	
-				$data1=array(); 
-				$listaIncid=$incidencia->mostrar_incidenciasfiltro("SELECT idEmpleado,idTipoIncidencia,fechaInicio FROM incidencias WHERE idTipoIncidencia = ".$_POST['incidencia']." AND idEmpleado=".$idE." ORDER BY fechaInicio");
-				$res=0;
-				foreach ($listaIncid as $val){
-					$fecha=explode(' ',$val['fechaInicio']);
-					$res++;
-					$data1[] = array($fecha[0],$res);
-				}
-				$aux=[];
-				foreach ($data1 as $key => $row) {
-					$aux[$key] = $row[0];
-				}
-				$cuenta = count($data1);	
-				array_multisort($aux,SORT_ASC,$data1);
-				$arregloDatos[] = array('name'=>$nmE,'data'=>$data1,'NUM'=>$cuenta);
-			}
-		} else {
-			$arregloDatos = 0;
-		}
-		echo json_encode($arregloDatos);*/
 	break;
 	case 2:
 		$mes=$_POST['fecha'];
